@@ -23,7 +23,7 @@ public class LoneWolf extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public LoneWolf() {
-        super("Lone Wolf", 'h', 102);
+        super("Lone olf", 'h', 102);
         this.behaviours.put(999, new WanderBehaviour());
     }
 
