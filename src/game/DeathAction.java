@@ -29,7 +29,6 @@ public class DeathAction extends Action {
      * @param map The map the actor is on.
      * @return result of the action to be displayed on the UI
      */
-
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
