@@ -34,6 +34,7 @@ public abstract class Ground implements Capable, Printable {
 		this.displayChar = displayChar;
 	}
 
+
 	/**
 	 * Returns an empty Action list.
 	 *
