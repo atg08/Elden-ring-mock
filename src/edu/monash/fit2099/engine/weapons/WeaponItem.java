@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.items.*;
 /**
  * Class representing items that can be used as a weapon.
  */
-public abstract class WeaponItem extends Item implements Weapon {
+public abstract class 	WeaponItem extends Item implements Weapon {
 
 	private final int damage;
 	private final int hitRate;

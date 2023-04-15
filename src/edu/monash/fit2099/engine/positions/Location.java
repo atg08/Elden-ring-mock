@@ -123,7 +123,7 @@ public class Location implements Printable {
 	}
 
 	/**
-	 * Accessor to determine whether there is an Actor at this location.
+	 * Accessor to determine whether there is an Actoract at this location.
 	 *
 	 * @return true if and only if there is an Actor at this location.
 	 */
