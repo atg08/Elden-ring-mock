@@ -1,4 +1,4 @@
-package game;
+package game.utils;
 
 import java.util.Random;
 
@@ -12,6 +12,10 @@ import java.util.Random;
 public class RandomNumberGenerator {
     public static int getRandomInt(int bound) {
         return bound > 0 ? new Random().nextInt(bound) : 0;
+    }
+
+    public static boolean getBooleanProbability(int rate){
+        return new Random().nextInt(100)<=rate;
     }
 
     public static int getRandomInt(int lowerBound, int upperBound) {
