@@ -4,10 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.gameactors.StatusActor;
-import game.weapons.Grossmesser;
 
 public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
 

@@ -1,8 +1,8 @@
-package game.weapons;
+package game.weapons.regularWeapons;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
-public class Club extends WeaponItem {
+public class Uchigatana extends WeaponItem {
 
     /**
      * Constructor.
@@ -13,7 +13,7 @@ public class Club extends WeaponItem {
      * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
      * @param hitRate     the probability/chance to hit the target.
      */
-    public Club(String name, char displayChar, int damage, String verb, int hitRate) {
-        super("Club", '!', 103, "hit", 80);
+    public Uchigatana(String name, char displayChar, int damage, String verb, int hitRate) {
+        super("Uchigatana", ')', 115, "hit", 80);
     }
 }
