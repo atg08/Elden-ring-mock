@@ -20,13 +20,4 @@ public abstract class Environment extends Ground {
         super(displayChar);
     }
     public abstract Enemy spawn(int spawnRate);
-
-    public void despawn(Location location, GameMap gameMap){
-        Enemy enemy = (Enemy) gameMap.getActorAt(location);
-
-        if (!enemy.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)) {
-            gameMap.removeActor(enemy);
-        }
-
-    };
 }

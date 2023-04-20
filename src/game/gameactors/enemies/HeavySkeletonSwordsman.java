@@ -21,12 +21,11 @@ public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
     public HeavySkeletonSwordsman() {
         super("Heavy Skeleton Swordsman", 'q', 153);
 //        this.addWeaponToInventory(new Grossmesser());
-        addCapability(StatusActor.HOSTILE_TO_ENEMY);
-        addCapability(StatusActor.SKELETON_TYPE);
     }
 
     @Override
     public Action getAction(Actor actor, GameMap gameMap) {
+
         if (actor.hasCapability(StatusActor.SKELETON_TYPE)){
             return new DoNothingAction();
         }

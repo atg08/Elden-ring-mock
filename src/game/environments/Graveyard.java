@@ -31,14 +31,10 @@ public class Graveyard extends Environment{
 
     public void tick(Location location, GameMap gamemap){
 
-
         if (location.getActor() == null){
             //spawning
             int spawnRate = 27;
             spawn(spawnRate);
         }
-
-        // despawning
-        despawn(location, gamemap);
     }
 }
