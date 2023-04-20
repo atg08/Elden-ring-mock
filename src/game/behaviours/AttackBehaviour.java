@@ -9,8 +9,6 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
-import game.gameactors.enemies.Enemy;
-import game.gameactors.enemies.Skeleton;
 
 import java.util.ArrayList;
 import java.util.List;

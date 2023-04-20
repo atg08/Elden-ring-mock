@@ -1,4 +1,4 @@
-package game.gameactors.enemies;
+package game.gameactors.enemies.wind;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,12 +6,11 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
-import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
 import game.utils.RandomNumberGenerator;
 
-public abstract class Skeleton extends Enemy{
-
+public abstract class WindEnemy extends Enemy {
     /**
      * Constructor.
      *
@@ -19,9 +18,8 @@ public abstract class Skeleton extends Enemy{
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public Skeleton(String name, char displayChar, int hitPoints) {
+    public WindEnemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        addCapability(EnemyType.SKELETON_TYPE);
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
@@ -31,6 +29,4 @@ public abstract class Skeleton extends Enemy{
 
         return new DoNothingAction();
     }
-
-    // add PileOfBones
 }
