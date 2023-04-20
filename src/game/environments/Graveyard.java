@@ -29,6 +29,7 @@ public class Graveyard extends Environment{
         return null;
     }
 
+
     public void tick(Location location, GameMap gamemap){
 
         if (location.getActor() == null){
