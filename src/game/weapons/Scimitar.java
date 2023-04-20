@@ -2,7 +2,7 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
-public class Grossmesser extends WeaponItem {
+public class Scimitar extends WeaponItem {
 
     /**
      * Constructor.
@@ -13,7 +13,7 @@ public class Grossmesser extends WeaponItem {
      * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
      * @param hitRate     the probability/chance to hit the target.
      */
-    public Grossmesser(String name, char displayChar, int damage, String verb, int hitRate) {
-        super("Grossmesser", '?', 115, "hit", 85);
+    public Scimitar(String name, char displayChar, int damage, String verb, int hitRate) {
+        super("Scimitar", 's', 118, verb, 88);
     }
 }
