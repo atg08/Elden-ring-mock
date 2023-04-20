@@ -27,10 +27,12 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             Actor targetActor = destination.getActor();
+            boolean canAttack = false;
+
 
             if (targetActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)) {
                 // target actor is a player
-                // TODO
+                canAttack = true;
 
             }else{
                 // target actor is an enemy
@@ -38,19 +40,22 @@ public class AttackBehaviour implements Behaviour {
                 EnemyType actorType = actorTypeList.get(0); // the type we are looking for
 
                 List<EnemyType> targetActorTypeList = actor.findCapabilitiesByType(EnemyType.class);
-                EnemyType targetActorType = targetActorTypeList.get(0); // the type we are looking for
+                EnemyType targetActorType = targetActorTypeList.get(0);
 
-                if (actorType.equals(targetActorType)){
-                    List<WeaponItem> weaponList = actor.getWeaponInventory();
-                    if (weaponList.size() == 0){
-                        actions.add(new AttackAction(targetActor, exit.getName()));
-                    }else{
-                        actions.add(new AttackAction(targetActor, exit.getName(), weaponList.get(0)));
-                    }
+                canAttack = actorType.equals(targetActorType);
+            }
+
+            if (canAttack){
+                List<WeaponItem> weaponList = actor.getWeaponInventory();
+                canAttack = weaponList.size() != 0;
+                if (weaponList.size() == 0){
+                    actions.add(new AttackAction(targetActor, exit.getName()));
+                }else{
+                    actions.add(new AttackAction(targetActor, exit.getName(), weaponList.get(0)));
                 }
             }
-        }
 
+        }
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
         }
