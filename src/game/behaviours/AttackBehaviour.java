@@ -34,7 +34,7 @@ public class AttackBehaviour implements Behaviour {
                 // target actor is a player
                 canAttack = true;
 
-            }else{
+            }else if(targetActor.hasCapability(StatusActor.IS_ENEMY)){
                 // target actor is an enemy
                 List<EnemyType> actorTypeList = actor.findCapabilitiesByType(EnemyType.class);
                 EnemyType actorType = actorTypeList.get(0); // the type we are looking for

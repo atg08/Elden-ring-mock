@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.DeathAction;
+import game.gameactors.EnemyType;
 
 /**
  * An Action to attack another Actor.
@@ -82,8 +83,10 @@ public class AttackAction extends Action {
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
-		if (!target.isConscious()) {
+		if (!target.isConscious() && !target.hasCapability(EnemyType.SKELETON_TYPE)) {
 			result += new DeathAction(actor).execute(target, map);
+		}else if (!target.isConscious() && target.hasCapability(EnemyType.SKELETON_TYPE)) {
+			result += new TurnIntoPileOfBonesAction().execute(target, map);
 		}
 
 		return result;
