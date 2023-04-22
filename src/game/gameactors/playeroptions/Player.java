@@ -6,8 +6,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.gameactors.StatusActor;
 import game.weapons.Club;
-import game.Resettable;
+import game.Reset.Resettable;
 import game.Status;
 
 /**
@@ -33,6 +34,7 @@ public abstract class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
+		this.addCapability(StatusActor.CAN_REST);
 	}
 
 	@Override
@@ -45,6 +47,14 @@ public abstract class Player extends Actor implements Resettable {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * this reset is called when player dies or rests at the site of lost grace
+	 * @param actor
+	 * @param map
+	 */
 	@Override
-	public void reset() {}
+	public void reset(Actor actor, GameMap map) {
+		this.heal(getMaxHp());
+	}
+
 }

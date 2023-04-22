@@ -3,8 +3,10 @@ package game.gameactors.enemies.graveyard;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
@@ -16,7 +18,7 @@ import game.utils.RandomNumberGenerator;
  * @author tanul
  */
 
-public abstract class Skeleton extends Enemy {
+public abstract class Skeleton extends Enemy implements Resettable{
 
     /**
      * Constructor.
@@ -39,4 +41,10 @@ public abstract class Skeleton extends Enemy {
     }
 
     // add PileOfBones
+
+    @Override
+    public void reset(Actor actor, GameMap map) {
+        DespawnAction despawn = new DespawnAction();
+        despawn.execute(this, map);
+    }
 }

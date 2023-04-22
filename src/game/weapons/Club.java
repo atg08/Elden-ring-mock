@@ -9,9 +9,10 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  * It deals 103 damage with 80% hit rate
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Aditti
  *
  */
+
 public class Club extends WeaponItem {
 
     /**
@@ -24,3 +25,5 @@ public class Club extends WeaponItem {
     @Override
     public void tick(Location currentLocation, Actor actor) {}
 }
+
+

@@ -3,8 +3,10 @@ package game.gameactors.enemies.water;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
@@ -13,7 +15,7 @@ import game.utils.RandomNumberGenerator;
  * A Abstract class that defines implementation of the similar characteristics of the OCEAN_TYPE enemies
  * @author tanul
  */
-public abstract class OceanEnemy extends Enemy {
+public abstract class OceanEnemy extends Enemy implements Resettable {
     /**
      * Constructor.
      *
@@ -33,4 +35,9 @@ public abstract class OceanEnemy extends Enemy {
         return new DoNothingAction();
     }
 
+    @Override
+    public void reset(Actor actor, GameMap map) {
+        DespawnAction despawn = new DespawnAction();
+        despawn.execute(this, map);
+    }
 }
