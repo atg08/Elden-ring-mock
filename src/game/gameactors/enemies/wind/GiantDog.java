@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 
@@ -35,5 +36,11 @@ public class GiantDog extends WindEnemy implements Behaviour {
 //            new AttackBehaviour(new Grossmesser(), )
 //        }
         return null;
+    }
+
+    // head
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(314, "bashes", 90);
     }
 }
