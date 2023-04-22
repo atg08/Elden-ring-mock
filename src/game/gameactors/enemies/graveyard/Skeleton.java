@@ -11,6 +11,11 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * A Abstract class that defines implementation of the similar characteristics of the SKELETON_TYPE enemies
+ * @author tanul
+ */
+
 public abstract class Skeleton extends Enemy {
 
     /**

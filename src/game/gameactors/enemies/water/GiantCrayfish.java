@@ -8,6 +8,11 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 
+/**
+ * A powerful enemy of the player that can perform a powerful slam attack
+ * @author tanul
+ */
+
 public class GiantCrayfish extends OceanEnemy implements Behaviour {
     /**
      * Constructor.

@@ -7,6 +7,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 
+/**
+ * A Enemy of the player that holds a weapon called Grossmesser
+ * @author tanul
+ */
+
 public class SkeletalBandit extends Skeleton implements Behaviour {
     /**
      * Constructor.

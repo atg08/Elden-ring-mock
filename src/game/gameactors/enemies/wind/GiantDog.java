@@ -8,6 +8,11 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 
+/**
+ * A powerful enemy of the player that can perform a powerful headbutt attack
+ * @author tanul
+ */
+
 public class GiantDog extends WindEnemy implements Behaviour {
     /**
      * Constructor.

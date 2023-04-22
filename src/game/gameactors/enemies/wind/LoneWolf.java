@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul
  *
  */
 public class LoneWolf extends WindEnemy implements Behaviour {
