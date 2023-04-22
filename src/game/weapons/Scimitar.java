@@ -1,4 +1,4 @@
-package game;
+package game.weapons;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
@@ -6,19 +6,20 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
  * A simple weapon that can be used to attack the enemy.
- * It deals 103 damage with 80% hit rate
+ * It deals 75 damage with 70% hit rate
  * Created by:
- * @author Adrian Kristanto
+ * @author Aditti
  * Modified by:
  *
  */
-public class Club extends WeaponItem {
+
+public class Scimitar extends WeaponItem {
 
     /**
-     * Constructor
+     * Constructor.
      */
-    public Club() {
-        super("Club", '!', 103, "bonks", 80);
+    public Scimitar(String name, char displayChar, int damage, String verb, int hitRate) {
+        super("Scimitar", 's', 118, verb, 88);
     }
 
     @Override
