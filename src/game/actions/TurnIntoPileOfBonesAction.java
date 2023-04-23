@@ -16,6 +16,7 @@ public class TurnIntoPileOfBonesAction extends Action {
         map.removeActor(actor);
 
         // TODO add the PileOfBones to the seme location
+        map.addActor(new PileOfBones(), location);
 
 
         return actor.toString() + "turns into a Pile Of Bones";
