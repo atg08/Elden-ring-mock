@@ -22,7 +22,7 @@ public class GiantDog extends WindEnemy implements Behaviour {
      * @param hitPoints   the Actor's starting hit points
      * @author Tanul
      */
-    public GiantDog(String name, char displayChar, int hitPoints) {
+    public GiantDog() {
         super("Giant Dog", 'G', 693);
     }
 

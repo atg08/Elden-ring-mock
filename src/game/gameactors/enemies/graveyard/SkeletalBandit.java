@@ -22,7 +22,7 @@ public class SkeletalBandit extends Skeleton implements Behaviour {
      * @param hitPoints   the Actor's starting hit points
      * @author Tanul
      */
-    public SkeletalBandit(String name, char displayChar, int hitPoints) {
+    public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 184);
     }
 

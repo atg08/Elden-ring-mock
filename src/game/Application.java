@@ -71,5 +71,6 @@ public class Application {
 //		world.addPlayer(player, gameMap.at(36, 10));
 
 		world.run();
+
 	}
 }
