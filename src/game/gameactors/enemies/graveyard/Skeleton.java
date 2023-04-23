@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.ResetManager;
 import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
@@ -30,10 +31,11 @@ public abstract class Skeleton extends Enemy implements Resettable{
     public Skeleton(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         addCapability(EnemyType.SKELETON_TYPE);
+        rm.registerResettable(this);
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
-        if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
+        if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
             return new DespawnAction();
         }
 
@@ -43,8 +45,8 @@ public abstract class Skeleton extends Enemy implements Resettable{
     // add PileOfBones
 
     @Override
-    public void reset(Actor actor, GameMap map) {
+    public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
-        despawn.execute(this, map);
+        return despawn.execute(this, map);
     }
 }

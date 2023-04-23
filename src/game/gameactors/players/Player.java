@@ -1,4 +1,4 @@
-package game.gameactors.playeroptions;
+package game.gameactors.players;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.Reset.ResetManager;
 import game.gameactors.StatusActor;
 import game.weapons.Club;
 import game.Reset.Resettable;
@@ -22,6 +23,7 @@ import game.Status;
 public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
+	private ResetManager rm;
 
 	/**
 	 * Constructor.
@@ -30,11 +32,12 @@ public abstract class Player extends Actor implements Resettable {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
-		super(name, displayChar, hitPoints);
+	public Player(int hitPoints) {
+		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
+		rm.registerResettable(this);
 	}
 
 	@Override
@@ -53,8 +56,11 @@ public abstract class Player extends Actor implements Resettable {
 	 * @param map
 	 */
 	@Override
-	public void reset(Actor actor, GameMap map) {
+	public String reset(Actor actor, GameMap map) {
 		this.heal(getMaxHp());
+		return "Player health is reset to " + this.printHp();
 	}
+
+
 
 }

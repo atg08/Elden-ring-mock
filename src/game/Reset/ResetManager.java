@@ -1,5 +1,9 @@
 package game.Reset;
 
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ResetAction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +26,21 @@ public class ResetManager {
         this.resettables = new ArrayList<>();
     }
 
-    public void run() {}
+    public void run(GameMap map) {
 
-    public void registerResettable(Resettable resettable) {}
+        for (Resettable r : resettables){
+            ResetAction ra = new ResetAction();
+            ra.execute((Actor) r, map); // CAN DO A TRY CATCH IF WRONG CLASS TYPE CAUGHT
+                                        // MEANING ITEM OF RESETTABLE
+        }
+    }
 
-    public void removeResettable(Resettable resettable) {}
+    public void registerResettable(Resettable resettable) {
+        this.resettables.add(resettable);
+    }
+
+    public void removeResettable(Resettable resettable) {
+        this.resettables.remove(resettable);
+    }
+
 }

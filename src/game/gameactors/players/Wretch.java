@@ -1,4 +1,4 @@
-package game.gameactors.playeroptions;
+package game.gameactors.players;
 
 import game.weapons.Club;
 
@@ -11,7 +11,7 @@ public class Wretch extends Player{
      * @param hitPoints   Player's starting number of hitpoints
      */
     public Wretch(String name, char displayChar, int hitPoints) {
-        super("Tarnished", '@', 414);
+        super( 414);
         addWeaponToInventory(new Club());
     }
 }

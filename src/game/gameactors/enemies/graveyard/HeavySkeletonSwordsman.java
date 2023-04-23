@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
 import game.behaviours.Behaviour;
+import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 
 /**
@@ -29,7 +30,7 @@ public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap gameMap) {
 
-        if (actor.hasCapability(StatusActor.SKELETON_TYPE)){
+        if (actor.hasCapability(EnemyType.SKELETON_TYPE)){
             return new DoNothingAction();
         }
 

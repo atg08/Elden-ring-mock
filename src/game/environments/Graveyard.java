@@ -3,7 +3,8 @@ package game.environments;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.gameactors.enemies.Enemy;
-import game.gameactors.enemies.HeavySkeletonSwordsman;
+
+import game.gameactors.enemies.graveyard.HeavySkeletonSwordsman;
 import game.utils.RandomNumberGenerator;
 
 public class Graveyard extends Environment{

@@ -6,8 +6,10 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.ResetManager;
 import game.Reset.Resettable;
 import game.actions.DespawnAction;
+import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.utils.RandomNumberGenerator;
@@ -16,6 +18,7 @@ import game.utils.RandomNumberGenerator;
  * @author tanul
  */
 public abstract class OceanEnemy extends Enemy implements Resettable {
+
     /**
      * Constructor.
      *
@@ -25,10 +28,11 @@ public abstract class OceanEnemy extends Enemy implements Resettable {
      */
     public OceanEnemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        rm.registerResettable(this);
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
-        if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
+        if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
             return new DespawnAction();
         }
 
@@ -36,8 +40,10 @@ public abstract class OceanEnemy extends Enemy implements Resettable {
     }
 
     @Override
-    public void reset(Actor actor, GameMap map) {
+    public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
-        despawn.execute(this, map);
+        return despawn.execute(this, map);
     }
+
+
 }

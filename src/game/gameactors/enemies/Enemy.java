@@ -6,11 +6,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Reset.ResetManager;
+import game.Reset.Resettable;
 import game.gameactors.StatusActor;
 import game.utils.RandomNumberGenerator;
 
 public class Enemy extends Actor {
-
+    protected ResetManager rm;
     protected StatusActor enemyType;
     /**
      * Constructor.

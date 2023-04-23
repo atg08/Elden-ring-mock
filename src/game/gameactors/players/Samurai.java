@@ -1,6 +1,6 @@
-package game.gameactors.playeroptions;
+package game.gameactors.players;
 
-public class Bandit extends Player{
+public class Samurai extends Player{
     /**
      * Constructor.
      *
@@ -8,8 +8,9 @@ public class Bandit extends Player{
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Bandit(String name, char displayChar, int hitPoints) {
-        super("Tarnished", '@', 414);
-        //addWeaponToInventory(new GreatKnife());
+    public Samurai(String name, char displayChar, int hitPoints) {
+        super( 455);
+        //addWeaponToInventory(new Uchigatana());
     }
+
 }
