@@ -1,4 +1,4 @@
-package game;
+package game.gameactors.players;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.Club;
+import game.Resettable;
+import game.Status;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -15,7 +18,7 @@ import edu.monash.fit2099.engine.displays.Menu;
  * Modified by:
  *
  */
-public class Player extends Actor implements Resettable {
+public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 
@@ -23,11 +26,10 @@ public class Player extends Actor implements Resettable {
 	 * Constructor.
 	 *
 	 * @param name        Name to call the player in the UI
-	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
-		super(name, displayChar, hitPoints);
+	public Player(String name, int hitPoints) {
+		super(name, '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 	}
