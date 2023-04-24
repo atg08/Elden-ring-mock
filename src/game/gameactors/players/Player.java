@@ -7,10 +7,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.Reset.ResetManager;
+import game.actions.ConsumeAction;
 import game.gameactors.StatusActor;
+import game.items.FlaskOfCrimsonTears;
 import game.runes.Rune;
 import game.Reset.Resettable;
 import game.Status;
+import game.weapons.Club;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -36,7 +39,15 @@ public abstract class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
+		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
+	}
+
+	@Override
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		ActionList actions = new ActionList();
+		actions.add(new ConsumeAction(this.getItemInventory().get(0)));
+		return actions;
 	}
 
 	@Override
