@@ -44,7 +44,10 @@ public abstract class WindEnemy extends Enemy implements Resettable {
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
-
         return despawn.execute(this, map);
+    }
+    @Override
+    public boolean isRemovable() {
+        return true;
     }
 }

@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.ResetManager;
+import game.Reset.Resettable;
 import game.actions.ConsumeAction;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
  * @author tanul
  */
 
-public class FlaskOfCrimsonTears extends Item {
+public class FlaskOfCrimsonTears extends Item implements Resettable {
 
     /**
      * AMOUNT THE ITEM CAN HEAL
@@ -31,6 +33,12 @@ public class FlaskOfCrimsonTears extends Item {
      */
     private int consumed;
 
+    /**
+     * refers to the single reset manager instance
+     * @see ResetManager
+     */
+    private ResetManager rm;
+
     /***
      * Constructor.
      * no use of display char at this stage as this item shouldn't be
@@ -42,6 +50,9 @@ public class FlaskOfCrimsonTears extends Item {
         this.addCapability(ItemUsage.CAN_CONSUME_TO_HEAL);
         this.addCapability(ItemUsage.IS_FLASK);
         this.consumed = 0;
+        rm.registerResettable(this);
+        // upon initialization of the object adds the object
+        // to the list of resettable
     }
 
     /**
@@ -76,12 +87,29 @@ public class FlaskOfCrimsonTears extends Item {
     }
 
     /**
+     * Method allows us to reset the number of times this item has been used
+     */
+    private void resetConsumed() {
+        this.consumed = 0;
+    }
+
+    /**
      *
      * @return THE NAME OF THE ITEM
      */
     @Override
     public String toString() {
-        return "FlaskOfCrimsonTears";
+        return "Flask Of Crimson Tears";
     }
 
+    @Override
+    public String reset(Actor actor, GameMap map) {
+        this.resetConsumed();
+        return this + "has been reset";
+    }
+
+    @Override
+    public boolean isRemovable() {
+        return false;
+    }
 }

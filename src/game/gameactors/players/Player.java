@@ -71,6 +71,11 @@ public abstract class Player extends Actor implements Resettable {
 		return "Player health is reset to " + this.printHp();
 	}
 
+	@Override
+	public boolean isRemovable() {
+		return false;
+	}
+
 	public void increaseRune(Rune rune){
 		this.runes.increaseRune(rune);
 	}

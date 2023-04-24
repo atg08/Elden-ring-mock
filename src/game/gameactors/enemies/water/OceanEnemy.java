@@ -45,5 +45,10 @@ public abstract class OceanEnemy extends Enemy implements Resettable {
         return despawn.execute(this, map);
     }
 
+    @Override
+    public boolean isRemovable() {
+        return true;
+    }
+
 
 }

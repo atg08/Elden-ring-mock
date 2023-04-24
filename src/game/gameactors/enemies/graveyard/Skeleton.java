@@ -44,9 +44,19 @@ public abstract class Skeleton extends Enemy implements Resettable{
 
     // add PileOfBones
 
+
+    // in skeleton for extensibility and modifications incase future enemies are not resettable
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
+
+        // this is so that enemy that has been removed
+        // won't be attempted to be removed again
         return despawn.execute(this, map);
+    }
+
+    @Override
+    public boolean isRemovable() {
+        return true;
     }
 }

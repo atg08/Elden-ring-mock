@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class ResetManager {
     private List<Resettable> resettables;
+    private List<Resettable> removables;
     private static ResetManager instance;
 
     /**
@@ -26,12 +27,20 @@ public class ResetManager {
         this.resettables = new ArrayList<>();
     }
 
-    public void run(GameMap map) {
+    public void run(Actor actor, GameMap map) {
 
         for (Resettable r : resettables){
-            ResetAction ra = new ResetAction();
-            ra.execute((Actor) r, map); // CAN DO A TRY CATCH IF WRONG CLASS TYPE CAUGHT
-                                        // MEANING ITEM OF RESETTABLE
+            if (r.isRemovable()){
+                this.removables.add(r);
+            }
+            ResetAction ra = new ResetAction(r);
+            ra.execute(actor, map);
+
+        }
+
+        for (Resettable r2: removables){
+            // in-case actor is removed
+            this.removeResettable(r2);
         }
     }
 
@@ -42,5 +51,14 @@ public class ResetManager {
     public void removeResettable(Resettable resettable) {
         this.resettables.remove(resettable);
     }
+
+//    public void registerRemovable(Resettable resettable) {
+//        this.removables.add(resettable);
+//    }
+//
+//    public void removeRemovable(Resettable resettable) {
+//        this.removables.remove(resettable);
+//    }
+
 
 }

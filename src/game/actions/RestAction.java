@@ -17,7 +17,7 @@ public class RestAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        rm.run(map);
+        rm.run(actor, map);
         return actor + "has rested at a site of lost grace";
     }
 
