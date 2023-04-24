@@ -13,13 +13,13 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  *
  */
 
-public class Grossmesser extends WeaponItem {
+public class GreatKnife extends WeaponItem {
 
     /**
      * Constructor.
      */
-    public Grossmesser(String name, char displayChar, int damage, String verb, int hitRate) {
-        super("Grossmesser", '?', 115, "hit", 85);
+    public GreatKnife() {
+        super("Great Knife", '/', 75, "hit", 70);
     }
 
     @Override

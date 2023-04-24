@@ -1,16 +1,20 @@
-package game.gameactors.enemies;
+package game.gameactors.enemies.water;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.behaviours.AttackBehaviour;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DespawnAction;
 import game.behaviours.Behaviour;
-import game.gameactors.StatusActor;
-import game.weapons.Grossmesser;
+import game.gameactors.EnemyType;
 
-public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
+/**
+ * A powerful enemy of the player that can perform a powerful slam attack
+ * @author tanul
+ */
 
+public class GiantCrab extends OceanEnemy implements Behaviour {
     /**
      * Constructor.
      *
@@ -18,15 +22,14 @@ public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public HeavySkeletonSwordsman() {
-        super("Heavy Skeleton Swordsman", 'q', 153);
-//        this.addWeaponToInventory(new Grossmesser());
+    public GiantCrab() {
+        super("Giant Crab", 'C', 208);
     }
 
     @Override
     public Action getAction(Actor actor, GameMap gameMap) {
 
-        if (actor.hasCapability(StatusActor.SKELETON_TYPE)){
+        if (actor.hasCapability(EnemyType.OCEAN_TYPE)){
             return new DoNothingAction();
         }
 
@@ -40,4 +43,11 @@ public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
 //        }
         return null;
     }
+
+    // slam cna be individual or area attack
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(208, "slams", 90);
+    }
+
 }

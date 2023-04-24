@@ -1,4 +1,4 @@
-package game;
+package game.gameactors.enemies.wind;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,9 +7,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.gameactors.EnemyType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,14 +21,14 @@ import java.util.Map;
  *
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul
  *
  */
-public class LoneWolf extends Actor {
+public class LoneWolf extends WindEnemy implements Behaviour {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public LoneWolf() {
-        super("Lone olf", 'h', 102);
+        super("Lone Wolf", 'h', 102);
         this.behaviours.put(999, new WanderBehaviour());
     }
 
@@ -72,5 +74,22 @@ public class LoneWolf extends Actor {
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
+    }
+
+    @Override
+    public Action getAction(Actor actor, GameMap map) {
+        if (actor.hasCapability(EnemyType.WIND_TYPE)){
+            return new DoNothingAction();
+        }
+
+//        location = gameMap.locationOf(actor);
+        // check exits
+        // if there is a player there
+
+
+//        if (GameMap. player nearby){
+//            new AttackBehaviour(new Grossmesser(), )
+//        }
+        return null;
     }
 }
