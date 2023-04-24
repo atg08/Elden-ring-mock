@@ -1,4 +1,4 @@
-package game;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -45,6 +45,10 @@ public class DeathAction extends Action {
         map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target);
         return result;
+
+        // TODO make sure to trigger drop rune action (note: however for enemy when it's killed by the player
+        //  it automatically transfers its runes to the player so its's not shown in the amp)
+        // HOWEVER, for player when it's dead, the rune must be dropped
     }
 
     @Override

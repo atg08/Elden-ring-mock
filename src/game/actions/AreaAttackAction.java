@@ -22,7 +22,7 @@ public class AreaAttackAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
-        String results = "";
+        String results = actor.toString() + "attacks his surrounding!";
 
         // check all exits
 
@@ -41,7 +41,7 @@ public class AreaAttackAction extends Action {
                 Actor targetActor = destination.getActor();
 
                 if (targetActor != null){
-                    results += new AttackAction(this.target, exit.getName()).execute(actor, map);
+                    results += new AttackAction(this.target, exit.getName()).execute(actor, map) + "\n";
                 }
             }
         }

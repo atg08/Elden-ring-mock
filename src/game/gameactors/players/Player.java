@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.Reset.ResetManager;
 import game.gameactors.StatusActor;
-import game.weapons.Club;
+import game.runes.Rune;
 import game.Reset.Resettable;
 import game.Status;
 
@@ -24,12 +24,11 @@ public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private ResetManager rm;
+	protected Rune runes = new Rune();
 
 	/**
 	 * Constructor.
 	 *
-	 * @param name        Name to call the player in the UI
-	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
 	public Player(int hitPoints) {
@@ -59,6 +58,14 @@ public abstract class Player extends Actor implements Resettable {
 	public String reset(Actor actor, GameMap map) {
 		this.heal(getMaxHp());
 		return "Player health is reset to " + this.printHp();
+	}
+
+	public void increaseRune(Rune rune){
+		this.runes.increaseRune(rune);
+	}
+
+	public boolean decreaseRune(Rune rune){
+		return this.runes.decreaseRune(rune);
 	}
 
 

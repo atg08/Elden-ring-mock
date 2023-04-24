@@ -3,6 +3,7 @@ package game.weapons;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.runes.Rune;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -13,7 +14,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  *
  */
 
-public class Club extends WeaponItem {
+public class Club extends WeaponItem implements Purchasable, Sellable {
 
     /**
      * Constructor
@@ -24,6 +25,16 @@ public class Club extends WeaponItem {
 
     @Override
     public void tick(Location currentLocation, Actor actor) {}
+
+    @Override
+    public Rune getPurchasingPrice() {
+        return new Rune(600);
+    }
+
+    @Override
+    public Rune getSellingPrice() {
+        return new Rune(100);
+    }
 }
 
 
