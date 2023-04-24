@@ -37,7 +37,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
      * refers to the single reset manager instance
      * @see ResetManager
      */
-    private ResetManager rm;
+    private ResetManager rm = ResetManager.getInstance();
 
     /***
      * Constructor.

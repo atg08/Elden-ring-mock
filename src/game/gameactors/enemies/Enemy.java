@@ -12,8 +12,8 @@ import game.gameactors.StatusActor;
 import game.utils.RandomNumberGenerator;
 
 public class Enemy extends Actor {
-    protected ResetManager rm;
-    protected StatusActor enemyType;
+    protected ResetManager rm = ResetManager.getInstance();
+//    protected StatusActor enemyType;
     /**
      * Constructor.
      *
@@ -32,7 +32,7 @@ public class Enemy extends Actor {
         return null;
     }
 
-    public StatusActor getEnemyType(){
-        return this.enemyType;
-    }
+//    public StatusActor getEnemyType(){
+//        return this.enemyType;
+//    }
 }

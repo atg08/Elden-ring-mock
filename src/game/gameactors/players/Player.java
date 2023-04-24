@@ -26,7 +26,7 @@ import game.weapons.Club;
 public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
-	private ResetManager rm;
+	private ResetManager rm = ResetManager.getInstance();
 	protected Rune runes = new Rune();
 
 	/**

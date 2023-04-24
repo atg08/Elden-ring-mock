@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ResetManager {
     private List<Resettable> resettables;
-    private List<Resettable> removables;
+    private List<Resettable> removables = new ArrayList<>();;
     private static ResetManager instance;
 
     /**
@@ -38,11 +38,14 @@ public class ResetManager {
 
         }
 
-        for (Resettable r2: removables){
-            // in-case actor is removed
-            this.removeResettable(r2);
+        if (removables.size() > 0 ){
+            for (Resettable r2: removables){
+                // in-case actor is removed
+                this.removeResettable(r2);
+            }
         }
     }
+
 
     public void registerResettable(Resettable resettable) {
         this.resettables.add(resettable);
@@ -59,6 +62,12 @@ public class ResetManager {
 //    public void removeRemovable(Resettable resettable) {
 //        this.removables.remove(resettable);
 //    }
+    public static ResetManager getInstance(){
+        if (instance == null){
+            instance = new ResetManager();
+        }
+        return instance;
+    }
 
 
 }
