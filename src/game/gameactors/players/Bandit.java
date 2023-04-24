@@ -1,5 +1,7 @@
 package game.gameactors.players;
 
+import game.weapons.GreatKnife;
+
 public class Bandit extends Player{
     /**
      * Constructor.
@@ -8,7 +10,7 @@ public class Bandit extends Player{
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Bandit(String name, char displayChar, int hitPoints) {
+    public Bandit() {
         super( 414);
 
         // if transaction successful
