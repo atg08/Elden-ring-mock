@@ -11,6 +11,7 @@ import game.gameactors.StatusActor;
 import game.runes.Rune;
 import game.Reset.Resettable;
 import game.Status;
+import game.weapons.Club;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -24,7 +25,6 @@ public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private ResetManager rm;
-	protected Rune runes = new Rune();
 
 	/**
 	 * Constructor.
@@ -37,6 +37,8 @@ public abstract class Player extends Actor implements Resettable {
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
 		rm.registerResettable(this);
+
+		this.addItemToInventory(new Rune());  // player always starts with 0 rune
 	}
 
 	@Override
@@ -60,12 +62,26 @@ public abstract class Player extends Actor implements Resettable {
 		return "Player health is reset to " + this.printHp();
 	}
 
+	public Rune getExistingRune(){
+		Rune existingRune = (Rune) this.getItemInventory().
+				stream()
+				.filter(item -> "rune".equals(item.toString()))
+				.findFirst()
+				.orElse(null);
+
+		return existingRune;
+	}
+
 	public void increaseRune(Rune rune){
-		this.runes.increaseRune(rune);
+
+		Rune existingRune = this.getExistingRune();
+		if (existingRune != null){existingRune.increaseRune(rune);}
+
 	}
 
 	public boolean decreaseRune(Rune rune){
-		return this.runes.decreaseRune(rune);
+		Rune existingRune = getExistingRune();
+		return existingRune.decreaseRune(rune);
 	}
 
 
