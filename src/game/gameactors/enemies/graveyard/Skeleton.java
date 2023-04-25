@@ -36,6 +36,7 @@ public abstract class Skeleton extends Enemy implements Resettable{
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
         if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
+            rm.removeResettable(this);
             return new DespawnAction();
         }
 
@@ -49,7 +50,6 @@ public abstract class Skeleton extends Enemy implements Resettable{
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
-
         // this is so that enemy that has been removed
         // won't be attempted to be removed again
         return despawn.execute(this, map);

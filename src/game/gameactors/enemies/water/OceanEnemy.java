@@ -33,6 +33,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable {
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
         if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
+            rm.removeResettable(this);
             return new DespawnAction();
         }
 

@@ -7,7 +7,7 @@ import game.Reset.ResetManager;
 
 public class RestAction extends Action {
 
-    private ResetManager rm;
+    private ResetManager rm = ResetManager.getInstance();
 
     /**
      * When called it will call the ResetManager to perform the reset of the game

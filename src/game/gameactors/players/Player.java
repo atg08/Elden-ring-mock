@@ -67,7 +67,7 @@ public abstract class Player extends Actor implements Resettable {
 	 */
 	@Override
 	public String reset(Actor actor, GameMap map) {
-		this.heal(getMaxHp());
+		this.heal(this.getMaxHp());
 		return "Player health is reset to " + this.printHp();
 	}
 
