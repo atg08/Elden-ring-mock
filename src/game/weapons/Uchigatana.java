@@ -32,6 +32,11 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
+    public WeaponItem restock() {
+        return new Uchigatana();
+    }
+
+    @Override
     public Rune getSellingPrice() {
         return new Rune(500);
     }

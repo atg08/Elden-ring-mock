@@ -4,14 +4,17 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.gameactors.Trader;
 import game.gameactors.players.Player;
 import game.weapons.Purchasable;
 
 public class PurchaseAction extends Action {
     private WeaponItem weapon;
+    private Trader trader;
 
-    public PurchaseAction(WeaponItem weapon){
+    public PurchaseAction(WeaponItem weapon, Trader trader){
         this.weapon = weapon;
+        this.trader = trader;
     }
 
     @Override
@@ -21,6 +24,7 @@ public class PurchaseAction extends Action {
         Purchasable purchasableWeapon = (Purchasable) this.weapon;
         if (player.decreaseRune(purchasableWeapon.getPurchasingPrice())){
             player.addWeaponToInventory(this.weapon);
+            trader.restock(this.weapon);
             result = "Tarnished purchased " + this.weapon.toString();
         }else{
             result = "Tarnished could not purchase the item. He did not have enough runes.";

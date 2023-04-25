@@ -32,6 +32,11 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
+    public WeaponItem restock() {
+        return new Scimitar();
+    }
+
+    @Override
     public Rune getSellingPrice() {
         return new Rune(100);
     }

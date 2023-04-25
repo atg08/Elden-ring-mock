@@ -5,13 +5,11 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Scimitar;
-import game.weapons.Uchigatana;
+import game.weapons.*;
 
 import java.util.ArrayList;
 
@@ -41,18 +39,25 @@ public class Trader extends Actor {
         return null;
     }
 
+    public void restock(WeaponItem weapon){
+        this.sellableWeaponItems.remove(weapon);
+        Purchasable purchasableWeapon = (Purchasable) weapon;
+        this.sellableWeaponItems.add(purchasableWeapon.restock());
+
+    }
+
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(StatusActor.IS_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
 
-            // create SellActions for each sellable weapons
+            // create SellActions for each sellable weapon
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
                 actions.add(new SellAction(weaponItem));
             }
 
             // create PurchaseAction for each purchasable weapons
             for (WeaponItem weaponItem: this.sellableWeaponItems){
-                actions.add(new PurchaseAction(weaponItem));
+                actions.add(new PurchaseAction(weaponItem, this));
             }
         }
 

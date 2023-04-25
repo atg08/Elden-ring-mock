@@ -32,7 +32,13 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
+    public WeaponItem restock() {
+        return new GreatKnife();
+    }
+
+    @Override
     public Rune getSellingPrice() {
         return new Rune(350);
     }
+
 }
