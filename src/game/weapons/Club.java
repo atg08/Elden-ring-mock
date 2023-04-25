@@ -32,6 +32,11 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
+    public WeaponItem restock() {
+        return new Club();
+    }
+
+    @Override
     public Rune getSellingPrice() {
         return new Rune(100);
     }
