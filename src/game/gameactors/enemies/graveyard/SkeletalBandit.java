@@ -13,7 +13,7 @@ import game.gameactors.EnemyType;
  * @author tanul
  */
 
-public class SkeletalBandit extends Skeleton implements Behaviour {
+public class SkeletalBandit extends Skeleton implements Behaviour,Revivable {
     /**
      * Constructor.
      *
@@ -43,4 +43,14 @@ public class SkeletalBandit extends Skeleton implements Behaviour {
         return null;
     }
 
+    @Override
+    public Skeleton revive() {
+        return new SkeletalBandit();
+    }
+
+
+//    @Override
+//    public Skeleton revive() {
+//        return new SkeletalBandit();
+//    }
 }

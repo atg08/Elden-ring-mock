@@ -4,13 +4,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
-import game.environments.locations.StatusLocation;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.utils.RandomNumberGenerator;
 
 public abstract class Environment extends Ground {
-    protected StatusLocation statusLocation;
+
 
     /**
      * Constructor.

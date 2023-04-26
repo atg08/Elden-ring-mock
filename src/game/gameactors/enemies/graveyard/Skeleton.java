@@ -59,4 +59,7 @@ public abstract class Skeleton extends Enemy implements Resettable{
     public boolean isRemovable() {
         return true;
     }
+
+
+
 }

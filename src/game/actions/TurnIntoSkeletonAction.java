@@ -5,22 +5,22 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.gameactors.enemies.graveyard.PileOfBones;
+import game.gameactors.enemies.graveyard.Revivable;
 import game.gameactors.enemies.graveyard.Skeleton;
 
-public class TurnIntoPileOfBonesAction extends Action {
+public class TurnIntoSkeletonAction extends Action {
+
     @Override
     public String execute(Actor actor, GameMap map) {
-        // note the actor must be Skeleton
 
-        // remove the HSS
-        Location location = map.locationOf(actor);
+        PileOfBones pob = (PileOfBones) actor;
+        Skeleton target = pob.getReviveBackTo();
+        Revivable reviveTarget = (Revivable) target;
+        Skeleton revived = reviveTarget.revive();
+        Location whereToRevive = map.locationOf(actor);
         map.removeActor(actor);
-
-        // TODO add the PileOfBones to the seme location
-        map.addActor(new PileOfBones((Skeleton) actor), location);
-
-
-        return actor.toString() + "turns into a Pile Of Bones";
+        map.addActor(revived, whereToRevive);
+        return actor + "has been revived to " + revived;
     }
 
     @Override

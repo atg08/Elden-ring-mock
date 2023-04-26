@@ -13,7 +13,7 @@ import game.gameactors.StatusActor;
  * A Enemy of the player that holds a weapon called Grossmesser
  * @author tanul
  */
-public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
+public class HeavySkeletonSwordsman extends Skeleton implements Behaviour,Revivable {
 
     /**
      * Constructor.
@@ -44,5 +44,15 @@ public class HeavySkeletonSwordsman extends Skeleton implements Behaviour {
 //        }
         return null;
     }
+
+    @Override
+    public Skeleton revive() {
+        return new HeavySkeletonSwordsman();
+    }
+
+//    @Override
+//    public Skeleton revive() {
+//        return new HeavySkeletonSwordsman();
+//    }
 
 }

@@ -7,12 +7,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.Reset.ResetManager;
+import game.Reset.Respawnable;
 import game.actions.ConsumeAction;
+import game.environments.SiteOfLostGrace;
+import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
 import game.items.FlaskOfCrimsonTears;
 import game.runes.Rune;
 import game.Reset.Resettable;
-import game.Status;
 import game.weapons.Club;
 
 /**
@@ -23,11 +25,20 @@ import game.weapons.Club;
  * Modified by:
  *
  */
-public abstract class Player extends Actor implements Resettable {
+public abstract class Player extends Actor implements Resettable, Respawnable {
 
 	private final Menu menu = new Menu();
 	private ResetManager rm = ResetManager.getInstance();
 	protected Rune runes = new Rune();
+	protected SiteOfLostGrace respawnPoint;
+
+	public SiteOfLostGrace getRespawnPoint() {
+		return respawnPoint;
+	}
+
+	public void setRespawnPoint(SiteOfLostGrace respawnPoint) {
+		this.respawnPoint = respawnPoint;
+	}
 
 	/**
 	 * Constructor.
@@ -36,10 +47,12 @@ public abstract class Player extends Actor implements Resettable {
 	 */
 	public Player(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
+		this.addCapability(StatusActor.CAN_RESPAWN);
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
+		this.setRespawnPoint(TheFirstStep.getInstance());
 		rm.registerResettable(this);
 	}
 
@@ -84,6 +97,9 @@ public abstract class Player extends Actor implements Resettable {
 		return this.runes.decreaseRune(rune);
 	}
 
-
-
+	@Override
+	public void respawn(GameMap map) {
+		map.removeActor(this);
+		map.addActor(this, getRespawnPoint().getSiteLocation());
+	}
 }
