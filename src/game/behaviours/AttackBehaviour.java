@@ -6,9 +6,11 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AreaAttackAction;
 import game.actions.AttackAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,34 +23,36 @@ public class AttackBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Action> actions = new ArrayList<>();
+        Enemy enemy = (Enemy) actor;
+
+        boolean isTargetedAction = isTargetedAction();
 
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             Actor targetActor = destination.getActor();
-            boolean canAttack = false;
 
+            boolean canAttack = enemy.canTarget(targetActor);
 
-            if (targetActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)) {
-                // target actor is a player
-                canAttack = true;
-
-            }else if(targetActor.hasCapability(StatusActor.IS_ENEMY)){
-                // target actor is an enemy
-                List<EnemyType> actorTypeList = actor.findCapabilitiesByType(EnemyType.class);
-                EnemyType actorType = actorTypeList.get(0); // the type we are looking for
-
-                List<EnemyType> targetActorTypeList = actor.findCapabilitiesByType(EnemyType.class);
-                EnemyType targetActorType = targetActorTypeList.get(0);
-
-                canAttack = actorType.equals(targetActorType);
+            // area attack -> if we find at least one attackable actor -> return AreaAttackAction
+            if (canAttack && isTargetedAction){
+                List<WeaponItem> weaponList = actor.getWeaponInventory();
+                if (weaponList.size() == 0){
+                    // intrinsic weapon attack
+                    return new AreaAttackAction();
+                }else{
+                    // this method returns AreaAttackAction/special attack
+                    return weaponList.get(0).getSkill(actor);
+                }
             }
 
+            // targeted attack -> collect all possible enemies around
             if (canAttack){
                 List<WeaponItem> weaponList = actor.getWeaponInventory();
-                canAttack = weaponList.size() != 0;
                 if (weaponList.size() == 0){
+                    // intrinsic weapon attack
                     actions.add(new AttackAction(targetActor, exit.getName()));
                 }else{
+                    // regular weapon attack
                     actions.add(new AttackAction(targetActor, exit.getName(), weaponList.get(0)));
                 }
             }
@@ -60,5 +64,9 @@ public class AttackBehaviour implements Behaviour {
         else {
             return null;
         }
+    }
+
+    private boolean isTargetedAction(){
+        return random.nextInt(0, 1) == 0;
     }
 }

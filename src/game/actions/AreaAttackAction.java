@@ -9,17 +9,17 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 public class AreaAttackAction extends Action {
 
-    private Actor target;
     private Weapon weapon;
 
-    public AreaAttackAction(Actor target, Weapon weapon) {
-        this.target = target;
+    public AreaAttackAction(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public AreaAttackAction(Actor target) {
-        this.target = target;
-    }
+    /**
+     *
+     * the deafult constructor used when the attack is done by the intrinsic weapon
+     */
+    public AreaAttackAction() {}
 
     public String execute(Actor actor, GameMap map) {
         String results = actor.toString() + "attacks his surrounding!";
@@ -32,7 +32,7 @@ public class AreaAttackAction extends Action {
                 Actor targetActor = destination.getActor();
 
                 if (targetActor != null){
-                    results += new AttackAction(this.target, exit.getName(), this.weapon).execute(actor, map);
+                    results += new AttackAction(targetActor, exit.getName(), this.weapon).execute(actor, map);
                 }
             }
         }else{
@@ -41,7 +41,7 @@ public class AreaAttackAction extends Action {
                 Actor targetActor = destination.getActor();
 
                 if (targetActor != null){
-                    results += new AttackAction(this.target, exit.getName()).execute(actor, map) + "\n";
+                    results += new AttackAction(targetActor, exit.getName()).execute(actor, map) + "\n";
                 }
             }
         }

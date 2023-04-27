@@ -4,8 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Reset.ResetManager;
 import game.gameactors.StatusActor;
 import game.runes.Rune;
@@ -47,6 +50,20 @@ public abstract class Player extends Actor implements Resettable {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+		// TODO add area attack?
+		if (checkEnemyExistenceAround(map.locationOf(this))){
+			for (WeaponItem weaponItem: this.getWeaponInventory()){
+				Action action = weaponItem.getSkill(this);
+				if (action != null){
+					actions.add(action);
+				}
+			}
+
+			// TODO if player's intrinsic weapon has area attack ability, add it here
+		}
+
+
+
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
@@ -82,6 +99,19 @@ public abstract class Player extends Actor implements Resettable {
 	public boolean decreaseRune(Rune rune){
 		Rune existingRune = getExistingRune();
 		return existingRune.decreaseRune(rune);
+	}
+
+	public boolean checkEnemyExistenceAround(Location location) {
+		for (Exit exit : location.getExits()) {
+			Location destination = exit.getDestination();
+			Actor targetActor = destination.getActor();
+
+			if (targetActor.hasCapability(StatusActor.IS_ENEMY)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
