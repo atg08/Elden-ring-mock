@@ -70,6 +70,8 @@ public class Application {
 //		Player player = new Player("Tarnished", '@', 300);
 //		world.addPlayer(player, gameMap.at(36, 10));
 
+
+
 		world.run();
 
 	}
