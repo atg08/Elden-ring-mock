@@ -4,13 +4,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
-import game.environments.locations.StatusLocation;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.utils.RandomNumberGenerator;
 
 public abstract class Environment extends Ground {
-    protected StatusLocation statusLocation;
 
     /**
      * Constructor.
@@ -29,10 +27,10 @@ public abstract class Environment extends Ground {
         return widths.max()/2 < location.x();
     }
 
-    public void tick(Location location, GameMap gamemap){
+    public void tick(Location location, GameMap map){
 
-        if (location.getActor() == null){
-            spawn(location,gamemap);
+        if (map.isAnActorAt(location)){
+            spawn(location,map);
         }
     }
 }

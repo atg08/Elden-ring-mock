@@ -27,10 +27,12 @@ public class Trader extends Actor {
      */
     public Trader(String name, char displayChar, int hitPoints) {
         super("Merchant kale", 'k', 9999999);
-        sellableWeaponItems.add(new Uchigatana());
-        sellableWeaponItems.add(new GreatKnife());
-        sellableWeaponItems.add(new Club());
-        sellableWeaponItems.add(new Scimitar());
+        this.sellableWeaponItems.add(new Uchigatana());
+        this.sellableWeaponItems.add(new GreatKnife());
+        this.sellableWeaponItems.add(new Club());
+        this.sellableWeaponItems.add(new Scimitar());
+
+        this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
     }
 
     @Override

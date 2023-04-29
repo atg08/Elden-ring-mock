@@ -6,50 +6,78 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AreaAttackAction;
 import game.actions.AttackAction;
-import game.gameactors.EnemyType;
-import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
+import game.weapons.WeaponSkill;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class AttackBehaviour implements Behaviour {
 
     private final Random random = new Random();
+    private Player player;
 
+    public AttackBehaviour(Player player){
+        this.player = player;
+    }
+
+    // assume enemy does not own any weapons with a special skill (like Uchigatana)
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        // ensure that player has not moved in the same turn
+        if (map.locationOf(player) != this.player.getPlayerPreviousLocation()){
+            return null;
+        }
+
         ArrayList<Action> actions = new ArrayList<>();
+        Enemy enemy = (Enemy) actor;
+
+        boolean isTargetedAction = this.detTargetedAction();
+        WeaponItem weaponItem = null;
+        if (actor.getWeaponInventory().size() != 0){
+            weaponItem = actor.getWeaponInventory().get(0);
+            boolean canTargetAttack = weaponItem.hasCapability(WeaponSkill.AREA_ATTACK);
+            boolean canAreaAttack = weaponItem.hasCapability(WeaponSkill.TARGETED_ATTACK);
+
+            if (canTargetAttack && !canAreaAttack){
+                isTargetedAction = true;
+            } else if (!canTargetAttack && canAreaAttack){
+                isTargetedAction = false;
+            }
+        }
+
 
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             Actor targetActor = destination.getActor();
-            boolean canAttack = false;
 
-
-            if (targetActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)) {
-                // target actor is a player
-                canAttack = true;
-
-            }else if(targetActor.hasCapability(StatusActor.IS_ENEMY)){
-                // target actor is an enemy
-                List<EnemyType> actorTypeList = actor.findCapabilitiesByType(EnemyType.class);
-                EnemyType actorType = actorTypeList.get(0); // the type we are looking for
-
-                List<EnemyType> targetActorTypeList = actor.findCapabilitiesByType(EnemyType.class);
-                EnemyType targetActorType = targetActorTypeList.get(0);
-
-                canAttack = actorType.equals(targetActorType);
+            if (targetActor == null){
+                continue;
             }
 
+            // area attack -> if we find at least one attack-able actor -> return AreaAttackAction
+            if (!isTargetedAction){
+                if (weaponItem != null){
+                    // intrinsic weapon attack
+                    return new AreaAttackAction(weaponItem);
+                }else{
+                    // this method returns AreaAttackAction/special attack
+                    return new AreaAttackAction();
+                }
+            }
+
+            // targeted attack -> collect all possible enemies around
+            boolean canAttack = enemy.canTarget(targetActor);
             if (canAttack){
-                List<WeaponItem> weaponList = actor.getWeaponInventory();
-                canAttack = weaponList.size() != 0;
-                if (weaponList.size() == 0){
+                if (weaponItem != null){
+                    // intrinsic weapon attack
                     actions.add(new AttackAction(targetActor, exit.getName()));
                 }else{
-                    actions.add(new AttackAction(targetActor, exit.getName(), weaponList.get(0)));
+                    // regular weapon attack
+                    actions.add(new AttackAction(targetActor, exit.getName(), weaponItem));
                 }
             }
 
@@ -60,5 +88,9 @@ public class AttackBehaviour implements Behaviour {
         else {
             return null;
         }
+    }
+
+    private boolean detTargetedAction(){
+        return random.nextInt(0, 1) == 0;
     }
 }

@@ -26,7 +26,6 @@ public class GustOfWind extends Environment{
         if (detEast(location, map)) {
             // check east or west
             if (RandomNumberGenerator.getBooleanProbability(4)) {
-                // spawn skeleton bandit
                 return new GiantDog();
             }
         } else {

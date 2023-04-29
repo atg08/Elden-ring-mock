@@ -4,14 +4,18 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Reset.ResetManager;
+import game.actions.AreaAttackAction;
 import game.gameactors.StatusActor;
 import game.runes.Rune;
 import game.Reset.Resettable;
-import game.Status;
 import game.weapons.Club;
+import game.weapons.WeaponSkill;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -25,6 +29,7 @@ public abstract class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private ResetManager rm;
+	private Location previousLocation;
 
 	/**
 	 * Constructor.
@@ -33,7 +38,7 @@ public abstract class Player extends Actor implements Resettable {
 	 */
 	public Player(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
 		rm.registerResettable(this);
@@ -43,9 +48,25 @@ public abstract class Player extends Actor implements Resettable {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// record player's current location
+		this.previousLocation = map.locationOf(this);
+
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+
+		// add area attack
+		if (checkEnemyExistenceAround(map.locationOf(this))){
+			for (WeaponItem weaponItem: this.getWeaponInventory()){
+				if (weaponItem.hasCapability(WeaponSkill.AREA_ATTACK)){
+					actions.add(new AreaAttackAction(weaponItem));
+				}
+			}
+
+			// TODO if player's intrinsic weapon has area attack ability, add it here
+		}
+
+
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -75,7 +96,10 @@ public abstract class Player extends Actor implements Resettable {
 	public void increaseRune(Rune rune){
 
 		Rune existingRune = this.getExistingRune();
-		if (existingRune != null){existingRune.increaseRune(rune);}
+		// Note: it shouldn't be null because we instantiate new Rune everytime we instantiate a player
+		if (existingRune != null){
+			existingRune.increaseRune(rune);
+		}
 
 	}
 
@@ -84,6 +108,20 @@ public abstract class Player extends Actor implements Resettable {
 		return existingRune.decreaseRune(rune);
 	}
 
+	public boolean checkEnemyExistenceAround(Location location) {
+		for (Exit exit : location.getExits()) {
+			Location destination = exit.getDestination();
+			Actor targetActor = destination.getActor();
 
+			if (targetActor.hasCapability(StatusActor.IS_ENEMY)) {
+				return true;
+			}
+		}
 
+		return false;
+	}
+
+	public Location getPlayerPreviousLocation(){
+		return this.previousLocation;
+	}
 }

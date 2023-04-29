@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
-import game.gameactors.enemies.graveyard.Skeleton;
 import game.gameactors.enemies.water.OceanEnemy;
 import game.gameactors.enemies.wind.WindEnemy;
 import game.gameactors.players.Player;

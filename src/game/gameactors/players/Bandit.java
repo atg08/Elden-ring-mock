@@ -1,5 +1,7 @@
 package game.gameactors.players;
 
+import game.weapons.GreatKnife;
+
 public class Bandit extends Player{
     /**
      * Constructor.
@@ -10,8 +12,6 @@ public class Bandit extends Player{
      */
     public Bandit(String name, char displayChar, int hitPoints) {
         super( 414);
-
-        // if transaction successful
-        addWeaponToInventory(new GreatKnife());
+        this.addWeaponToInventory(new GreatKnife());
     }
 }

@@ -34,6 +34,8 @@ public interface Weapon {
 	int chanceToHit();
 
 	/**
+	 * for targeted attack
+	 *
 	 * Get an active skill action from the weapon. Use this method if you want to use a weapon skill
 	 * against one targeted Actor (i.e, special attack, heal, stun, etc.).
 	 * @param target target actor
@@ -44,6 +46,8 @@ public interface Weapon {
 	}
 
 	/**
+	 * for area attack
+	 *
 	 * Get an active skill action from the weapon. This should be used for weapon skills that do not involve a target actor
 	 * For instance, healing the holder of the weapon, switching current weapon's attack, e.g. from normal attack to fire attack
 	 * @param holder weapon holder
