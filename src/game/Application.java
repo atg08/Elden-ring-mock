@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.gameactors.enemies.wind.LoneWolf;
+import game.grounds.Dirt;
+import game.grounds.Floor;
+import game.grounds.Wall;
 
 /**
  * The main class to start the game.

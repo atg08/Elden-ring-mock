@@ -32,7 +32,7 @@ public class AreaAttackAction extends Action {
                 Actor targetActor = destination.getActor();
 
                 if (targetActor != null){
-                    results += new AttackAction(targetActor, exit.getName(), this.weapon).execute(actor, map);
+                    results += System.lineSeparator() + new AttackAction(targetActor, exit.getName(), this.weapon).execute(actor, map);
                 }
             }
         }else{
@@ -41,7 +41,7 @@ public class AreaAttackAction extends Action {
                 Actor targetActor = destination.getActor();
 
                 if (targetActor != null){
-                    results += new AttackAction(targetActor, exit.getName()).execute(actor, map) + "\n";
+                    results += System.lineSeparator() + new AttackAction(targetActor, exit.getName()).execute(actor, map);
                 }
             }
         }
@@ -51,6 +51,10 @@ public class AreaAttackAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        if (this.weapon != null){
+            return "Do area attack using " + this.weapon;
+        }
+        return "Do area attack using " + actor.getIntrinsicWeapon().toString();
+
     }
 }

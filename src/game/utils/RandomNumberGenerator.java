@@ -18,7 +18,7 @@ public class RandomNumberGenerator {
         return new Random().nextInt(100)<=rate;
     }
 
-    public static int getRandomInt(int lowerBound, int upperBound) {
+    public static int getRandomIntInRange(int lowerBound, int upperBound) {
         int range = upperBound - lowerBound + 1;
         return new Random().nextInt(range) + lowerBound;
     }

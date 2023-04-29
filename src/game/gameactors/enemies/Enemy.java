@@ -6,30 +6,32 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Reset.ResetManager;
 import game.Reset.Resettable;
-import game.Status;
 import game.actions.AttackAction;
+import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.runes.Rune;
 import game.utils.RandomNumberGenerator;
+import game.weapons.WeaponSkill;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable {
     protected ResetManager rm;
     protected StatusActor enemyType;
     protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    protected int despawnRate = 10;
+    protected int maxRuneDrop;
+    protected int minRuneDrop;
 
     /**
      * Constructor.
@@ -38,13 +40,16 @@ public abstract class Enemy extends Actor {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public Enemy(String name, char displayChar, int hitPoints) {
+    public Enemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(name, displayChar, hitPoints);
         addCapability(StatusActor.IS_ENEMY);
+        rm.registerResettable(this);
+
+        this.maxRuneDrop = maxRuneDrop;
+        this.minRuneDrop = minRuneDrop;
 
         // wander bahavior
         this.behaviours.put(999, new WanderBehaviour());
-        this.behaviours.put(2, new AttackBehaviour());
 
         // TODO for other bahaviors, add manually through the Application class
 
@@ -61,6 +66,13 @@ public abstract class Enemy extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (!this.hasCapability(StatusActor.FOLLOWING_PLAYER) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
+            return new DespawnAction();
+        }
+
+        // reset following status
+        this.removeCapability(StatusActor.FOLLOWING_PLAYER);
+
         // put behaviors into actions
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
@@ -75,16 +87,28 @@ public abstract class Enemy extends Actor {
 
         // add targeted attack if player
         if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+
             // for intrinsic weapon
             actions.add(new AttackAction(this, direction));
 
             // for regular weapons
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
-                actions.add(weaponItem.getSkill(this, direction));
+                // targeted attack
+                actions.add(new AttackAction(this, direction, weaponItem));
+
+                // special attack
+                Action specialAttack = weaponItem.getSkill(this, direction);
+                if (specialAttack != null){
+                    actions.add(specialAttack);
+                }
             }
         }
 
         return actions;
+    }
+
+    public Rune getDeathRune(){
+        return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minRuneDrop, this.maxRuneDrop));
     }
 
     public boolean canTarget(Actor otherActor){
@@ -110,5 +134,19 @@ public abstract class Enemy extends Actor {
 
     public StatusActor getEnemyType(){
         return this.enemyType;
+    }
+
+    @Override
+    public String reset(Actor actor, GameMap map) {
+        DespawnAction despawn = new DespawnAction();
+        return despawn.execute(this, map);
+    }
+
+    public int getMinRune(){
+        return this.minRuneDrop;
+    }
+
+    public int getMaxRune(){
+        return this.maxRuneDrop;
     }
 }
