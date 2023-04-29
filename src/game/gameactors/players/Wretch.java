@@ -1,5 +1,7 @@
 package game.gameactors.players;
 
+import game.weapons.Club;
+
 public class Wretch extends Player{
     /**
      * Constructor.

@@ -1,5 +1,7 @@
 package game.gameactors.players;
 
+import game.weapons.GreatKnife;
+
 public class Bandit extends Player{
     /**
      * Constructor.

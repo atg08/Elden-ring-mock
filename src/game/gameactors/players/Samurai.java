@@ -1,5 +1,7 @@
 package game.gameactors.players;
 
+import game.weapons.Uchigatana;
+
 public class Samurai extends Player{
     /**
      * Constructor.
@@ -10,7 +12,7 @@ public class Samurai extends Player{
      */
     public Samurai(String name, char displayChar, int hitPoints) {
         super( 455);
-        //addWeaponToInventory(new Uchigatana());
+        addWeaponToInventory(new Uchigatana());
     }
 
 }
