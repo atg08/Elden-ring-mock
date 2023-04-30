@@ -5,13 +5,11 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Scimitar;
-import game.weapons.Uchigatana;
+import game.weapons.*;
 
 import java.util.ArrayList;
 
@@ -29,10 +27,12 @@ public class Trader extends Actor {
      */
     public Trader(String name, char displayChar, int hitPoints) {
         super("Merchant kale", 'k', 9999999);
-        sellableWeaponItems.add(new Uchigatana());
-        sellableWeaponItems.add(new GreatKnife());
-        sellableWeaponItems.add(new Club());
-        sellableWeaponItems.add(new Scimitar());
+        this.sellableWeaponItems.add(new Uchigatana());
+        this.sellableWeaponItems.add(new GreatKnife());
+        this.sellableWeaponItems.add(new Club());
+        this.sellableWeaponItems.add(new Scimitar());
+
+        this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
     }
 
     @Override
@@ -41,18 +41,25 @@ public class Trader extends Actor {
         return null;
     }
 
+    public void restock(WeaponItem weapon){
+        this.sellableWeaponItems.remove(weapon);
+        Purchasable purchasableWeapon = (Purchasable) weapon;
+        this.sellableWeaponItems.add(purchasableWeapon.restock());
+
+    }
+
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(StatusActor.IS_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
 
-            // create SellActions for each sellable weapons
+            // create SellActions for each sellable weapon
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
                 actions.add(new SellAction(weaponItem));
             }
 
             // create PurchaseAction for each purchasable weapons
             for (WeaponItem weaponItem: this.sellableWeaponItems){
-                actions.add(new PurchaseAction(weaponItem));
+                actions.add(new PurchaseAction(weaponItem, this));
             }
         }
 

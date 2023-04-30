@@ -13,35 +13,13 @@ import game.gameactors.EnemyType;
  * @author tanul
  */
 
-public class GiantCrayfish extends OceanEnemy implements Behaviour {
+public class GiantCrayfish extends OceanEnemy{
     /**
      * Constructor.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
      * @author Tanul
      */
     public GiantCrayfish() {
-        super("Giant Crayfish", 'R', 4803);
-    }
-
-    @Override
-    public Action getAction(Actor actor, GameMap map) {
-
-        if (actor.hasCapability(EnemyType.OCEAN_TYPE)) {
-            return new DoNothingAction();
-        }
-
-//        location = gameMap.locationOf(actor);
-        // check exits
-        // if there is a player there
-
-
-//        if (GameMap. player nearby){
-//            new AttackBehaviour(new Grossmesser(), )
-//        }
-        return null;
+        super("Giant Crayfish", 'R', 4803, 500, 2374);
     }
 
     // giant Pincer

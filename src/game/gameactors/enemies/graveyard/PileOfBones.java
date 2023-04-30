@@ -1,16 +1,13 @@
 package game.gameactors.enemies.graveyard;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
 import game.actions.TurnIntoPileOfBonesAction;
 import game.actions.TurnIntoSkeletonAction;
+import game.gameactors.enemies.Enemy;
 
-public class PileOfBones extends Actor{
+public class PileOfBones extends Enemy {
 
     private final int REVIVE_TO_SKELETON = 3;
 
@@ -23,7 +20,7 @@ public class PileOfBones extends Actor{
      * @param reviveBackTo
      */
     public PileOfBones(Skeleton reviveBackTo) {
-        super("Pile Of Bones", 'X', 1);
+        super("Pile Of Bones", 'X', 1, reviveBackTo.getMinRune(), reviveBackTo.getMaxRune());
         this.reviveBackTo = reviveBackTo;
     }
 

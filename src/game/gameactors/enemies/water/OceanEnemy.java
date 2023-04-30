@@ -17,7 +17,7 @@ import game.utils.RandomNumberGenerator;
  * A Abstract class that defines implementation of the similar characteristics of the OCEAN_TYPE enemies
  * @author tanul
  */
-public abstract class OceanEnemy extends Enemy implements Resettable {
+public abstract class OceanEnemy extends Enemy implements Resettable{
 
     /**
      * Constructor.
@@ -26,20 +26,11 @@ public abstract class OceanEnemy extends Enemy implements Resettable {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public OceanEnemy(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public OceanEnemy(String name, char displayChar, int hitPoints, int minMaxDrop, int maxDropRune) {
+        super(name, displayChar, hitPoints, minMaxDrop, maxDropRune);
+        this.addCapability(EnemyType.OCEAN_TYPE);
         rm.registerResettable(this);
     }
-
-    public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
-        if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
-            rm.removeResettable(this);
-            return new DespawnAction();
-        }
-
-        return new DoNothingAction();
-    }
-
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();

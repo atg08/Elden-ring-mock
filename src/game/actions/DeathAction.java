@@ -3,11 +3,10 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.gameactors.StatusActor;
-import game.gameactors.players.Player;
 
 /**
  * An action executed if an actor is killed.
@@ -34,33 +33,55 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
+        int droppedRuneAmount = 0;
 
         if (target.hasCapability(StatusActor.CAN_RESPAWN) && target.hasCapability(StatusActor.HOSTILE_TO_ENEMY)) {
             Player player = (Player) target;
             player.respawn(map);
 
             // add the drop runes
+            if (item.toString() == "rune") {
+                Rune rune = (Rune) item;
+                droppedRuneAmount = rune.getAmount();
+            }
 
             return  result;
         } else {
-            // only happens for enemies
-            ActionList dropActions = new ActionList();
+
             // drop all items
-            for (Item item : target.getItemInventory())
+            ActionList dropActions = new ActionList();
+            for (Item item : target.getItemInventory()) {
                 dropActions.add(item.getDropAction(target));
+            }
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
+
             for (Action drop : dropActions)
                 drop.execute(target, map);
-            // remove actor
-            map.removeActor(target);
-            result += System.lineSeparator() + menuDescription(target);
-            return result;
 
-            // TODO make sure to trigger drop rune action (note: however for enemy when it's killed by the player
-            //  it automatically transfers its runes to the player so its's not shown in the amp)
-            // HOWEVER, for player when it's dead, the rune must be dropped
+            // drop/transfer Rune
+            if (this.attacker.hasCapability(StatusActor.HOSTILE_TO_ENEMY) && target.hasCapability(StatusActor.IS_ENEMY)) {
+                // player kills enemy
+                // when player kills enemy, runes should be directly transferred
+                Player player = (Player) this.attacker;
+                Enemy enemy = (Enemy) target;
+                Rune droppedRune = enemy.getDeathRune();
+                player.increaseRune(droppedRune);
+                droppedRuneAmount = droppedRune.getAmount();
+            } else if (this.attacker.hasCapability(StatusActor.IS_ENEMY) && target.hasCapability(StatusActor.IS_ENEMY)) {
+                // enemy kills enemy
+                Enemy enemy = (Enemy) target;
+                Rune droppedRune = enemy.getDeathRune();
+                dropActions.add(new DropItemAction(droppedRune));
+                droppedRuneAmount = droppedRune.getAmount();
+            }
         }
+
+
+        // remove actor
+        map.removeActor(target);
+        result += System.lineSeparator() + menuDescription(target) + System.lineSeparator() + target + " dropped " + droppedRuneAmount + " runes";
+        return result;
     }
 
     @Override

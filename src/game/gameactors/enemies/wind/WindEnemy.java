@@ -19,7 +19,7 @@ import game.utils.RandomNumberGenerator;
  * A Abstract class that defines implementation of the similar characteristics of the WIND_TYPE enemies
  * @author tanul
  */
-public abstract class WindEnemy extends Enemy implements Resettable {
+public abstract class WindEnemy extends Enemy, Resettable{
 
     /**
      * Constructor.
@@ -28,24 +28,10 @@ public abstract class WindEnemy extends Enemy implements Resettable {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public WindEnemy(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public WindEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
+        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        this.addCapability(EnemyType.WIND_TYPE);
         rm.registerResettable(this);
-    }
-
-    public Action playTurn(ActionList actions, Action lastAction, GameMap gameMap, Display display){
-        if (!this.hasCapability(EnemyType.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(10)){
-            rm.removeResettable(this);
-            return new DespawnAction();
-        }
-
-        return new DoNothingAction();
-    }
-
-    @Override
-    public String reset(Actor actor, GameMap map) {
-        DespawnAction despawn = new DespawnAction();
-        return despawn.execute(this, map);
     }
     @Override
     public boolean isRemovable() {

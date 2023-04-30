@@ -28,10 +28,10 @@ public abstract class Environment extends Ground {
         return widths.max()/2 < location.x();
     }
 
-    public void tick(Location location, GameMap gamemap){
+    public void tick(Location location, GameMap map){
 
-        if (location.getActor() == null){
-            spawn(location,gamemap);
+        if (map.isAnActorAt(location)){
+            spawn(location,map);
         }
     }
 }

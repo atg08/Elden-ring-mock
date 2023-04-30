@@ -14,35 +14,15 @@ import game.gameactors.EnemyType;
  * @author tanul
  */
 
-public class GiantCrab extends OceanEnemy implements Behaviour {
+public class GiantCrab extends OceanEnemy{
     /**
      * Constructor.
      *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
      */
     public GiantCrab() {
-        super("Giant Crab", 'C', 208);
+        super("Giant Crab", 'C', 208, 318, 4961);
     }
 
-    @Override
-    public Action getAction(Actor actor, GameMap gameMap) {
-
-        if (actor.hasCapability(EnemyType.OCEAN_TYPE)){
-            return new DoNothingAction();
-        }
-
-//        location = gameMap.locationOf(actor);
-        // check exits
-        // if there is a player there
-
-
-//        if (GameMap. player nearby){
-//            new AttackBehaviour(new Grossmesser(), )
-//        }
-        return null;
-    }
 
     // slam cna be individual or area attack
     @Override

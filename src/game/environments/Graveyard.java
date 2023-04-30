@@ -23,8 +23,6 @@ public class Graveyard extends Environment{
     public Enemy spawn(Location location, GameMap map) {
         if (RandomNumberGenerator.getBooleanProbability(27)) {
             if (detEast(location, map)) {
-                // check east or west
-                // spawn skeleton bandit
                 return new SkeletalBandit();
             } else {
                 return new HeavySkeletonSwordsman();

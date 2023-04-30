@@ -1,8 +1,10 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AreaAttackAction;
 import game.runes.Rune;
 
 /**
@@ -21,6 +23,7 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
      */
     public Club() {
         super("Club", '!', 103, "bonks", 80);
+        this.addCapability(WeaponSkill.TARGETED_ATTACK);
     }
 
     @Override
@@ -29,6 +32,11 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(600);
+    }
+
+    @Override
+    public WeaponItem restock() {
+        return new Club();
     }
 
     @Override

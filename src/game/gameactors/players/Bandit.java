@@ -12,8 +12,6 @@ public class Bandit extends Player{
      */
     public Bandit() {
         super( 414);
-
-        // if transaction successful
-        addWeaponToInventory(new GreatKnife());
+        this.addWeaponToInventory(new GreatKnife());
     }
 }

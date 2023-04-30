@@ -12,7 +12,7 @@ public class DespawnAction extends Action {
     @Override
     public String execute(Actor actor, GameMap gameMap) {
         gameMap.removeActor(actor);
-        return actor + "is despawned.";
+        return this.menuDescription(actor);
     }
 
     @Override

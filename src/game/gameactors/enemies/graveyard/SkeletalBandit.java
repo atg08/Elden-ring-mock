@@ -1,19 +1,14 @@
 package game.gameactors.enemies.graveyard;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.DespawnAction;
-import game.behaviours.Behaviour;
-import game.gameactors.EnemyType;
+import game.gameactors.enemies.Revivable;
+import game.weapons.Scimitar;
 
 /**
  * A Enemy of the player that holds a weapon called Grossmesser
  * @author tanul
  */
 
-public class SkeletalBandit extends Skeleton implements Behaviour,Revivable {
+public class SkeletalBandit extends Skeleton {
     /**
      * Constructor.
      *
@@ -23,34 +18,13 @@ public class SkeletalBandit extends Skeleton implements Behaviour,Revivable {
      * @author Tanul
      */
     public SkeletalBandit() {
-        super("Skeletal Bandit", 'b', 184);
+        super("Skeletal Bandit", 'b', 184, 35, 892);
+        this.addWeaponToInventory(new Scimitar());
     }
 
     @Override
-    public Action getAction(Actor actor, GameMap map) {
-        if (actor.hasCapability(EnemyType.SKELETON_TYPE)){
-            return new DoNothingAction();
-        }
-
-//        location = gameMap.locationOf(actor);
-        // check exits
-        // if there is a player there
-
-
-//        if (GameMap. player nearby){
-//            new AttackBehaviour(new Grossmesser(), )
-//        }
-        return null;
-    }
-
-    @Override
-    public Skeleton revive() {
+    public Revivable revive() {
         return new SkeletalBandit();
     }
 
-
-//    @Override
-//    public Skeleton revive() {
-//        return new SkeletalBandit();
-//    }
 }

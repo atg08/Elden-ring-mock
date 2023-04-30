@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import game.behaviours.Behaviour;
+import game.gameactors.StatusActor;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -45,6 +46,7 @@ public class FollowBehaviour implements Behaviour {
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
+					actor.addCapability(StatusActor.FOLLOWING_PLAYER);
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}

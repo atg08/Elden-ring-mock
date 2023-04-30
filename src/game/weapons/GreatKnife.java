@@ -1,8 +1,9 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.QuickStepAction;
 import game.runes.Rune;
 
 /**
@@ -21,10 +22,13 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
      */
     public GreatKnife() {
         super("Great Knife", '/', 75, "hit", 70);
+        this.addCapability(WeaponSkill.TARGETED_ATTACK);
     }
 
     @Override
-    public void tick(Location currentLocation, Actor actor) {}
+    public Action getSkill(Actor target, String direction) {
+        return new QuickStepAction(target, direction, this);
+    }
 
     @Override
     public Rune getPurchasingPrice() {
@@ -32,7 +36,13 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
+    public WeaponItem restock() {
+        return new GreatKnife();
+    }
+
+    @Override
     public Rune getSellingPrice() {
         return new Rune(350);
     }
+
 }
