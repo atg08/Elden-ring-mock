@@ -74,7 +74,7 @@ public class QuickStepAction extends Action {
         // find possible locations to make a quick step
         for (Exit exit : map.locationOf(actor).getExits()){
             Location destination = exit.getDestination();
-            if (destination.getActor() == null){
+            if (destination.getActor() == null && destination.canActorEnter(actor)){
                 actions.add(new MoveActorAction(destination, exit.getName()));
             }
         }

@@ -94,7 +94,9 @@ public abstract class Enemy extends Actor implements Resettable {
             // for regular weapons
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
                 // targeted attack
-                actions.add(new AttackAction(this, direction, weaponItem));
+                if (weaponItem.hasCapability(WeaponSkill.TARGETED_ATTACK)){
+                    actions.add(new AttackAction(this, direction, weaponItem));
+                }
 
                 // special attack
                 Action specialAttack = weaponItem.getSkill(this, direction);

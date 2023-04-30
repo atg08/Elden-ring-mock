@@ -24,12 +24,6 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
         super("Scimitar", 's', 118, "hit", 88);
         this.addCapability(WeaponSkill.AREA_ATTACK);
     }
-
-    @Override
-    public Action getSkill(Actor target, String direction) {
-        return new AreaAttackAction();
-    }
-
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(600);
