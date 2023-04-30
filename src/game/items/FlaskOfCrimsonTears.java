@@ -53,6 +53,8 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         rm.registerResettable(this);
         // upon initialization of the object adds the object
         // to the list of resettable
+
+        this.addAction(new ConsumeAction(this));
     }
 
     /**
@@ -112,4 +114,5 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
     public boolean isRemovable() {
         return false;
     }
+
 }

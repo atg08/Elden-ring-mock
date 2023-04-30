@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.gameactors.EnemyType;
+import game.gameactors.StatusActor;
 
 /**
  * An Action to attack another Actor.
@@ -71,6 +72,10 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		if (target.hasCapability(StatusActor.CANNOT_BE_ATTACKED)){
+			return this.target + " cannot be attacked";
+		}
+
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
 		}

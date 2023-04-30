@@ -4,7 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.gameactors.enemies.Skeleton;
+import game.gameactors.enemies.graveyard.PileOfBones;
+import game.gameactors.enemies.graveyard.Skeleton;
 
 public class TurnIntoPileOfBonesAction extends Action {
     @Override

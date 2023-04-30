@@ -1,6 +1,10 @@
 package game.runes;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpAction;
+import edu.monash.fit2099.engine.items.PickUpItemAction;
+import edu.monash.fit2099.engine.items.RecoverRuneAction;
 
 public class Rune extends Item {
 
@@ -34,5 +38,11 @@ public class Rune extends Item {
         }else{
             return false;
         }
+    }
+
+    public PickUpAction getPickUpAction(Actor actor) {
+        if(portable)
+            return new RecoverRuneAction(this);
+        return null;
     }
 }

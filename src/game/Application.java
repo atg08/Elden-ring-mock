@@ -13,6 +13,9 @@ import game.gameactors.enemies.wind.LoneWolf;
 import game.gameactors.players.Bandit;
 import game.gameactors.players.Samurai;
 import game.gameactors.players.Wretch;
+import game.grounds.Dirt;
+import game.grounds.Floor;
+import game.grounds.Wall;
 
 /**
  * The main class to start the game.
@@ -89,13 +92,13 @@ public class Application {
 			selection = choice;
 			switch (selection) {
 				case "b":
-					Bandit bandit = new Bandit("Tarnished", '@' , 414);
+					Bandit bandit = new Bandit();
 					break;
 				case "s":
-					Samurai samurai = new Samurai("Tarnished", '@' , 455);
+					Samurai samurai = new Samurai();
 					break;
 				case "w":
-					Wretch wretch = new Wretch("Tarnished", '@' , 414);
+					Wretch wretch = new Wretch();
 			}
 		} while (selection != "x");
 

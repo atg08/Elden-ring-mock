@@ -30,6 +30,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
         super(name, displayChar, hitPoints, minMaxDrop, maxDropRune);
         this.addCapability(EnemyType.OCEAN_TYPE);
         rm.registerResettable(this);
+        this.addCapability(StatusActor.CAN_DESPAWN);
     }
     @Override
     public String reset(Actor actor, GameMap map) {

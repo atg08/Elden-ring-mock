@@ -2,14 +2,27 @@ package game.gameactors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Reset.ResetManager;
 import game.Reset.Resettable;
+import game.actions.AttackAction;
+import game.actions.DespawnAction;
+import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
+import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.runes.Rune;
 import game.utils.RandomNumberGenerator;
+import game.weapons.WeaponSkill;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public abstract class Enemy extends Actor{
     protected ResetManager rm = ResetManager.getInstance();;
@@ -52,7 +65,11 @@ public abstract class Enemy extends Actor{
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (!this.hasCapability(StatusActor.FOLLOWING_PLAYER) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
-            return new DespawnAction();
+            if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
+                rm.removeResettable((Resettable) this);
+                return new DespawnAction();
+            }
+
         }
 
         // reset following status
@@ -71,7 +88,7 @@ public abstract class Enemy extends Actor{
         ActionList actions =  new ActionList();
 
         // add targeted attack if player
-        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
 
             // for intrinsic weapon
             actions.add(new AttackAction(this, direction));
@@ -101,7 +118,7 @@ public abstract class Enemy extends Actor{
     public boolean canTarget(Actor otherActor){
 
         // if otherActor is a player, Enemy can attack him
-        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
             return true;
         }
 

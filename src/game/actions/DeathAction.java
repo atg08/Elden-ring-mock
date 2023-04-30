@@ -7,6 +7,10 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
+import game.runes.Rune;
 
 /**
  * An action executed if an actor is killed.
@@ -35,17 +39,17 @@ public class DeathAction extends Action {
         String result = "";
         int droppedRuneAmount = 0;
 
-        if (target.hasCapability(StatusActor.CAN_RESPAWN) && target.hasCapability(StatusActor.HOSTILE_TO_ENEMY)) {
+        if (target.hasCapability(StatusActor.CAN_RESPAWN) && target.hasCapability(StatusActor.IS_PLAYER)) {
             Player player = (Player) target;
+
+            Rune droppedRune = player.getExistingRune();
+
+            droppedRune.togglePortability();
+            result = new DropItemAction(droppedRune).execute(player, map);
+
             player.respawn(map);
 
-            // add the drop runes
-            if (item.toString() == "rune") {
-                Rune rune = (Rune) item;
-                droppedRuneAmount = rune.getAmount();
-            }
-
-            return  result;
+            droppedRuneAmount = droppedRune.getAmount();
         } else {
 
             // drop all items
@@ -60,7 +64,7 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
 
             // drop/transfer Rune
-            if (this.attacker.hasCapability(StatusActor.HOSTILE_TO_ENEMY) && target.hasCapability(StatusActor.IS_ENEMY)) {
+            if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && target.hasCapability(StatusActor.IS_ENEMY)) {
                 // player kills enemy
                 // when player kills enemy, runes should be directly transferred
                 Player player = (Player) this.attacker;

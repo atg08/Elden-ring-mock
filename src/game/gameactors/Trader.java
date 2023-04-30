@@ -2,10 +2,10 @@ package game.gameactors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
@@ -32,13 +32,14 @@ public class Trader extends Actor {
         this.sellableWeaponItems.add(new Club());
         this.sellableWeaponItems.add(new Scimitar());
 
-        this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
+        this.addCapability(StatusActor.IS_TRADER);
+        this.addCapability(StatusActor.CANNOT_BE_ATTACKED);
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // trader does not do make any actions actively. it responds if player requires him
-        return null;
+        return new DoNothingAction();
     }
 
     public void restock(WeaponItem weapon){
@@ -50,7 +51,7 @@ public class Trader extends Actor {
 
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
 
             // create SellActions for each sellable weapon
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){

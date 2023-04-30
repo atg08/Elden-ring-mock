@@ -19,7 +19,7 @@ import game.utils.RandomNumberGenerator;
  * A Abstract class that defines implementation of the similar characteristics of the WIND_TYPE enemies
  * @author tanul
  */
-public abstract class WindEnemy extends Enemy, Resettable{
+public abstract class WindEnemy extends Enemy implements Resettable{
 
     /**
      * Constructor.
@@ -32,6 +32,7 @@ public abstract class WindEnemy extends Enemy, Resettable{
         super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
         this.addCapability(EnemyType.WIND_TYPE);
         rm.registerResettable(this);
+        this.addCapability(StatusActor.CAN_DESPAWN);
     }
     @Override
     public boolean isRemovable() {

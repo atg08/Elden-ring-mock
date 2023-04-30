@@ -28,6 +28,7 @@ public abstract class Skeleton extends Enemy implements Revivable, Resettable {
         super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
         this.addCapability(EnemyType.SKELETON_TYPE);
         rm.registerResettable(this);
+        this.addCapability(StatusActor.CAN_DESPAWN);
     }
 
 

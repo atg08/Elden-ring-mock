@@ -4,13 +4,22 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Reset.ResetManager;
+import game.Reset.Respawnable;
+import game.actions.AreaAttackAction;
+import game.environments.SiteOfLostGrace;
+import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
+import game.items.FlaskOfCrimsonTears;
 import game.runes.Rune;
 import game.Reset.Resettable;
-import game.Status;
+import game.weapons.Club;
+import game.weapons.WeaponSkill;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -43,7 +52,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 	 */
 	public Player(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
-		this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
+		this.addCapability(StatusActor.IS_PLAYER);
 		this.addCapability(StatusActor.CAN_RESPAWN);
 		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
@@ -52,13 +61,6 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		rm.registerResettable(this);
 
 		this.addItemToInventory(new Rune());  // player always starts with 0 rune
-	}
-
-	@Override
-	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-		ActionList actions = new ActionList();
-		actions.add(new ConsumeAction(this.getItemInventory().get(0)));
-		return actions;
 	}
 
 	@Override
@@ -130,6 +132,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 	@Override
 	public void respawn(GameMap map) {
 		map.removeActor(this);
+		this.addItemToInventory(new Rune());
 		map.addActor(this, getRespawnPoint().getSiteLocation());
 	}
 	public boolean checkEnemyExistenceAround(Location location) {
