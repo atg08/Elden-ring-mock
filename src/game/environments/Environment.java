@@ -6,11 +6,10 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 
 public abstract class Environment extends Ground {
-
-
     /**
      * Constructor.
      *
@@ -19,6 +18,7 @@ public abstract class Environment extends Ground {
     public Environment(char displayChar) {
         super(displayChar);
     }
+
     public abstract Enemy spawn(Location location, GameMap map);
 
     public Boolean detEast (Location location, GameMap map){
@@ -28,10 +28,16 @@ public abstract class Environment extends Ground {
         return widths.max()/2 < location.x();
     }
 
-    public void tick(Location location, GameMap map){
+    @Override
+    public void tick(Location location){
+        GameMap map = location.map();
 
-        if (map.isAnActorAt(location)){
-            spawn(location,map);
+        if (!map.isAnActorAt(location)){
+            Enemy enemy = spawn(location,map);
+            if (enemy != null){
+                map.addActor(enemy, location);
+                System.out.println("comes here");
+            }
         }
     }
 }

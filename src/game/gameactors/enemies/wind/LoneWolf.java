@@ -2,6 +2,7 @@ package game.gameactors.enemies.wind;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
 
 /**
  * BEHOLD, DOG!

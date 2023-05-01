@@ -13,6 +13,7 @@ import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.enemies.Revivable;
+import game.gameactors.players.Player;
 
 public abstract class Skeleton extends Enemy implements Revivable, Resettable {
     /**

@@ -12,6 +12,7 @@ import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 /**
  * A Abstract class that defines implementation of the similar characteristics of the OCEAN_TYPE enemies

@@ -6,14 +6,12 @@ import game.gameactors.enemies.Enemy;
 
 import game.gameactors.enemies.graveyard.HeavySkeletonSwordsman;
 import game.gameactors.enemies.graveyard.SkeletalBandit;
+import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 
 public class Graveyard extends Environment{
-
     /**
      * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
      */
     public Graveyard() {
         super('n');

@@ -10,8 +10,10 @@ import game.actions.DespawnAction;
 import game.actions.TurnIntoPileOfBonesAction;
 import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
 
 public class PileOfBones extends Enemy {
+    // TODO needs to implement resettable too
 
     private final int REVIVE_TO_SKELETON = 3;
 

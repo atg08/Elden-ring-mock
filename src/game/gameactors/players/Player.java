@@ -140,7 +140,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 			Location destination = exit.getDestination();
 			Actor targetActor = destination.getActor();
 
-			if (targetActor.hasCapability(StatusActor.IS_ENEMY)) {
+			if (targetActor != null && targetActor.hasCapability(StatusActor.IS_ENEMY)) {
 				return true;
 			}
 		}

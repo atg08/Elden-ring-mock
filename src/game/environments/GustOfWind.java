@@ -8,16 +8,15 @@ import game.gameactors.enemies.graveyard.HeavySkeletonSwordsman;
 import game.gameactors.enemies.graveyard.SkeletalBandit;
 import game.gameactors.enemies.wind.GiantDog;
 import game.gameactors.enemies.wind.LoneWolf;
+import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 
 public class GustOfWind extends Environment{
 
     /**
      * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
      */
-    public GustOfWind(char displayChar) {
+    public GustOfWind() {
         super('&');
     }
 

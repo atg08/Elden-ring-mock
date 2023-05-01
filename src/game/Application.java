@@ -9,8 +9,13 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.gameactors.enemies.wind.LoneWolf;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
+import game.environments.*;
+import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Bandit;
+import game.gameactors.players.Player;
 import game.gameactors.players.Samurai;
 import game.gameactors.players.Wretch;
 import game.grounds.Dirt;
@@ -31,35 +36,40 @@ public class Application {
 
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
+				new Wall(), new Floor(),
+				new Graveyard(), new PuddleOfWater(),
+				new GustOfWind(), TheFirstStep.getInstance());
 
+		// don't put enemy in the map; they will be spawned automatically
 		List<String> map = Arrays.asList(
 				"...nnnn....................................................................",
-				".......nnn............#####....######.........................bbbbbb.......",
-				"......................#..___....____#...............................bbbb...",
+				".......nnn............#####....######.........................&&&&&&.......",
+				"......................#..___....____#...............................&&&&...",
 				"...nn..nn....nn...................__#......................................",
-				"......................._____........#..................bb...bb....bbbb.....",
+				"......................._____........#..................&&...&&....&&&&.....",
 				"........nnnn..........#............_#......................................",
 				"....&&................#...........###......................................",
 				".......&&..................................................................",
-				".......................................................GG.....GGGG.........",
-				"..&&&&............................###___###.......................GGGG.....",
-				"..................................________#...............GGGGGG...........",
-				"..~~..~~..~~......................#________................................",
+				".......................................................~~.....~~~~.........",
+				"..&&&&............................###___###.......................~~~~.....",
+				"..................................________#...............~~~~~~...........",
+				"..~~..~~..~~......................#___U____................................",
 				"..................................#_______#................................",
 				"..........~~......................###___###................................",
 				"......~~............................#___#..................................",
 				"...~~......................................................................",
 				"...........................................................................",
-				"..................................................RRRR.....RR...RRRR.......",
-				"..####__##..........####____...........................RRR....######..##...",
-				"..#.....__........................................RR...RR.RR..#....____....",
+				"..................................................nnnn.....nn...nnnn.......",
+				"..####__##..........####____...........................nnn....######..##...",
+				"..#.....__........................................nn...nn.nn..#....____....",
 				"..#___..........##..........#________...........................__.....#...",
 				"..####__###..................................................._.....__.#...",
 				"..............................................................###..__###...",
 				"......................_________####........................................");
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
+
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -71,14 +81,6 @@ public class Application {
 			}
 		}
 
-		gameMap.at(23, 17).addActor(new LoneWolf());
-
-		// HINT: what does it mean to prefer composition to inheritance?
-		// do this in the character type the player chooses
-//		Player player = new Player("Tarnished", '@', 300);
-//		world.addPlayer(player, gameMap.at(36, 10));
-
-
 		Scanner sel = new Scanner(System.in);
 
 		System.out.println("Select you role:");
@@ -87,20 +89,32 @@ public class Application {
 		System.out.println("w: Wretch");
 		String choice = sel.nextLine();
 
+		Player player = null;
 		String selection;
+
+		// TODO use Menu class
 		do {
 			selection = choice;
 			switch (selection) {
 				case "b":
-					Bandit bandit = new Bandit();
+					player = new Bandit();
 					break;
 				case "s":
-					Samurai samurai = new Samurai();
+					player = new Samurai();
 					break;
 				case "w":
-					Wretch wretch = new Wretch();
+					player = new Wretch();
+					break;
 			}
-		} while (selection != "x");
+		} while (player == null);
+
+		world.addPlayer(player, gameMap.at(36, 10));
+
+		// add available behaviours to enemy
+		Enemy.addBehaviourWithPriority(new WanderBehaviour(), 3);
+		Enemy.addBehaviourWithPriority(new AttackBehaviour(player), 1);
+		Enemy.addBehaviourWithPriority(new FollowBehaviour(player), 2);
+
 
 		world.run();
 

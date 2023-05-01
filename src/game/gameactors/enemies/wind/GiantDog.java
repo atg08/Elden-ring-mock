@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
+import game.gameactors.players.Player;
 
 /**
  * A powerful enemy of the player that can perform a powerful headbutt attack

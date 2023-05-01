@@ -12,10 +12,13 @@ import game.Reset.ResetManager;
 import game.Reset.Resettable;
 import game.actions.AttackAction;
 import game.actions.DespawnAction;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.gameactors.players.Player;
 import game.runes.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
@@ -27,10 +30,12 @@ import java.util.TreeMap;
 public abstract class Enemy extends Actor{
     protected ResetManager rm = ResetManager.getInstance();;
     protected StatusActor enemyType;
-    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    protected static Map<Integer, Behaviour> behaviours = new TreeMap<>();
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
+
+    protected Player player;
 
     /**
      * Constructor.
@@ -46,11 +51,10 @@ public abstract class Enemy extends Actor{
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
 
-        // wander bahavior
-        this.behaviours.put(999, new WanderBehaviour());
+    }
 
-        // TODO for other bahaviors, add manually through the Application class
-
+    public static void addBehaviourWithPriority(Behaviour behaviour, int priority){
+        Enemy.behaviours.put(priority, behaviour);
     }
 
     /**

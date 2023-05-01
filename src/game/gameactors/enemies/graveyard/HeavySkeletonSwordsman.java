@@ -1,6 +1,7 @@
 package game.gameactors.enemies.graveyard;
 
 import game.gameactors.enemies.Revivable;
+import game.gameactors.players.Player;
 import game.weapons.Grossmesser;
 
 /**

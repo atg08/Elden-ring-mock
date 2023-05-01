@@ -12,6 +12,7 @@ import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 
 
@@ -37,5 +38,11 @@ public abstract class WindEnemy extends Enemy implements Resettable{
     @Override
     public boolean isRemovable() {
         return true;
+    }
+
+    @Override
+    public String reset(Actor actor, GameMap map) {
+        DespawnAction despawn = new DespawnAction();
+        return despawn.execute(this, map);
     }
 }
