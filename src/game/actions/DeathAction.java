@@ -43,6 +43,7 @@ public class DeathAction extends Action {
         int droppedRuneAmount = 0;
 
         if (target.hasCapability(StatusActor.CAN_RESPAWN) && target.hasCapability(StatusActor.IS_PLAYER)) {
+            // Player is dying
             Player player = (Player) target;
 
             Rune droppedRune = player.getExistingRune();
@@ -60,8 +61,11 @@ public class DeathAction extends Action {
             player.respawn(map);
 
             droppedRuneAmount = droppedRune.getAmount();
+            result += System.lineSeparator() + menuDescription(target)
+                    + System.lineSeparator() + target + " dropped " + droppedRuneAmount + " runes";
 
         } else {
+            // enemy is dying
 
             // drop all items
             ActionList dropActions = new ActionList();
@@ -74,7 +78,7 @@ public class DeathAction extends Action {
             for (Action drop : dropActions)
                 drop.execute(target, map);
 
-            // drop/transfer Rune
+            // transfer Rune
             if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && target.hasCapability(StatusActor.IS_ENEMY)) {
                 // player kills enemy
                 // when player kills enemy, runes should be directly transferred
@@ -83,19 +87,16 @@ public class DeathAction extends Action {
                 Rune droppedRune = enemy.getDeathRune();
                 player.increaseRune(droppedRune);
                 droppedRuneAmount = droppedRune.getAmount();
-            } else if (this.attacker.hasCapability(StatusActor.IS_ENEMY) && target.hasCapability(StatusActor.IS_ENEMY)) {
+                result += System.lineSeparator() + menuDescription(target) + System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
+            }else{
                 // enemy kills enemy
-                Enemy enemy = (Enemy) target;
-                Rune droppedRune = enemy.getDeathRune();
-                dropActions.add(new DropItemAction(droppedRune));
-                droppedRuneAmount = droppedRune.getAmount();
+                result += System.lineSeparator() + menuDescription(target);
             }
 
             // remove actor
             map.removeActor(target);
         }
 
-        result += System.lineSeparator() + menuDescription(target) + System.lineSeparator() + target + " dropped " + droppedRuneAmount + " runes";
         return result;
     }
 
