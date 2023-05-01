@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public abstract class Enemy extends Actor{
-    protected ResetManager rm = ResetManager.getInstance();;
+    protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
     protected static Map<Integer, Behaviour> behaviours = new TreeMap<>();
     protected int despawnRate = 10;

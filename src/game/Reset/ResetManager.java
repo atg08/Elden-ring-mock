@@ -16,7 +16,8 @@ import java.util.List;
  */
 public class ResetManager {
     private List<Resettable> resettables;
-    private List<Resettable> removables = new ArrayList<>();;
+    private List<Resettable> removables = new ArrayList<>();
+    private List<Resettable> resettablesToBeAddedAgain = new ArrayList<>();
     private static ResetManager instance;
 
     /**
@@ -29,21 +30,24 @@ public class ResetManager {
 
     public void run(Actor actor, GameMap map) {
 
-        for (Resettable r : resettables){
+        for (Resettable r : this.resettables){
             if (r.isRemovable()){
                 this.removables.add(r);
             }
 //            r.reset(actor,map);
-            System.out.println(r.reset(actor,map));
-
+            String message = r.reset(actor,map);
+            if (!message.equals("")){System.out.println(message);}
         }
 
-        if (removables.size() > 0 ){
-            for (Resettable r2: removables){
-                // in-case actor is removed
-                this.removeResettable(r2);
-            }
+
+        for (Resettable r2: this.removables){
+            // in-case actor is removed
+            this.removeResettable(r2);
         }
+
+        this.resettables.addAll(this.resettablesToBeAddedAgain);
+        this.resettablesToBeAddedAgain.clear();
+
     }
 
 
@@ -56,6 +60,8 @@ public class ResetManager {
     public void removeResettable(Resettable resettable) {
         this.resettables.remove(resettable);
     }
+
+    public void registerAsResettableAgain(Resettable resettable){this.resettablesToBeAddedAgain.add(resettable);}
 
 //    public void registerRemovable(Resettable resettable) {
 //        this.removables.add(resettable);

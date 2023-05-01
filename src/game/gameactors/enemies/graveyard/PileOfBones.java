@@ -14,7 +14,6 @@ import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Player;
 
 public class PileOfBones extends Enemy implements Resettable {
-    // TODO needs to implement resettable too
 
     private final int REVIVE_TO_SKELETON = 3;
 
