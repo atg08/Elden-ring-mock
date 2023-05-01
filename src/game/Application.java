@@ -42,7 +42,14 @@ public class Application {
 				new Graveyard(), new PuddleOfWater(),
 				new GustOfWind(), TheFirstStep.getInstance());
 
+		List<String> testMap = Arrays.asList(
+				"n.__",
+				".._U",
+				"&.__"
+		);
+
 		// don't put enemy in the map; they will be spawned automatically
+		// note: if you don't have SiteOfLostGrace it gives you an error
 		List<String> map = Arrays.asList(
 				"...........................................................................",
 				"...nnnn...............#####....######.........................&&&&&&.......",
@@ -68,7 +75,7 @@ public class Application {
 				"..####__###..................................................._.....__.#...",
 				"..............................................................###..__###...",
 				"..................&..._________####........................................");
-		GameMap gameMap = new GameMap(groundFactory, map);
+		GameMap gameMap = new GameMap(groundFactory, testMap);
 		world.addGameMap(gameMap);
 
 
@@ -112,7 +119,7 @@ public class Application {
 
 		Trader kale = new Trader("Merchant kale");
 
-		world.addPlayer(player, gameMap.at(3, 3));
+		world.addPlayer(player, gameMap.at(1, 1));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
 		// add available behaviours to enemy

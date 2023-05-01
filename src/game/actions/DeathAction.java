@@ -47,7 +47,13 @@ public class DeathAction extends Action {
 
             Rune droppedRune = player.getExistingRune();
 
+            // ensure that rune can be dropped; note we don't need to toggle back this because when this rune is picked
+            // up, its amount will be added to another new instance of Rune which is not portable
             droppedRune.togglePortability();
+
+            // register this rune as resettable
+            droppedRune.registerAsResettable();
+            droppedRune.setRuneLocation(map.locationOf(target));
             result = new DropItemAction(droppedRune).execute(player, map);
 
 //            rm.run(player, map);

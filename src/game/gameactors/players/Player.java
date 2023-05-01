@@ -151,10 +151,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		}
 		this.addItemToInventory(new Rune());
 		rm.run(this,map);
-		System.out.println("before: " + map.locationOf(this));
-		System.out.println("before get respawn point: " + getRespawnPoint().getSiteLocation());
+//		System.out.println("before: " + map.locationOf(this));
+//		System.out.println("before get respawn point: " + getRespawnPoint().getSiteLocation());
 		map.moveActor(this, getRespawnPoint().getSiteLocation());
-		System.out.println("after: " + map.locationOf(this));
+//		System.out.println("after: " + map.locationOf(this));
 
 
 	}
