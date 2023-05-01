@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Reset.ResetManager;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Player;
@@ -21,6 +22,8 @@ import game.runes.Rune;
  */
 public class DeathAction extends Action {
     private Actor attacker;
+
+//    private ResetManager rm = ResetManager.getInstance();
 
     public DeathAction(Actor actor) {
         this.attacker = actor;
@@ -47,9 +50,11 @@ public class DeathAction extends Action {
             droppedRune.togglePortability();
             result = new DropItemAction(droppedRune).execute(player, map);
 
+//            rm.run(player, map);
             player.respawn(map);
 
             droppedRuneAmount = droppedRune.getAmount();
+
         } else {
 
             // drop all items
@@ -79,11 +84,11 @@ public class DeathAction extends Action {
                 dropActions.add(new DropItemAction(droppedRune));
                 droppedRuneAmount = droppedRune.getAmount();
             }
+
+            // remove actor
+            map.removeActor(target);
         }
 
-
-        // remove actor
-        map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target) + System.lineSeparator() + target + " dropped " + droppedRuneAmount + " runes";
         return result;
     }

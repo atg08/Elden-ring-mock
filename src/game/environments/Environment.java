@@ -36,7 +36,7 @@ public abstract class Environment extends Ground {
             Enemy enemy = spawn(location,map);
             if (enemy != null){
                 map.addActor(enemy, location);
-                System.out.println("comes here");
+                System.out.println(enemy + " spawned");
             }
         }
     }

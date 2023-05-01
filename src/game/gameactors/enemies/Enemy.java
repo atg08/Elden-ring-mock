@@ -128,9 +128,12 @@ public abstract class Enemy extends Actor{
 
         // if otherActor is an enemy of not same type, Enemy can attack it
         List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
-        EnemyType actorType = actorTypeList.get(0); // the type we are looking for
-
         List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
+        if (actorTypeList.size() == 0 ||  otherActorTypeList.size() == 0){
+            return false;
+        }
+
+        EnemyType actorType = actorTypeList.get(0); // the type we are looking for
         EnemyType otherActorType = otherActorTypeList.get(0);
 
         return !actorType.equals(otherActorType);

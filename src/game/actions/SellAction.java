@@ -26,6 +26,6 @@ public class SellAction extends Action {
     @Override
     public String menuDescription(Actor actor) {
         Sellable sellableWeapon = (Sellable) this.weapon;
-        return "Tarnished sells " + this.weapon.toString() + " for " + sellableWeapon.getSellingPrice();
+        return "Tarnished sells " + this.weapon.toString() + " for " + sellableWeapon.getSellingPrice().getAmount();
     }
 }

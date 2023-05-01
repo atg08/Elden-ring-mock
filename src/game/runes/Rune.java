@@ -32,7 +32,7 @@ public class Rune extends Item {
     }
 
     public boolean decreaseRune(Rune rune){
-        if (this.amount - rune.getAmount() < 0){
+        if (this.amount - rune.getAmount() >= 0){
             this.amount -= rune.getAmount();
             return true;
         }else{

@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
 
 public class AreaAttackAction extends Action {
 
@@ -30,8 +32,15 @@ public class AreaAttackAction extends Action {
             for (Exit exit : map.locationOf(actor).getExits()){
                 Location destination = exit.getDestination();
                 Actor targetActor = destination.getActor();
-
-                if (targetActor != null){
+                boolean canAttack = true;
+                if (targetActor == null){
+                    continue;
+                }
+                if (targetActor.hasCapability(StatusActor.IS_ENEMY) && actor.hasCapability(StatusActor.IS_ENEMY)){
+                    Enemy enemy = (Enemy) actor;
+                    canAttack = enemy.canTarget(targetActor);
+                }
+                if (canAttack){
                     results += System.lineSeparator() + new AttackAction(targetActor, exit.getName(), this.weapon).execute(actor, map);
                 }
             }
@@ -39,8 +48,15 @@ public class AreaAttackAction extends Action {
             for (Exit exit : map.locationOf(actor).getExits()){
                 Location destination = exit.getDestination();
                 Actor targetActor = destination.getActor();
-
-                if (targetActor != null){
+                boolean canAttack = true;
+                if (targetActor == null){
+                    continue;
+                }
+                if (targetActor.hasCapability(StatusActor.IS_ENEMY) && actor.hasCapability(StatusActor.IS_ENEMY)){
+                    Enemy enemy = (Enemy) actor;
+                    canAttack = enemy.canTarget(targetActor);
+                }
+                if (canAttack){
                     results += System.lineSeparator() + new AttackAction(targetActor, exit.getName()).execute(actor, map);
                 }
             }

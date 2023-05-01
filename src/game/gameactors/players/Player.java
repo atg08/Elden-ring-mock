@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.FancyMessage;
 import game.Reset.ResetManager;
 import game.Reset.Respawnable;
 import game.actions.AreaAttackAction;
@@ -34,7 +35,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 	private final Menu menu = new Menu();
 	private ResetManager rm = ResetManager.getInstance();
 	protected Rune runes = new Rune();
-	protected SiteOfLostGrace respawnPoint;
+	protected static SiteOfLostGrace respawnPoint;
 	private Location previousLocation;
 
 	public SiteOfLostGrace getRespawnPoint() {
@@ -54,17 +55,22 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(StatusActor.IS_PLAYER);
 		this.addCapability(StatusActor.CAN_RESPAWN);
-		this.addWeaponToInventory(new Club());
+//		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
-		this.setRespawnPoint(TheFirstStep.getInstance());
 		rm.registerResettable(this);
-
 		this.addItemToInventory(new Rune());  // player always starts with 0 rune
+		respawnPoint = TheFirstStep.getInstance();
+
 	}
+
+
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+		display.println(this.name + " (" + this.hitPoints +"/" + this.getMaxHp() + ")" + ", runes: " + getExistingRune().getAmount());
+
 		// record player's current location
 		this.previousLocation = map.locationOf(this);
 
@@ -95,7 +101,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 	 */
 	@Override
 	public String reset(Actor actor, GameMap map) {
-		this.heal(this.getMaxHp());
+		this.resetMaxHp(this.getMaxHp());
 		return "Player health is reset to " + this.printHp();
 	}
 
@@ -120,6 +126,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		// Note: it shouldn't be null because we instantiate new Rune everytime we instantiate a player
 		if (existingRune != null){
 			existingRune.increaseRune(rune);
+//			System.out.println("runes " + existingRune.getAmount());
 		}
 
 	}
@@ -129,11 +136,27 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		return existingRune.decreaseRune(rune);
 	}
 
+
+
 	@Override
 	public void respawn(GameMap map) {
-		map.removeActor(this);
+		// BEHOLD, ELDEN RING
+		for (String line : FancyMessage.YOU_DIED.split("\n")) {
+			new Display().println(line);
+			try {
+				Thread.sleep(200);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		}
 		this.addItemToInventory(new Rune());
-		map.addActor(this, getRespawnPoint().getSiteLocation());
+		rm.run(this,map);
+		System.out.println("before: " + map.locationOf(this));
+		System.out.println("before get respawn point: " + getRespawnPoint().getSiteLocation());
+		map.moveActor(this, getRespawnPoint().getSiteLocation());
+		System.out.println("after: " + map.locationOf(this));
+
+
 	}
 	public boolean checkEnemyExistenceAround(Location location) {
 		for (Exit exit : location.getExits()) {
@@ -151,4 +174,9 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 	public Location getPlayerPreviousLocation(){
 		return this.previousLocation;
 	}
+
+
+
 }
+
+

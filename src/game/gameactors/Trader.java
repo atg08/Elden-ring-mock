@@ -25,8 +25,8 @@ public class Trader extends Actor {
      * @param hitPoints   the Actor's starting hit points
      * @author Tanul
      */
-    public Trader(String name, char displayChar, int hitPoints) {
-        super("Merchant kale", 'k', 9999999);
+    public Trader(String name) {
+        super(name, 'k', 9999999);
         this.sellableWeaponItems.add(new Uchigatana());
         this.sellableWeaponItems.add(new GreatKnife());
         this.sellableWeaponItems.add(new Club());

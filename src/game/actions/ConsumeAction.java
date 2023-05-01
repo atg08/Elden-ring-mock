@@ -1,6 +1,7 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -26,7 +27,7 @@ public class ConsumeAction extends Action {
                     return "The actors health has been restored by " + flask.getHEAL_AMOUNT();
                 }
                 else {
-                    return "The Item can not be consumed anymore";
+                    return new DoNothingAction().execute(actor,map);
                 }
             }
         }

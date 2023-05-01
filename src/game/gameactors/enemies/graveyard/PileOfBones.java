@@ -6,13 +6,14 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.actions.TurnIntoPileOfBonesAction;
 import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Player;
 
-public class PileOfBones extends Enemy {
+public class PileOfBones extends Enemy implements Resettable {
     // TODO needs to implement resettable too
 
     private final int REVIVE_TO_SKELETON = 3;
@@ -28,6 +29,7 @@ public class PileOfBones extends Enemy {
     public PileOfBones(Skeleton reviveBackTo) {
         super("Pile Of Bones", 'X', 1, reviveBackTo.getMinRune(), reviveBackTo.getMaxRune());
         this.reviveBackTo = reviveBackTo;
+        rm.registerResettable(this);
     }
 
     // have it so on death of SKELETON_TYPE GAMEMAP REMOVE ACTOR HSS ADD ACTOR PILE OF BONES
@@ -55,5 +57,16 @@ public class PileOfBones extends Enemy {
     }
 
 
+    @Override
+    public String reset(Actor actor, GameMap map) {
+        DespawnAction despawn = new DespawnAction();
+        // this is so that enemy that has been removed
+        // won't be attempted to be removed again
+        return despawn.execute(this, map);
+    }
 
+    @Override
+    public boolean isRemovable() {
+        return true;
+    }
 }

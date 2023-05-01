@@ -17,7 +17,7 @@ public class PuddleOfWater extends Environment {
      *
      * @param displayChar character to display for this type of terrain
      */
-    public PuddleOfWater(char displayChar) {
+    public PuddleOfWater() {
         super('~');
     }
 

@@ -2,6 +2,7 @@ package game.Reset;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.runes.Rune;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,8 @@ public class ResetManager {
             if (r.isRemovable()){
                 this.removables.add(r);
             }
-            r.reset(actor,map);
+//            r.reset(actor,map);
+            System.out.println(r.reset(actor,map));
 
         }
 
@@ -43,6 +45,8 @@ public class ResetManager {
             }
         }
     }
+
+
 
 
     public void registerResettable(Resettable resettable) {

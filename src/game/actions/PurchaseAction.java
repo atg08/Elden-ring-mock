@@ -36,6 +36,6 @@ public class PurchaseAction extends Action {
     @Override
     public String menuDescription(Actor actor) {
         Purchasable purchasableWeapon = (Purchasable) this.weapon;
-        return "Tarnished purchases " + this.weapon.toString() + " for " + purchasableWeapon.getPurchasingPrice();
+        return "Tarnished purchases " + this.weapon.toString() + " for " + purchasableWeapon.getPurchasingPrice().getAmount();
     }
 }

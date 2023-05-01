@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AreaAttackAction;
 import game.runes.Rune;
 
+
 /**
  * A simple weapon that can be used to attack the enemy.
  * It deals 75 damage with 70% hit rate

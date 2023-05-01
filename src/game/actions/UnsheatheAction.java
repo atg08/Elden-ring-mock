@@ -63,7 +63,7 @@ public class UnsheatheAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Uchigatana" + " with Unsheathe Action");
+        return actor + " attacks " + target + " at " + direction + " with Uchigatana using Unsheathe Action";
     }
 
     @Override

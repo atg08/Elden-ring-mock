@@ -18,11 +18,11 @@ public class RestAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         rm.run(actor, map);
-        return actor + "has rested at a site of lost grace";
+        return actor + " has rested at a site of lost grace";
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "has rested at a site of lost grace";
+        return actor + " can rest";
     }
 }

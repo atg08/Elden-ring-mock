@@ -101,7 +101,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
      */
     @Override
     public String toString() {
-        return "Flask Of Crimson Tears";
+        return "Flask Of Crimson Tears (" + (this.getMAX_CONSUME_AMOUNT()-this.getConsumed()) + "/" + this.getMAX_CONSUME_AMOUNT() + ")";
     }
 
     @Override

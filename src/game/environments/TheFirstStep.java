@@ -1,5 +1,6 @@
 package game.environments;
 
+import edu.monash.fit2099.engine.positions.Location;
 import game.Reset.ResetManager;
 
 public class TheFirstStep extends SiteOfLostGrace{
@@ -20,5 +21,11 @@ public class TheFirstStep extends SiteOfLostGrace{
         }
         return instance;
     }
+
+//    @Override
+//    public void tick(Location location) {
+////        super.tick(location);
+//        this.siteLocation = location;
+//    }
 
 }
