@@ -2,10 +2,11 @@ package game.gameactors.players;
 
 import game.weapons.GreatKnife;
 
+
 /**
  * this is the Bandit class
- * @author tanul
- * @version 1
+ * @author aditti
+ * @version 2
  */
 public class Bandit extends Player{
     /**
