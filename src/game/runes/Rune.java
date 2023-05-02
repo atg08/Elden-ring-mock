@@ -65,7 +65,6 @@ public class Rune extends Item implements Resettable{
     public String reset(Actor actor, GameMap map) {
         if (this.checkForRemoval()){
             runeLocation.removeItem(this);
-            System.out.println("inner if roijgiorjgoirejgoirjg");
             return "rune removed from the map";
         }
         this.rm.registerAsResettableAgain(this);

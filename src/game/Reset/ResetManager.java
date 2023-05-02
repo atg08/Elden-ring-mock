@@ -1,6 +1,7 @@
 package game.Reset;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.runes.Rune;
 
@@ -19,6 +20,7 @@ public class ResetManager {
     private List<Resettable> removables = new ArrayList<>();
     private List<Resettable> resettablesToBeAddedAgain = new ArrayList<>();
     private static ResetManager instance;
+    private final Display display = new Display();
 
     /**
      * HINT 1: where have we seen a private constructor before?
@@ -36,7 +38,7 @@ public class ResetManager {
             }
 //            r.reset(actor,map);
             String message = r.reset(actor,map);
-            if (!message.equals("")){System.out.println(message);}
+            if (!message.equals("")){display.println(message);}
         }
 
 

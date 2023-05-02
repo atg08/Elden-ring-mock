@@ -1,5 +1,6 @@
 package game.environments;
 
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -10,6 +11,7 @@ import game.gameactors.players.Player;
 import game.utils.RandomNumberGenerator;
 
 public abstract class Environment extends Ground {
+    Display display = new Display();
     /**
      * Constructor.
      *
@@ -36,7 +38,7 @@ public abstract class Environment extends Ground {
             Enemy enemy = spawn(location,map);
             if (enemy != null){
                 map.addActor(enemy, location);
-                System.out.println(enemy + " spawned");
+                display.println(enemy + " spawned");
             }
         }
     }

@@ -75,9 +75,10 @@ public class Application {
 				"..####__###..................................................._.....__.#...",
 				"..............................................................###..__###...",
 				"..................&..._________####........................................");
-		GameMap gameMap = new GameMap(groundFactory, testMap);
+		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
 
+		Display display = new Display();
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -91,26 +92,26 @@ public class Application {
 
 		Scanner sel = new Scanner(System.in);
 
-		System.out.println("Select you role:");
-		System.out.println("b: Bandit");
-		System.out.println("s: Samurai");
-		System.out.println("w: Wretch");
-		String choice = sel.nextLine();
+		display.println("Select you role:");
+		display.println("b: Bandit");
+		display.println("s: Samurai");
+		display.println("w: Wretch");
+		char choice = display.readChar();
 
 		Player player = null;
-		String selection;
+		char selection;
 
 		// TODO use Menu class
 		do {
 			selection = choice;
 			switch (selection) {
-				case "b":
+				case 'b':
 					player = new Bandit();
 					break;
-				case "s":
+				case 's':
 					player = new Samurai();
 					break;
-				case "w":
+				case 'w':
 					player = new Wretch();
 					break;
 			}
