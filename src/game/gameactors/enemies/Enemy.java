@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class Enemy extends Actor{
+public abstract class Enemy extends Actor implements DeathRuneDroppper{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
     protected static Map<Integer, Behaviour> behaviours = new TreeMap<>();
@@ -115,6 +115,7 @@ public abstract class Enemy extends Actor{
         return actions;
     }
 
+    @Override
     public Rune getDeathRune(){
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minRuneDrop, this.maxRuneDrop));
     }

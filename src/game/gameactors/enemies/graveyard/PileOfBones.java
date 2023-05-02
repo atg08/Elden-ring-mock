@@ -6,27 +6,36 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Reset.ResetManager;
 import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.actions.TurnIntoPileOfBonesAction;
 import game.actions.TurnIntoSkeletonAction;
+import game.gameactors.enemies.DeathRuneDroppper;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Player;
+import game.runes.Rune;
+import game.utils.RandomNumberGenerator;
 
-public class PileOfBones extends Enemy implements Resettable {
+public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper {
 
     private final int REVIVE_TO_SKELETON = 3;
 
     private int numberOfTurnsAlive = 0;
 
     private Skeleton reviveBackTo;
+    public int minRuneDrop;
+    public int maxRuneDrop;
+    protected ResetManager rm = ResetManager.getInstance();
 
     /**
      * Constructor
      * @param reviveBackTo
      */
     public PileOfBones(Skeleton reviveBackTo) {
-        super("Pile Of Bones", 'X', 1, reviveBackTo.getMinRune(), reviveBackTo.getMaxRune());
+        super("Pile Of Bones", 'X', 1);
+        this.minRuneDrop= reviveBackTo.getMinRune();
+        this.maxRuneDrop = reviveBackTo.getMaxRune();
         this.reviveBackTo = reviveBackTo;
         rm.registerResettable(this);
     }
@@ -39,6 +48,11 @@ public class PileOfBones extends Enemy implements Resettable {
     private boolean checkForRevive(){
         this.numberOfTurnsAlive +=1;
         return this.numberOfTurnsAlive == this.REVIVE_TO_SKELETON;
+    }
+
+    @Override
+    public Rune getDeathRune(){
+        return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minRuneDrop, this.maxRuneDrop));
     }
 
     public Skeleton getReviveBackTo(){

@@ -11,11 +11,12 @@ import game.Reset.Resettable;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.DeathRuneDroppper;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.enemies.Revivable;
 import game.gameactors.players.Player;
 
-public abstract class Skeleton extends Enemy implements Revivable, Resettable {
+public abstract class Skeleton extends Enemy implements Revivable, Resettable, DeathRuneDroppper {
     /**
      * Constructor.
      *

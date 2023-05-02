@@ -16,6 +16,7 @@ import game.actions.AreaAttackAction;
 import game.environments.SiteOfLostGrace;
 import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.DeathRuneDroppper;
 import game.items.FlaskOfCrimsonTears;
 import game.runes.Rune;
 import game.Reset.Resettable;
@@ -30,7 +31,7 @@ import game.weapons.WeaponSkill;
  * Modified by:
  *
  */
-public abstract class Player extends Actor implements Resettable, Respawnable {
+public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper {
 
 	private final Menu menu = new Menu();
 	private ResetManager rm = ResetManager.getInstance();
@@ -151,10 +152,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		}
 		this.addItemToInventory(new Rune());
 		rm.run(this,map);
-//		System.out.println("before: " + map.locationOf(this));
-//		System.out.println("before get respawn point: " + getRespawnPoint().getSiteLocation());
 		map.moveActor(this, getRespawnPoint().getSiteLocation());
-//		System.out.println("after: " + map.locationOf(this));
 
 
 	}
@@ -175,7 +173,19 @@ public abstract class Player extends Actor implements Resettable, Respawnable {
 		return this.previousLocation;
 	}
 
+	@Override
+	public Rune getDeathRune(){
+		Rune droppedRune = this.getExistingRune();
 
+		// ensure that rune can be dropped; note we don't need to toggle back this because when this rune is picked
+		// up, its amount will be added to another new instance of Rune which is not portable
+		droppedRune.togglePortability();
+
+		// register this rune as resettable
+		droppedRune.registerAsResettable();
+
+		return droppedRune;
+	}
 
 }
 
