@@ -2,6 +2,11 @@ package game.gameactors.players;
 
 import game.weapons.GreatKnife;
 
+/**
+ * this is the Bandit class
+ * @author tanul
+ * @version 1
+ */
 public class Bandit extends Player{
     /**
      * Constructor.
@@ -14,4 +19,6 @@ public class Bandit extends Player{
         super( 414);
         this.addWeaponToInventory(new GreatKnife());
     }
+
+
 }
