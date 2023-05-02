@@ -2,6 +2,11 @@ package game.gameactors.players;
 
 import game.weapons.Uchigatana;
 
+/**
+ * This is the concrete class for Samurai
+ * @author tanul
+ * @version 1
+ */
 public class Samurai extends Player{
     /**
      * Constructor.

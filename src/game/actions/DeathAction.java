@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Reset.ResetManager;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Player;

@@ -10,8 +10,8 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
-import game.Reset.ResetManager;
-import game.Reset.Respawnable;
+import game.reset.ResetManager;
+import game.reset.Respawnable;
 import game.actions.AreaAttackAction;
 import game.environments.SiteOfLostGrace;
 import game.environments.TheFirstStep;
@@ -19,8 +19,7 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.items.FlaskOfCrimsonTears;
 import game.runes.Rune;
-import game.Reset.Resettable;
-import game.weapons.Club;
+import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
 /**
