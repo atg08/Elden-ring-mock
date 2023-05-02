@@ -1,15 +1,11 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Reset.ResetManager;
-import game.Reset.Resettable;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 import game.actions.ConsumeAction;
-
-import java.util.List;
 
 
 /**

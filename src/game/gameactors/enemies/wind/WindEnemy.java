@@ -1,19 +1,12 @@
 package game.gameactors.enemies.wind;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Reset.ResetManager;
-import game.Reset.Resettable;
+import game.reset.Resettable;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
-import game.gameactors.players.Player;
-import game.utils.RandomNumberGenerator;
 
 
 /**

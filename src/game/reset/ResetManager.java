@@ -1,9 +1,8 @@
-package game.Reset;
+package game.reset;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.runes.Rune;
 
 import java.util.ArrayList;
 import java.util.List;

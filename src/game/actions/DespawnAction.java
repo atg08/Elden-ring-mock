@@ -3,9 +3,6 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Reset.ResetManager;
-import game.gameactors.StatusActor;
-import game.utils.RandomNumberGenerator;
 
 public class DespawnAction extends Action {
 

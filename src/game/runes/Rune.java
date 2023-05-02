@@ -6,8 +6,8 @@ import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.items.RecoverRuneAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Reset.ResetManager;
-import game.Reset.Resettable;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 
 public class Rune extends Item implements Resettable{
 
