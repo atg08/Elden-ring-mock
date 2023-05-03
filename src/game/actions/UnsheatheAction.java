@@ -8,6 +8,10 @@ import game.gameactors.EnemyType;
 
 import java.util.Random;
 
+/**
+ * An action for unsheathe action.
+ * @author Aditti Gupta
+ */
 public class UnsheatheAction extends Action {
 
     /**
@@ -53,20 +57,15 @@ public class UnsheatheAction extends Action {
         this.direction = direction;
     }
 
-
-
+    @Override
     /**
-     * Describes which target the actor is attacking with which weapon
+     * Executes the unsheathe action. It simply doubles the normal attack action.
      *
-     * @param actor The actor performing the action.
-     * @return a description used for the menu UI
+     * @param actor The actor performing the attack action.
+     * @param map The map the actor is on.
+     * @return the result of the attack, e.g. whether the target is killed, etc.
+     * @see DeathAction
      */
-    @Override
-    public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction + " with Uchigatana using Unsheathe Action";
-    }
-
-    @Override
     public String execute(Actor actor, GameMap map) {
         int damage = 2 * (weapon.damage());
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
@@ -78,6 +77,17 @@ public class UnsheatheAction extends Action {
         }
 
         return result;
+    }
+
+    /**
+     * Describes which target the actor is attacking with which weapon
+     *
+     * @param actor The actor performing the action.
+     * @return a description used for the menu UI
+     */
+    @Override
+    public String menuDescription(Actor actor) {
+        return actor + " attacks " + target + " at " + direction + " with Uchigatana using Unsheathe Action";
     }
 
 

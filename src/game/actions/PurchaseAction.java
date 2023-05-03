@@ -8,15 +8,41 @@ import game.gameactors.Trader;
 import game.gameactors.players.Player;
 import game.weapons.Purchasable;
 
+/**
+ * Action for a player to purchase a weapon from a trader.
+ * @author Satoshi Kashima
+ */
 public class PurchaseAction extends Action {
+    /**
+     * The weapon to be sold
+     */
     private WeaponItem weapon;
+
+    /**
+     * the trader
+     */
     private Trader trader;
 
-    public PurchaseAction(WeaponItem weapon, Trader trader){
+    /**
+     * Constructor for PurchaseAction.
+     *
+     * @param weapon The weapon to be purchased.
+     * @param trader The trader selling the weapon.
+     */
+    public PurchaseAction(WeaponItem weapon, Trader trader) {
         this.weapon = weapon;
         this.trader = trader;
     }
 
+    /**
+     * Executes the purchase action.
+     * Returns unsuccessful message if there isn't enough rune for the player to buy the given weapon.
+     * It ensures that the purchased weapon object is no longer stored in trader's weapon lists.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map on which the action is performed.
+     * @return A message describing the result of the action.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String result;
@@ -33,6 +59,12 @@ public class PurchaseAction extends Action {
         return result;
     }
 
+    /**
+     * Describes what weapon was purchased for what amount of runes.
+     *
+     * @param actor The actor performing the action.
+     * @return A string description of the action.
+     */
     @Override
     public String menuDescription(Actor actor) {
         Purchasable purchasableWeapon = (Purchasable) this.weapon;

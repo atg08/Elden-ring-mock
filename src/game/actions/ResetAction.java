@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.ResetManager;
 
-public class RestAction extends Action {
+public class ResetAction extends Action {
 
     private ResetManager rm = ResetManager.getInstance();
 
