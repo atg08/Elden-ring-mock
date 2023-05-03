@@ -2,6 +2,6 @@
 # Elden Ring
 
 ## XX_LabYYTeamZZ
-Team members:
+Team members: Satoshi Kashima, Tanul Gupta, Aditti Gupta
 
 ## Design Rationale
