@@ -24,6 +24,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
+/**
+
+ * The Enemy class is an abstract class representing a type of actor that can attack and be attacked by other actors.
+ * It includes methods to select an action to perform during its turn and to check if it can target another actor.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
+ */
+
 public abstract class Enemy extends Actor implements DeathRuneDroppper{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
@@ -35,11 +45,13 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
     protected Player player;
 
     /**
-     * Constructor.
+     * Constructor for the Enemy class.
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
+     * @param minRuneDrop the minimum number of runes this Enemy drops upon death
+     * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
      */
     public Enemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(name, displayChar, hitPoints);
@@ -50,12 +62,18 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
 
     }
 
+    /**
+     * Adds a Behaviour object with a specified priority to the Enemy's list of behaviours.
+     *
+     * @param behaviour the Behaviour object to be added
+     * @param priority the priority of the Behaviour object
+     */
     public static void addBehaviourWithPriority(Behaviour behaviour, int priority){
         Enemy.behaviours.put(priority, behaviour);
     }
 
     /**
-     * At each turn, select a valid action to perform.
+     * Selects a valid action to perform during this Enemy's turn.
      *
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
@@ -85,6 +103,15 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
         return new DoNothingAction();
     }
 
+
+    /**
+     * Returns the allowable Actions for this Actor.
+     * @param otherActor the other Actor that is being attacked.
+     * @param direction the direction in which the attack is happening.
+     * @param map the map containing the Actor.
+     * @return an ActionList containing the allowable Actions for this Actor.
+     */
+
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions =  new ActionList();
 
@@ -112,10 +139,23 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
         return actions;
     }
 
+
+    /**
+
+     * Returns the rune of the Enemy Actor after death.
+     * @return a Rune object representing the death rune of the Enemy Actor.
+     */
     @Override
     public Rune getDeathRune(){
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minRuneDrop, this.maxRuneDrop));
     }
+
+
+    /**
+     * Determines if the Enemy can target the given Actor.
+     * @param otherActor the Actor to check if it can be targeted by the Enemy.
+     * @return true if the Enemy can target the Actor, false otherwise.
+     */
 
     public boolean canTarget(Actor otherActor){
 
@@ -137,14 +177,32 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
         return !actorType.equals(otherActorType);
     }
 
+    /**
+
+     * Returns the intrinsic weapon of the Actor.
+     * @return the IntrinsicWeapon object representing the intrinsic weapon of the Enemy Actor.
+     */
+
     public IntrinsicWeapon getIntrinsicWeapon() {
         return null;
     }
 
+
+    /**
+
+     * Returns the minimum rune that can be dropped by the Enemy Actor.
+     * @return the minimum rune that can be dropped.
+     */
     public int getMinRune(){
         return this.minRuneDrop;
     }
 
+
+    /**
+
+     * Returns the maximum rune that can be dropped by the Enemy Actor.
+     * @return the maximum rune that can be dropped.
+     */
     public int getMaxRune(){
         return this.maxRuneDrop;
     }

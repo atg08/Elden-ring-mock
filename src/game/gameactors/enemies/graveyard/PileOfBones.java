@@ -9,14 +9,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
-import game.actions.TurnIntoPileOfBonesAction;
 import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.gameactors.enemies.Enemy;
-import game.gameactors.players.Player;
 import game.runes.Rune;
 import game.utils.RandomNumberGenerator;
 
+
+/**
+ * A class that represents a pile of bones on a game map that can revive
+ * back into a {@link Skeleton} after a certain number of turns alive.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
+ */
 public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper {
 
     private final int REVIVE_TO_SKELETON = 3;
@@ -29,8 +34,9 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     protected ResetManager rm = ResetManager.getInstance();
 
     /**
-     * Constructor
-     * @param reviveBackTo
+     * Constructor for creating a new PileOfBones.
+     *
+     * @param reviveBackTo the {@see Skeleton} instance that this pile of bones can revive to.
      */
     public PileOfBones(Skeleton reviveBackTo) {
         super("Pile Of Bones", 'X', 1);
@@ -40,25 +46,50 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         rm.registerResettable(this);
     }
 
-    // have it so on death of SKELETON_TYPE GAMEMAP REMOVE ACTOR HSS ADD ACTOR PILE OF BONES
-    // RESET DESPAWN 100% PILE OF BONES AND OTHERS
 
-    // counter for numbers of turns not killed to turn back into HSS
-
+    /**
+     * Checks whether the PileOfBones has been alive for a certain number of turns
+     * and can be revived back into a {@see Skeleton}.
+     *
+     * @return true if the PileOfBones has been alive for a certain number of turns and can be revived back into a Skeleton, false otherwise.
+     */
     private boolean checkForRevive(){
         this.numberOfTurnsAlive +=1;
         return this.numberOfTurnsAlive == this.REVIVE_TO_SKELETON;
     }
 
+
+    /**
+     * Returns the {@see Rune} that should be dropped by the PileOfBones when it dies.
+     *
+     * @return a new instance of {@see Rune} that should be dropped by the PileOfBones when it dies.
+     */
     @Override
     public Rune getDeathRune(){
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minRuneDrop, this.maxRuneDrop));
     }
 
+
+    /**
+     * Returns the {@see Skeleton} instance that this pile of bones can revive back to.
+     *
+     * @return the {@see Skeleton} instance that this pile of bones can revive back to.
+     */
     public Skeleton getReviveBackTo(){
         return this.reviveBackTo;
     }
 
+
+    /**
+     * Overrides the playTurn method of {@see Actor} to make the PileOfBones revive back into a {@see Skeleton} after
+     * a certain number of turns or do nothing otherwise.
+     *
+     * @param actions    a list of available actions for the PileOfBones.
+     * @param lastAction the last Action performed.
+     * @param map        the GameMap containing the PileOfBones.
+     * @param display    the Display that will display the map.
+     * @return a new instance of {@see Action}
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
@@ -70,6 +101,14 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     }
 
 
+
+    /**
+     * Resets the current instance of Enemy by despawning it from the GameMap.
+     *
+     * @param actor the Actor associated with this Enemy
+     * @param map the GameMap instance where this Enemy is located
+     * @return the result of the DespawnAction's execution
+     */
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();
@@ -78,6 +117,12 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         return despawn.execute(this, map);
     }
 
+
+    /**
+     * Indicates whether the current instance of Enemy is removable or not.
+     *
+     * @return true, since Enemy instances can always be removed from the GameMap
+     */
     @Override
     public boolean isRemovable() {
         return true;

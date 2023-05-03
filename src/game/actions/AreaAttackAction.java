@@ -13,6 +13,11 @@ public class AreaAttackAction extends Action {
 
     private Weapon weapon;
 
+    /**
+     * Constructor for an AreaAttackAction that uses a specified weapon.
+     *
+     * @param weapon the weapon to use for the area attack
+     */
     public AreaAttackAction(Weapon weapon) {
         this.weapon = weapon;
     }
@@ -23,6 +28,14 @@ public class AreaAttackAction extends Action {
      */
     public AreaAttackAction() {}
 
+
+    /**
+     * Performs an area attack using the specified weapon or the actor's intrinsic weapon.
+     *
+     * @param actor the actor performing the area attack
+     * @param map the game map on which the area attack is being performed
+     * @return a string describing the results of the area attack
+     */
     public String execute(Actor actor, GameMap map) {
         String results = actor.toString() + "attacks his surrounding!";
 

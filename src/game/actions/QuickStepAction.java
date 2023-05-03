@@ -64,7 +64,6 @@ public class QuickStepAction extends Action {
      * @param actor The actor performing the attack action.
      * @param map The map the actor is on.
      * @return the result of the attack, e.g. whether the target is killed, etc.
-     * @see DeathAction
      */
     @Override
     public String execute(Actor actor, GameMap map) {

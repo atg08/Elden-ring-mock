@@ -15,15 +15,39 @@ import game.weapons.WeaponSkill;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+
+ * This class implements the Behaviour interface, which represents the behavior of an actor to attack other actors.
+ * The AttackBehaviour is responsible for selecting and executing the appropriate action for attacking.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
+ */
 public class AttackBehaviour implements Behaviour {
 
     private final Random random = new Random();
     private Player player;
 
+
+    /**
+     * Constructor for the AttackBehaviour class.
+     *
+     * @param player the player actor.
+     */
+
     public AttackBehaviour(Player player){
         this.player = player;
     }
 
+
+    /**
+     * This method returns the appropriate action for attacking an enemy actor.
+     *
+     * @param actor the actor to perform the action.
+     * @param map the map that the actor is in.
+     * @return the action to attack the enemy actor.
+     */
     // assume enemy does not own any weapons with a special skill (like Uchigatana)
     @Override
     public Action getAction(Actor actor, GameMap map) {
@@ -91,6 +115,13 @@ public class AttackBehaviour implements Behaviour {
         }
     }
 
+
+
+    /**
+     * Determines whether to perform a targeted action or an area attack action.
+     *
+     * @return true if a targeted action should be performed, false otherwise
+     */
     private boolean detTargetedAction(){
         return random.nextInt(2) == 0;
     }

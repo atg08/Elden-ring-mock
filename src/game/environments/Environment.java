@@ -5,13 +5,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
-import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
-import game.gameactors.players.Player;
-import game.utils.RandomNumberGenerator;
+
+/**
+ *
+ Abstract class representing a game environment, which is a type of Ground object.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
+ */
 
 public abstract class Environment extends Ground {
     Display display = new Display();
+
     /**
      * Constructor.
      *
@@ -21,8 +27,22 @@ public abstract class Environment extends Ground {
         super(displayChar);
     }
 
+    /**
+     * Abstract method that spawns an enemy at the given location in the given game map.
+     *
+     * @param location the location where the enemy should spawn
+     * @param map the game map in which the enemy is spawned
+     * @return an Enemy object representing the enemy that was spawned
+     */
     public abstract Enemy spawn(Location location, GameMap map);
 
+    /**
+     * Determines if a location is east the map.
+     *
+     * @param location the location to be checked
+     * @param map the game map containing the location
+     * @return true if the location is east of the middle of the map, false if it is the west side
+     */
     public Boolean detEast (Location location, GameMap map){
         NumberRange widths = map.getXRange();
         // East
@@ -30,6 +50,11 @@ public abstract class Environment extends Ground {
         return widths.max()/2 < location.x();
     }
 
+    /**
+     * Overrides the tick method in Ground. Spawns an enemy at the location if there is no actor at the location.
+     *
+     * @param location the location to be ticked
+     */
     @Override
     public void tick(Location location){
         GameMap map = location.map();

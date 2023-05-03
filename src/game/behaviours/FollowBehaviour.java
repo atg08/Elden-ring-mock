@@ -24,14 +24,22 @@ public class FollowBehaviour implements Behaviour {
 	private final Actor target;
 
 	/**
-	 * Constructor.
-	 * 
+	 * Constructor for FollowBehaviour class.
+	 *
 	 * @param subject the Actor to follow
 	 */
 	public FollowBehaviour(Actor subject) {
 		this.target = subject;
 	}
 
+
+	/**
+	 * This method gets the MoveActorAction that will move the actor one step closer to the target Actor.
+	 *
+	 * @param actor the actor that follows the target Actor
+	 * @param map the current GameMap
+	 * @return the MoveActorAction that will move the actor closer to the target Actor or null if it's not possible
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))
