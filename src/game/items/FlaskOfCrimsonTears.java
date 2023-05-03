@@ -9,36 +9,53 @@ import game.actions.ConsumeAction;
 
 
 /**
- * An Item that can be consumed to heal the player's hit points
- * @author tanul
+
+ An Item that can be consumed to heal the player's hit points
+
+ Has a limited number of uses before becoming unusable
+
+ Implements the Resettable interface to allow for resetting the item's usage count
+
+ @see Resettable
+
+ @see game.reset.ResetManager
+
+ @see game.actions.ConsumeAction
+
+ @author tanul
  */
 
 public class FlaskOfCrimsonTears extends Item implements Resettable {
 
     /**
-     * AMOUNT THE ITEM CAN HEAL
+
+     The amount of hit points this item heals
      */
     private final int HEAL_AMOUNT = 250;
     /**
-     * AMOUNT OF TIMES THE ITEM CAN BE USED
+
+     The maximum number of times this item can be consumed
      */
     private final int MAX_CONSUME_AMOUNT = 2;
 
     /**
-     * AMOUNT THE ITEM HAS BEEN USED
+
+     The number of times this item has been consumed
      */
     private int consumed;
 
     /**
-     * refers to the single reset manager instance
-     * @see ResetManager
+
+     The ResetManager instance used to register this item as Resettable
      */
     private ResetManager rm = ResetManager.getInstance();
 
-    /***
-     * Constructor.
-     * no use of display char at this stage as this item shouldn't be
-     * able to be dropped
+    /**
+
+     Constructor.
+     Initializes the item's name, display character, and other properties
+     Registers this item as Resettable with the ResetManager
+     Adds the ConsumeAction to the item's available actions
      */
     public FlaskOfCrimsonTears() {
         //not portable so cannot be piccked up and dropped
@@ -54,58 +71,76 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
     }
 
     /**
-     * getter method that RETURNS THE NUMBER OF TIMES THE ITEM HAS BEEN USED
-     * @return THE NUMBER OF TIMES THE ITEM HAS BEEN USED
+
+     Returns the number of times this item has been consumed
+     @return The number of times this item has been consumed
      */
     public int getConsumed() {
         return consumed;
     }
 
     /**
-     * getter method that RETURNS THE MAXIMUM NUMBER OF TIMES THE ITEM CAN BE USED
-     * @return MAX_CONSUME_AMOUNT
+
+     Returns the maximum number of times this item can be consumed
+     @return The maximum number of times this item can be consumed
      */
     public int getMAX_CONSUME_AMOUNT() {
         return MAX_CONSUME_AMOUNT;
     }
 
     /**
-     * getter method that RETURNS THE AMOUNT THE ITEM HEALS
-     * @return HEAL_AMOUNT
+
+     Returns the amount of hit points this item heals
+     @return The amount of hit points this item heals
      */
     public int getHEAL_AMOUNT() {
         return HEAL_AMOUNT;
     }
 
     /**
-     * method TO UPDATE THE NUMBER OF TIMES ITEM HAS BEEN CONSUMED
+
+     Increases the count of times this item has been consumed by 1
      */
     public void updateConsumed() {
         this.consumed += 1;
     }
 
     /**
-     * Method allows us to reset the number of times this item has been used
+
+     Resets the count of times this item has been consumed to 0
      */
     private void resetConsumed() {
         this.consumed = 0;
     }
 
     /**
-     *
-     * @return THE NAME OF THE ITEM
+
+     Returns the name of the item and the number of times it can still be consumed
+     @return The name of the item and the number of times it can still be consumed
      */
     @Override
     public String toString() {
         return "Flask Of Crimson Tears (" + (this.getMAX_CONSUME_AMOUNT()-this.getConsumed()) + "/" + this.getMAX_CONSUME_AMOUNT() + ")";
     }
 
+    /**
+
+     Resets the count of times this item has been consumed to 0 and returns a string indicating the item has been reset
+     @param actor The actor resetting the item
+     @param map The GameMap on which the reset is taking place
+     @return A string indicating the item has been reset
+     */
     @Override
     public String reset(Actor actor, GameMap map) {
         this.resetConsumed();
         return this + "has been reset";
     }
 
+    /**
+
+     Indicates whether this item can be removed from an inventory or not
+     @return False, as this item cannot be removed from an inventory
+     **/
     @Override
     public boolean isRemovable() {
         return false;

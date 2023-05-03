@@ -24,17 +24,22 @@ public class DeathAction extends Action {
 
 //    private ResetManager rm = ResetManager.getInstance();
 
+    /**
+     * Constructs a DeathAction object with the attacker who caused the death.
+     *
+     * @param actor The actor who caused the death.
+     */
     public DeathAction(Actor actor) {
         this.attacker = actor;
     }
 
     /**
-     * When the target is killed, the items & weapons carried by target
-     * will be dropped to the location in the game map where the target was
+     * When the target is killed, the items and weapons carried by the target
+     * will be dropped to the location in the game map where the target was.
      *
-     * @param target The actor performing the action.
-     * @param map The map the actor is on.
-     * @return result of the action to be displayed on the UI
+     * @param target The actor who was killed.
+     * @param map The map the actor was on.
+     * @return A string describing the result of the action to be displayed on the UI.
      */
     @Override
     public String execute(Actor target, GameMap map) {
@@ -99,6 +104,12 @@ public class DeathAction extends Action {
         return result;
     }
 
+    /**
+     * Returns a string describing the death of an actor.
+     *
+     * @param actor The actor who died.
+     * @return A string describing the death of the actor.
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " is killed.";
