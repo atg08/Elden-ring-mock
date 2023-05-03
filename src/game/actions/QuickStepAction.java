@@ -12,9 +12,11 @@ import game.gameactors.EnemyType;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Action for quick step.
+ * @author Satoshi Kashima
+ */
 public class QuickStepAction extends Action {
-
-    private final Random random = new Random();
 
     /**
      * The Actor that is to be attacked
@@ -37,8 +39,9 @@ public class QuickStepAction extends Action {
     private Weapon weapon;
 
     /**
-     * Constructor.
+     * Constructor with weapon.
      *
+     * @param weapon the weapon used to attack the target
      * @param target the Actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
      */
@@ -60,6 +63,7 @@ public class QuickStepAction extends Action {
     }
 
     /**
+     * Executes the quick step action. Uses AttackAction and MoveActorAction internally.
      *
      * @param actor The actor performing the attack action.
      * @param map The map the actor is on.
@@ -81,7 +85,7 @@ public class QuickStepAction extends Action {
 
         // randomly choose where to move
         if (actions.size() != 0){
-            String moveResult = actions.get(random.nextInt(actions.size())).execute(actor, map);
+            String moveResult = actions.get(rand.nextInt(actions.size())).execute(actor, map);
             return System.lineSeparator() + attackResult + System.lineSeparator() + moveResult;
         }
 

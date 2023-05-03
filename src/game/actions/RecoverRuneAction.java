@@ -7,14 +7,17 @@ import game.gameactors.players.Player;
 import game.runes.Rune;
 
 /**
- * Action to allow items to be picked up.
+ * Action to allow an actor to pick up previously dropped runes.
+ * @author Satoshi Kashima
  */
 public class RecoverRuneAction extends PickUpAction {
-
+    /**
+     * the rune to be recovered
+     */
     private final Rune rune;
 
     /**
-     * Constructor.
+     * Constructor. Requires rune as input.
      *
      * @param rune the rune to pick up
      */
@@ -24,9 +27,9 @@ public class RecoverRuneAction extends PickUpAction {
     }
 
     /**
-     * Add the item to the actor's inventory.
+     * Executes the recover rune action. It picks up the rune from the ground and increases the player's runes.
+     * Uses (extends) PickUpAction internally.
      *
-     * @see Action#execute(Actor, GameMap)
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return a suitable description to display in the UI
