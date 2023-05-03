@@ -1,27 +1,35 @@
 package game.weapons;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
+
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.runes.Rune;
 
 /**
  * A simple weapon that can be used to attack the enemy.
- * It deals 75 damage with 70% hit rate
- * Created by:
- * @author Aditti
- * Modified by:
  *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
  */
 
-public class Grossmesser extends WeaponItem {
+public class Grossmesser extends WeaponItem implements Sellable {
 
     /**
-     * Constructor.
+     * Creates a Grossmesser weapon instance.
      */
-    public Grossmesser(String name, char displayChar, int damage, String verb, int hitRate) {
+    public Grossmesser() {
         super("Grossmesser", '?', 115, "hit", 85);
+        this.addCapability(WeaponSkill.AREA_ATTACK);
+        this.addCapability(WeaponSkill.TARGETED_ATTACK);
     }
 
+
+    /**
+     * Creates Rune with the selling price of the Grossmesser weapon.
+     *
+     * @return A Rune object representing the selling price of the Grossmesser weapon.
+     */
     @Override
-    public void tick(Location currentLocation, Actor actor) {}
+    public Rune getSellingPrice() {
+        return new Rune(100);
+    }
 }

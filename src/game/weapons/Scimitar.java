@@ -1,8 +1,11 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AreaAttackAction;
+import game.runes.Rune;
+
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -13,15 +16,27 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  *
  */
 
-public class Scimitar extends WeaponItem {
+public class Scimitar extends WeaponItem implements Purchasable, Sellable {
 
     /**
      * Constructor.
      */
-    public Scimitar(String name, char displayChar, int damage, String verb, int hitRate) {
-        super("Scimitar", 's', 118, verb, 88);
+    public Scimitar() {
+        super("Scimitar", 's', 118, "hit", 88);
+        this.addCapability(WeaponSkill.AREA_ATTACK);
+    }
+    @Override
+    public Rune getPurchasingPrice() {
+        return new Rune(600);
     }
 
     @Override
-    public void tick(Location currentLocation, Actor actor) {}
+    public WeaponItem restock() {
+        return new Scimitar();
+    }
+
+    @Override
+    public Rune getSellingPrice() {
+        return new Rune(100);
+    }
 }

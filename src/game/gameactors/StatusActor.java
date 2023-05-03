@@ -1,5 +1,16 @@
 package game.gameactors;
 
+
+/**
+ * An enumeration representing different statuses that a game actor can have.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
+ */
 public enum StatusActor {
-    HOSTILE_TO_ENEMY, SKELETON_TYPE, FOLLOWING, CAN_ACTOR_ENTER, IS_ENEMY
+
+    /**
+     * Indicates the status of the actor.
+     */
+    IS_PLAYER, IS_ENEMY, CAN_REST, FOLLOWING_PLAYER, CAN_RESPAWN, CAN_DESPAWN, CANNOT_BE_ATTACKED, IS_TRADER
 }

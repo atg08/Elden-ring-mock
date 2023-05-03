@@ -6,7 +6,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.DeathAction;
+import game.gameactors.EnemyType;
+import game.gameactors.StatusActor;
 
 /**
  * An Action to attack another Actor.
@@ -71,6 +72,10 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		if (target.hasCapability(StatusActor.CANNOT_BE_ATTACKED)){
+			return this.target + " cannot be attacked";
+		}
+
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
 		}
@@ -82,8 +87,10 @@ public class AttackAction extends Action {
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
-		if (!target.isConscious()) {
+		if (!target.isConscious() && !target.hasCapability(EnemyType.SKELETON_TYPE)) {
 			result += new DeathAction(actor).execute(target, map);
+		}else if (!target.isConscious() && target.hasCapability(EnemyType.SKELETON_TYPE)) {
+			result += new TurnIntoPileOfBonesAction().execute(target, map);
 		}
 
 		return result;
