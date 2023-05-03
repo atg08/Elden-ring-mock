@@ -58,20 +58,19 @@ public class AttackBehaviour implements Behaviour {
                 continue;
             }
 
-            // area attack -> if we find at least one attack-able actor -> return AreaAttackAction
-            boolean canAttack = enemy.canTarget(targetActor);
-            if (canAttack) {
-                if (!isTargetedAction) {
-                    if (weaponItem != null) {
-                        // intrinsic weapon attack
-                        return new AreaAttackAction(weaponItem);
-                    } else {
-                        // this method returns AreaAttackAction/special attack
-                        return new AreaAttackAction();
-                    }
+            // area attack -> if we find at least one actor (does not need to be atackable) -> return AreaAttackAction
+            if (!isTargetedAction) {
+                if (weaponItem != null) {
+                    // intrinsic weapon attack
+                    return new AreaAttackAction(weaponItem);
+                } else {
+                    // this method returns AreaAttackAction/special attack
+                    return new AreaAttackAction();
                 }
             }
+
             // targeted attack -> collect all possible enemies around
+            boolean canAttack = enemy.canTarget(targetActor);
             if (canAttack){
                 if (weaponItem == null){
                     // intrinsic weapon attack
