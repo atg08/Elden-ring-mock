@@ -10,20 +10,30 @@ import game.gameactors.EnemyType;
 import game.gameactors.players.Player;
 
 /**
- * A powerful enemy of the player that can perform a powerful headbutt attack
- * @author tanul
+ * This class represents a type of WindEnemy called GiantDog, which has a specific set of stats and capabilities.
+ * It extends the WindEnemy class and overrides the getIntrinsicWeapon method to return a specific weapon.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
  */
 
 public class GiantDog extends WindEnemy{
+
+
     /**
-     * Constructor.
-     * @author Tanul
+     * Constructor for GiantDog.
      */
     public GiantDog() {
         super("Giant Dog", 'G', 693, 313, 1808);
         this.addCapability(EnemyType.WIND_TYPE);
     }
 
+
+    /**
+     * Returns the intrinsic weapon of the GiantDog.
+     *
+     * @return the intrinsic weapon of the GiantDog, which is an instance of the IntrinsicWeapon class.
+     */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(314, "bashes", 90);

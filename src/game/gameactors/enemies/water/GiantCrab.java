@@ -1,29 +1,34 @@
 package game.gameactors.enemies.water;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
+
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.DespawnAction;
-import game.behaviours.Behaviour;
-import game.gameactors.EnemyType;
-import game.gameactors.players.Player;
+
 
 /**
- * A powerful enemy of the player that can perform a powerful slam attack
- * @author tanul
+ * An enemy of the player that can perform a powerful slam attack.
+ * Extends the OceanEnemy class.
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0.0
  */
 
 public class GiantCrab extends OceanEnemy{
+
+
     /**
-     * Constructor.
-     *
+     * Constructor for the GiantCrab class.
      */
     public GiantCrab() {
         super("Giant Crab", 'C', 208, 318, 4961);
     }
 
+
+
+    /**
+     * Returns an IntrinsicWeapon object representing the GiantCrab's slam attack.
+     *
+     * @return An IntrinsicWeapon object representing the GiantCrab's slam attack.
+     */
 
     // slam cna be individual or area attack
     @Override
