@@ -23,33 +23,50 @@ import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
 /**
- * Class representing the Player. It implements the Resettable interface.
+ * This abstract class represents the player in the game. It implements the Resettable and Respawnable interfaces.
  * It carries around a club to attack a hostile creature in the Lands Between.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
  *
  */
 public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper {
 
 	private final Menu menu = new Menu();
+	/**
+	 * The ResetManager object for the player.
+	 */
 	private ResetManager rm = ResetManager.getInstance();
+	/**
+	 * The Rune object for the player.
+	 */
 	protected Rune runes = new Rune();
+	/**
+	 * The respawn point for the player.
+	 */
 	protected static SiteOfLostGrace respawnPoint;
+	/**
+	 * The previous location of the player.
+	 */
 	private Location previousLocation;
-
+	/**
+	 * Returns the location of the respawn point.
+	 * @return the location of the respawn point
+	 */
 	public SiteOfLostGrace getRespawnPoint() {
 		return respawnPoint;
 	}
-
+	/**
+	 * Sets the respawn point.
+	 * @param respawnPoint the respawn point to set
+	 */
 	public void setRespawnPoint(SiteOfLostGrace respawnPoint) {
 		this.respawnPoint = respawnPoint;
 	}
 
 	/**
-	 * Constructor.
-	 *
-	 * @param hitPoints   Player's starting number of hitpoints
+	 * Constructs a Player object with the specified number of hitpoints.
+	 * @param hitPoints the number of hitpoints the player has
 	 */
 	public Player(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
@@ -64,7 +81,14 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	}
 
-
+	/**
+	 * Displays the player's name, hitpoints, and runes.
+	 * @param actions the list of actions available to the player
+	 * @param lastAction the last action the player performed
+	 * @param map the game map
+	 * @param display the game display
+	 * @return the action selected by the player
+	 */
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -95,9 +119,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 	/**
-	 * this reset is called when player dies or rests at the site of lost grace
-	 * @param actor
-	 * @param map
+	 * Resets the player's hitpoints when the player dies or rests at the site of lost grace.
+	 * @param actor the actor to reset
+	 * @param map the game map
+	 * @return a string indicating that the player's health has been reset
 	 */
 	@Override
 	public String reset(Actor actor, GameMap map) {
@@ -105,11 +130,22 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		return "Player health is reset to " + this.printHp();
 	}
 
+	/**
+	 *
+	 * If this resettable is removable after reset
+	 * @return false
+	 */
 	@Override
 	public boolean isRemovable() {
 		return false;
 	}
 
+	/**
+
+	 Retrieves the existing Rune object from the player's inventory.
+
+	 @return The existing Rune object, or null if there is none.
+	 */
 	public Rune getExistingRune(){
 		Rune existingRune = (Rune) this.getItemInventory().
 				stream()
@@ -119,7 +155,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 		return existingRune;
 	}
+	/**
 
+	 Increases the quantity of the given Rune object in the player's inventory.
+
+	 @param rune The Rune object to increase.
+	 */
 	public void increaseRune(Rune rune){
 
 		Rune existingRune = this.getExistingRune();
@@ -131,13 +172,23 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	}
 
+
+	/**
+
+	 Decreases the quantity of the given Rune object in the player's inventory.
+	 @param rune The Rune object to decrease.
+	 @return True if the Rune was successfully decreased, false otherwise.
+	 */
 	public boolean decreaseRune(Rune rune){
 		Rune existingRune = getExistingRune();
 		return existingRune.decreaseRune(rune);
 	}
 
 
-
+	/**
+	 * Displays the you died message then resets the game, player to respawn point
+	 * @param map the GameMap on which the object should respawn
+	 */
 	@Override
 	public void respawn(GameMap map) {
 		// BEHOLD, ELDEN RING
@@ -155,6 +206,15 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 
 	}
+
+	/**
+
+	 Checks if there is an enemy actor in any of the exits of the given location.
+
+	 @param location The location to check for enemy actors.
+
+	 @return True if there is an enemy actor, false otherwise.
+	 */
 	public boolean checkEnemyExistenceAround(Location location) {
 		for (Exit exit : location.getExits()) {
 			Location destination = exit.getDestination();
@@ -168,6 +228,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		return false;
 	}
 
+
+	/**
+
+	 Retrieves the player's previous location.
+	 @return The player's previous location.
+	 */
 	public Location getPlayerPreviousLocation(){
 		return this.previousLocation;
 	}

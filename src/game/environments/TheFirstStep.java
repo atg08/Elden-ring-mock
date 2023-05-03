@@ -1,5 +1,10 @@
 package game.environments;
 
+/**
+
+ A site of lost grace representing the first step in the game.
+ @author tanul
+ */
 public class TheFirstStep extends SiteOfLostGrace{
 
     private static TheFirstStep instance;
@@ -12,6 +17,11 @@ public class TheFirstStep extends SiteOfLostGrace{
         super();
     }
 
+    /**
+
+     Get the singleton instance of TheFirstStep.
+     @return the instance of TheFirstStep
+     */
     public static TheFirstStep getInstance(){
         if (instance == null){
             instance = new TheFirstStep();
@@ -19,10 +29,5 @@ public class TheFirstStep extends SiteOfLostGrace{
         return instance;
     }
 
-//    @Override
-//    public void tick(Location location) {
-////        super.tick(location);
-//        this.siteLocation = location;
-//    }
 
 }
