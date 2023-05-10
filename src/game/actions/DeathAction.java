@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
+import edu.monash.fit2099.engine.items.DropRuneAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
@@ -50,16 +51,14 @@ public class DeathAction extends Action {
             // Player is dying
             Player player = (Player) target;
 
-            Rune droppedRune = player.getDeathRune();
-            droppedRune.setRuneLocation(map.locationOf(target));
-            result = new DropItemAction(droppedRune).execute(player, map);
+
+            String dropRuneMessage = new DropRuneAction().execute(player, map);
 
 //            rm.run(player, map);
             player.respawn(map);
 
-            droppedRuneAmount = droppedRune.getAmount();
             result += System.lineSeparator() + menuDescription(target)
-                    + System.lineSeparator() + target + " dropped " + droppedRuneAmount + " runes";
+                    + System.lineSeparator() + dropRuneMessage;
 
         } else {
             // enemy is dying
