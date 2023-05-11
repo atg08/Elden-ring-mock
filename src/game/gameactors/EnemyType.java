@@ -6,5 +6,5 @@ package game.gameactors;
  @author tanul
  */
 public enum EnemyType {
-    SKELETON_TYPE,OCEAN_TYPE,WIND_TYPE
+    SKELETON_TYPE,OCEAN_TYPE,WIND_TYPE, CASTLE_TYPE
 }

@@ -14,7 +14,7 @@ import game.gameactors.players.Player;
  * @modifiedBy Tanul , Satoshi , Aditti
  * @version 1.0.0
  */
-public class LoneWolf extends Enemy {
+public class LoneWolf extends WindEnemy {
 
 
     /**

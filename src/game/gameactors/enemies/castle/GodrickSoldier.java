@@ -1,27 +1,15 @@
 package game.gameactors.enemies.castle;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.DespawnAction;
-import game.gameactors.enemies.Enemy;
-import game.reset.Resettable;
 
-public class GodrickSoldier extends Enemy implements Resettable {
+import game.weapons.Grossmesser;
+
+public class GodrickSoldier extends CastleEnemy {
     /**
      * Constructor for the Enemy class.
      */
     public GodrickSoldier() {
         super("Godrick Soldier", 'p', 198, 38, 70);
+        this.addWeaponToInventory(new Grossmesser());
     }
 
-    @Override
-    public String reset(Actor actor, GameMap map) {
-        DespawnAction despawn = new DespawnAction();
-        return despawn.execute(this, map);
-    }
-
-    @Override
-    public boolean isRemovable() {
-        return true;
-    }
 }
