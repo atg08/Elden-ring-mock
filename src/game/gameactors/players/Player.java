@@ -22,6 +22,8 @@ import game.runes.Rune;
 import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
+import java.util.ArrayList;
+
 /**
  * This abstract class represents the player in the game. It implements the Resettable and Respawnable interfaces.
  * It carries around a club to attack a hostile creature in the Lands Between.
@@ -62,6 +64,18 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 */
 	public void setRespawnPoint(SiteOfLostGrace respawnPoint) {
 		this.respawnPoint = respawnPoint;
+	}
+
+
+
+	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
+
+	public static ArrayList<GameMap> getMapsAccessible() {
+		return mapsAccessible;
+	}
+	public static void addMapAccessible(GameMap map){
+
+		mapsAccessible.add(map);
 	}
 
 	/**
