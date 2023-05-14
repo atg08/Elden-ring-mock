@@ -79,6 +79,14 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 	/**
+	 *
+	 * @return players current hitpoints
+	 */
+	public int getMaxHP(){
+		return this.getMaxHp();
+	}
+
+	/**
 	 * Constructs a Player object with the specified number of hitpoints.
 	 * @param hitPoints the number of hitpoints the player has
 	 */
@@ -266,6 +274,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		return droppedRune;
 	}
 
+//	@Override
+//	public boolean isRemovableOnPlayerRest() {
+//		return false;
+//	}
 }
 
 

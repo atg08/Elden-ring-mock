@@ -27,4 +27,6 @@ public interface Resettable {
      */
     boolean isRemovable();
 
+//    boolean isRemovableOnPlayerRest();
+
 }

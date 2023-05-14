@@ -16,10 +16,7 @@ import game.doors.GoldenFogDoor;
 import game.environments.*;
 import game.gameactors.Trader;
 import game.gameactors.enemies.Enemy;
-import game.gameactors.players.Bandit;
-import game.gameactors.players.Player;
-import game.gameactors.players.Samurai;
-import game.gameactors.players.Wretch;
+import game.gameactors.players.*;
 import game.grounds.Cliff;
 import game.grounds.Dirt;
 import game.grounds.Floor;
@@ -43,13 +40,13 @@ public class Application {
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
 				new Wall(), new Floor(),
 				new Graveyard(), new PuddleOfWater(),
-				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor());
+				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor(), new SummonSign());
 
 
 		// don't put enemy in the map; they will be spawned automatically
 		// note: if you don't have SiteOfLostGrace it gives you an error
 		List<String> limgrave  = Arrays.asList(
-				"......................#....._D_.....#..........................+++.........",
+				"......................#....._D_..=..#..........................+++.........",
 				"......................#.....___.....#.......................+++++..........",
 				"......................#..___....____#.........................+++++........",
 				"......................#...........__#............................++........",
@@ -77,44 +74,45 @@ public class Application {
 //		gameMap.at(5,21).setGround(new GoldenFogDoor());
 
 		FancyGroundFactory groundFactory2 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				TheFirstStep.getInstance(), new GoldenFogDoor(), new Cliff());
+				TheFirstStep.getInstance(), new GoldenFogDoor(), new Cliff(), new Cage(), new Barrack(),
+				new GustOfWind());
 		List<String> stormveilCastle  = Arrays.asList(
 				"...........................................................................",
-				"...........................................................................",
+				"..................<...............<........................................",
 				"...........................................................................",
 				"##############################################...##########################",
-				"............................#................#.............................",
-				"............................#................#.............................",
-				"...........................................................................",
-				"............................#................#.............................",
+				"............................#................#.......B..............B......",
+				".....B...............B......#................#.............................",
+				"...............................<.........<.................................",
+				".....B...............B......#................#.......B..............B......",
 				"............................#................#.............................",
 				"#####################..#############...############.####..#########...#####",
 				"...............#++++++++++++#................#++++++++++++#................",
-				"...............#++++++++++++.................#++++++++++++#................",
+				"...............#++++++++++++...<.........<...#++++++++++++#................",
 				"...............#++++++++++++..................++++++++++++#................",
 				"...............#++++++++++++#................#++++++++++++#................",
 				"#####...##########.....#############...#############..#############...#####",
-				".._______..................................................................",
-				"_____..._..____............................................................",
-				".........____..............................................................",
-				"...._______................................................................",
+				".._______........................B......B........................B.....B...",
+				"_____..._..____....&&........<..............<..............................",
+				".........____......&&......................................................",
+				"...._______..................<..............<....................<.....<...",
 				"#####....##...###..#####...##########___###############......##.....####...",
 				"+++++++++++++++++++++++++++#...................#+++++++++++++++++++++++++++",
 				"+++++++++++++++++++++++++++....................#+++++++++++++++++++++++++++",
-				"+++++++++++++++++++++++++++#.........___........+++++++++++++++++++++++++++",
-				"+++++++++++++++++++++++++++#........._D_.......#+++++++++++++++++++++++++++");
-		GameMap gameMap2 = new GameMap(groundFactory, stormveilCastle);
+				"+++++++++++++++++++++++++++#....................+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++#...................#+++++++++++++++++++++++++++");
+		GameMap gameMap2 = new GameMap(groundFactory2, stormveilCastle);
 //		37,38,39 -> x , y = 21,22
 
 		FancyGroundFactory groundFactory3 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				TheFirstStep.getInstance(), new GoldenFogDoor());
+				 new GoldenFogDoor());
 		List<String> roundtableHold  = Arrays.asList(
 				"##################",
 				"#________________#",
 				"#________________#",
 				"#________________#",
 				"#________________#",
-				"#________U_______#",
+				"#________________#",
 				"#________________#",
 				"#________________#",
 				"#________________#",
@@ -144,6 +142,7 @@ public class Application {
 		Scanner sel = new Scanner(System.in);
 
 		display.println("Select you role:");
+		display.println("a: Astrologer");
 		display.println("b: Bandit");
 		display.println("s: Samurai");
 		display.println("w: Wretch");
@@ -156,6 +155,9 @@ public class Application {
 		do {
 			selection = choice;
 			switch (selection) {
+				case 'a':
+					player = new Astrologer();
+					break;
 				case 'b':
 					player = new Bandit();
 					break;
@@ -165,13 +167,14 @@ public class Application {
 				case 'w':
 					player = new Wretch();
 					break;
+
 			}
 		} while (player == null);
 
 
 		Trader kale = new Trader("Merchant kale");
 
-		world.addPlayer(player, gameMap.at(29, 1));
+		world.addPlayer(player, gameMap.at(33, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
 		// add available behaviours to enemy

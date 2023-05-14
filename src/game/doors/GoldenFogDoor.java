@@ -13,9 +13,6 @@ import game.gameactors.players.Player;
 
 public class GoldenFogDoor extends Ground {
 
-    private final int LIMGRAVE_MAP = 0;
-    private final int STORMVEIL_MAP = 1;
-    private final int ROUNDTABLE_MAP = 2;
     /**
      * Constructor.
      */
