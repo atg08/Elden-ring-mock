@@ -1,17 +1,17 @@
-package edu.monash.fit2099.engine.items;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.gameactors.players.Player;
-import game.runes.Rune;
+import game.items.Rune;
 
 public class DropRuneAction extends Action {
-    private Rune droppedRune;
 
     /**
      * drops rune at player's previous location
+     * should be used only for player
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return
@@ -21,15 +21,15 @@ public class DropRuneAction extends Action {
         Player player = (Player) actor;
         Location playerPreviousLocation = player.getPlayerPreviousLocation();
 
-        this.droppedRune = player.getDeathRune();
-        this.droppedRune.setRuneLocation(map.locationOf(player));
+        Rune droppedRune = player.getDeathRune();
+        droppedRune.setRuneLocation(playerPreviousLocation);
 
-        map.locationOf(player).addItem(this.droppedRune);
-        return menuDescription(actor);
+        playerPreviousLocation.addItem(droppedRune);
+        return actor + " dropped " + droppedRune.getAmount();
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " dropped " + this.droppedRune.getAmount();
+        return null;
     }
 }

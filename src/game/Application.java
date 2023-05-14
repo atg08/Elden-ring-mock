@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
@@ -13,7 +12,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.environments.*;
-import game.gameactors.Trader;
+import game.gameactors.MerchantKale;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.Bandit;
 import game.gameactors.players.Player;
@@ -118,7 +117,7 @@ public class Application {
 		} while (player == null);
 
 
-		Trader kale = new Trader("Merchant kale");
+		MerchantKale kale = new MerchantKale();
 
 		world.addPlayer(player, gameMap.at(1, 1));
 //		world.addPlayer(kale, gameMap.at(40, 12));

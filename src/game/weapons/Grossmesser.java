@@ -2,7 +2,7 @@ package game.weapons;
 
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.runes.Rune;
+import game.items.Rune;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -20,6 +20,7 @@ public class Grossmesser extends WeaponItem implements Sellable {
         super("Grossmesser", '?', 115, "hit", 85);
         this.addCapability(WeaponSkill.AREA_ATTACK);
         this.addCapability(WeaponSkill.TARGETED_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
 

@@ -1,6 +1,6 @@
 package game.weapons;
 
-import game.runes.Rune;
+import game.items.Rune;
 
 public interface Sellable {
     public Rune getSellingPrice();

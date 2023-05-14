@@ -9,5 +9,5 @@ package game.items;
  @author tanul
  */
 public enum ItemUsage {
-    CAN_CONSUME_TO_HEAL, IS_FLASK
+    CAN_CONSUME_TO_HEAL, EXCHANGEABLE
 }

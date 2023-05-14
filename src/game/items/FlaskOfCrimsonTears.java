@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-import game.actions.ConsumeAction;
+import game.actions.HealAction;
 
 
 /**
@@ -20,12 +20,12 @@ import game.actions.ConsumeAction;
 
  @see game.reset.ResetManager
 
- @see game.actions.ConsumeAction
+ @see HealAction
 
  @author tanul
  */
 
-public class FlaskOfCrimsonTears extends Item implements Resettable {
+public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
 
     /**
 
@@ -42,7 +42,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
 
      The number of times this item has been consumed
      */
-    private int consumed;
+    private int consumedCount;
 
     /**
 
@@ -61,32 +61,14 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         //not portable so cannot be piccked up and dropped
         super("Flask Of Crimson Tears",'E', false);
         this.addCapability(ItemUsage.CAN_CONSUME_TO_HEAL);
-        this.addCapability(ItemUsage.IS_FLASK);
-        this.consumed = 0;
+        this.consumedCount = 0;
         rm.registerResettable(this);
         // upon initialization of the object adds the object
         // to the list of resettable
 
-        this.addAction(new ConsumeAction(this));
+        this.addAction(new HealAction(this));
     }
 
-    /**
-
-     Returns the number of times this item has been consumed
-     @return The number of times this item has been consumed
-     */
-    public int getConsumed() {
-        return consumed;
-    }
-
-    /**
-
-     Returns the maximum number of times this item can be consumed
-     @return The maximum number of times this item can be consumed
-     */
-    public int getMAX_CONSUME_AMOUNT() {
-        return MAX_CONSUME_AMOUNT;
-    }
 
     /**
 
@@ -97,20 +79,13 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         return HEAL_AMOUNT;
     }
 
-    /**
-
-     Increases the count of times this item has been consumed by 1
-     */
-    public void updateConsumed() {
-        this.consumed += 1;
-    }
 
     /**
 
      Resets the count of times this item has been consumed to 0
      */
     private void resetConsumed() {
-        this.consumed = 0;
+        this.consumedCount = 0;
     }
 
     /**
@@ -120,7 +95,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
      */
     @Override
     public String toString() {
-        return "Flask Of Crimson Tears (" + (this.getMAX_CONSUME_AMOUNT()-this.getConsumed()) + "/" + this.getMAX_CONSUME_AMOUNT() + ")";
+        return "Flask Of Crimson Tears (" + (this.MAX_CONSUME_AMOUNT-this.consumedCount) + "/" + this.MAX_CONSUME_AMOUNT + ")";
     }
 
     /**
@@ -146,4 +121,23 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         return false;
     }
 
+    @Override
+    public boolean isAvailable() {
+        return this.MAX_CONSUME_AMOUNT - this.consumedCount > 0;
+    }
+
+
+    @Override
+    public int getHealAmount() {
+        return this.HEAL_AMOUNT;
+    }
+
+    /**
+
+     Increases the count of times this item has been consumed by 1
+     */
+    @Override
+    public void updateStatus() {
+        this.consumedCount += 1;
+    }
 }

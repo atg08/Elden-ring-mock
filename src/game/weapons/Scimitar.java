@@ -1,10 +1,7 @@
 package game.weapons;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.AreaAttackAction;
-import game.runes.Rune;
+import game.items.Rune;
 
 
 /**
@@ -24,6 +21,8 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
     public Scimitar() {
         super("Scimitar", 's', 118, "hit", 88);
         this.addCapability(WeaponSkill.AREA_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.PURCHASABLE);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
     @Override
     public Rune getPurchasingPrice() {

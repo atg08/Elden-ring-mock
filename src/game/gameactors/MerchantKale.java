@@ -9,24 +9,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
+import game.weapons.WeaponTradingAvailabilityStatus;
 import game.weapons.*;
 
 import java.util.ArrayList;
 
-public class Trader extends Actor {
+public class MerchantKale extends Actor {
 
     private ArrayList<WeaponItem> sellableWeaponItems = new ArrayList<>();
 
     /**
      * Constructor.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
-     * @author Tanul
+     ** @author Tanul
      */
-    public Trader(String name) {
-        super(name, 'k', 9999999);
+    public MerchantKale() {
+        super("Merchant Kale", 'k', 9999999);
         this.sellableWeaponItems.add(new Uchigatana());
         this.sellableWeaponItems.add(new GreatKnife());
         this.sellableWeaponItems.add(new Club());
@@ -55,7 +52,9 @@ public class Trader extends Actor {
 
             // create SellActions for each sellable weapon
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
-                actions.add(new SellAction(weaponItem));
+                if (weaponItem.hasCapability(WeaponTradingAvailabilityStatus.SELLABLE)) {
+                    actions.add(new SellAction(weaponItem));
+                }
             }
 
             // create PurchaseAction for each purchasable weapons

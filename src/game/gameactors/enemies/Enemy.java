@@ -16,7 +16,7 @@ import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.players.Player;
-import game.runes.Rune;
+import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
 

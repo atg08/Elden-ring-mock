@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
+import game.items.RemembranceOfTheGrafted;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
 import game.actions.AreaAttackAction;
@@ -18,7 +19,7 @@ import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.items.FlaskOfCrimsonTears;
-import game.runes.Rune;
+import game.items.Rune;
 import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
@@ -250,6 +251,17 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		droppedRune.registerAsResettable();
 
 		return droppedRune;
+	}
+
+	public RemembranceOfTheGrafted getExistingRemembranceOfTheGrafted(){
+		RemembranceOfTheGrafted existingRemembranceOfTheGrafted
+				= (RemembranceOfTheGrafted) this.getItemInventory()
+				.stream()
+				.filter(item -> "Remembrance of the Grafted".equals(item.toString()))
+				.findFirst()
+				.orElse(null);
+
+		return existingRemembranceOfTheGrafted;
 	}
 
 }

@@ -1,11 +1,9 @@
 package game.weapons;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.AreaAttackAction;
-import game.runes.Rune;
+import game.items.Rune;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -24,6 +22,8 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     public Club() {
         super("Club", '!', 103, "bonks", 80);
         this.addCapability(WeaponSkill.TARGETED_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.PURCHASABLE);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
     @Override

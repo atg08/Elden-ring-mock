@@ -1,10 +1,9 @@
 package edu.monash.fit2099.engine.items;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.gameactors.players.Player;
-import game.runes.Rune;
+import game.items.Rune;
 
 /**
  * Action to allow an actor to pick up previously dropped runes.
