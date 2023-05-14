@@ -49,18 +49,18 @@ public class FlareOfInferno extends Environment{
             if (RandomNumberGenerator.getBooleanProbability(8)) {
                 return new BlackflameMonk();
             }
-
         }
         return null;
     }
 
 
-    public void tick(Location location) {
-        // if player -> trigger death action
-        Actor actor = location.getActor();
-        if (actor != null && actor.hasCapability(StatusActor.IS_PLAYER)){
-            String result = new DeathAction(actor).execute(actor, location.map());
-            new Display().println(result);
-        }
-    }
+//    @Override
+//    public void tick(Location location) {
+//        // if player -> trigger death action
+//        Actor actor = location.getActor();
+//        if (actor != null && actor.hasCapability(StatusActor.IS_PLAYER)){
+//            String result = new DeathAction(actor).execute(actor, location.map());
+//            new Display().println(result);
+//        }
+//    }
 }

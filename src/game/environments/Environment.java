@@ -61,7 +61,7 @@ public abstract class Environment extends Ground {
         NumberRange lengths = map.getYRange();
         // East
         // assume middle is part of south
-        return lengths.max()/2 < location.y();
+        return lengths.max()/2 > location.y();
     }
 
     /**

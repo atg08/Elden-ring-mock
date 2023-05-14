@@ -40,7 +40,7 @@ public class Application {
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
 				new Wall(), new Floor(),
 				new Graveyard(), new PuddleOfWater(),
-				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor(), new SummonSign());
+				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor(), new SummonSign() , new FlareOfInferno());
 
 
 		// don't put enemy in the map; they will be spawned automatically
@@ -70,6 +70,17 @@ public class Application {
 				"_____D_______#.....+....++........................++.........._.....__.#...",
 				"_____________#.........+..+.....................+++...........###..__###...",
 				"_____________#.............++..............................................");
+
+//		List<String> limgrave  = Arrays.asList(
+//				"...WW........................_._..............",
+//				".............................___........WW....",
+//				"..........................___....____.........",
+//				"................U..................__.........",
+//				"........................_____.................",
+//				"...................................._.........",
+//				"....WW..................................WW....",
+//				"..............................................");
+
 		GameMap gameMap = new GameMap(groundFactory, limgrave);
 //		gameMap.at(5,21).setGround(new GoldenFogDoor());
 
@@ -174,8 +185,9 @@ public class Application {
 
 		Trader kale = new Trader("Merchant kale");
 
-		world.addPlayer(player, gameMap.at(33, 0));
+//		world.addPlayer(player, gameMap.at(33, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
+		world.addPlayer(player, gameMap.at(20, 3));
 
 		// add available behaviours to enemy
 		Enemy.addBehaviourWithPriority(new WanderBehaviour(), 3);
