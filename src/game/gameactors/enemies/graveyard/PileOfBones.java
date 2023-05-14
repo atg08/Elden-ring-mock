@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AttackAction;
+import game.gameactors.StatusActor;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -126,5 +129,21 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     @Override
     public boolean isRemovable() {
         return true;
+    }
+
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+
+        ActionList actions =  new ActionList();
+
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)) {
+            actions.add(new AttackAction(this, direction));
+            for (WeaponItem w : otherActor.getWeaponInventory()) {
+                actions.add(new AttackAction(this, direction, w));
+            }
+        }
+
+        return actions;
     }
 }
