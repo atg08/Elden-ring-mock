@@ -45,11 +45,6 @@ public class Application {
 				new Graveyard(), new PuddleOfWater(),
 				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor());
 
-		List<String> testMap = Arrays.asList(
-				"n.__",
-				".._U",
-				"&.__"
-		);
 
 		// don't put enemy in the map; they will be spawned automatically
 		// note: if you don't have SiteOfLostGrace it gives you an error
