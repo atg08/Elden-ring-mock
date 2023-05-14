@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.enemies.graveyard.HeavySkeletonSwordsman;
 import game.gameactors.enemies.graveyard.SkeletalBandit;
+import game.gameactors.enemies.graveyard.SkeletalMilitiaman;
+import game.gameactors.enemies.graveyard.SkeletonMage;
 import game.utils.RandomNumberGenerator;
 
 
@@ -25,7 +27,7 @@ public class Graveyard extends Environment{
 
     /**
      * Spawns an enemy at the given location in the given game map with a certain probability.
-     * The type of enemy spawned is determined by the location being east or west of the middle of the map.
+     * The type of enemy spawned is determined by the location
      * If the location is east a SkeletonBandit enemy will be spawned.
      * If the location is west HeavySkeletonSwordsman enemy will be spawned.
      *
@@ -37,10 +39,14 @@ public class Graveyard extends Environment{
     @Override
     public Enemy spawn(Location location, GameMap map) {
         if (RandomNumberGenerator.getBooleanProbability(27)) {
-            if (detEast(location, map)) {
+            if (detEast(location, map) && detNorth(location , map)) {
                 return new SkeletalBandit();
-            } else {
+            } else if (!detEast(location, map) && !detNorth(location,map)) {
                 return new HeavySkeletonSwordsman();
+            }else if (!detEast(location, map) && detNorth(location,map)) {
+                return new SkeletalMilitiaman();
+            }else {
+                return new SkeletonMage();
             }
         }
         return null;
