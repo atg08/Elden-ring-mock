@@ -1,17 +1,19 @@
 package game.gameactors.enemies.graveyard;
 
+import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.gameactors.StatusActor;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
 import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.runes.Rune;
+import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 
 
@@ -44,6 +46,7 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         this.maxRuneDrop = reviveBackTo.getMaxRune();
         this.reviveBackTo = reviveBackTo;
         rm.registerResettable(this);
+        this.addCapability(StatusActor.IS_ENEMY);
     }
 
 

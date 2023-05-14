@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.gameactors.Trader;
+import game.gameactors.MerchantKale;
 import game.gameactors.players.Player;
 import game.weapons.Purchasable;
 
@@ -21,7 +21,7 @@ public class PurchaseAction extends Action {
     /**
      * the trader
      */
-    private Trader trader;
+    private MerchantKale trader;
 
     /**
      * Constructor for PurchaseAction.
@@ -29,7 +29,7 @@ public class PurchaseAction extends Action {
      * @param weapon The weapon to be purchased.
      * @param trader The trader selling the weapon.
      */
-    public PurchaseAction(WeaponItem weapon, Trader trader) {
+    public PurchaseAction(WeaponItem weapon, MerchantKale trader) {
         this.weapon = weapon;
         this.trader = trader;
     }

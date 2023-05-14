@@ -28,4 +28,3 @@ public class Cliff extends Ground {
         }
     }
 }
-
