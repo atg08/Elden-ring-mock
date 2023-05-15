@@ -58,5 +58,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
         return true;
     }
 
-
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 }

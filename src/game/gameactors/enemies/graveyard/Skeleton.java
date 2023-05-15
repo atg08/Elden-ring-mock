@@ -62,6 +62,8 @@ import game.gameactors.enemies.Revivable;
         return true;
     }
 
-
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 
 }

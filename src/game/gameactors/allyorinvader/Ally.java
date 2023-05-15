@@ -43,8 +43,7 @@ public class Ally extends Actor implements Resettable {
         return true;
     }
 
-//    @Override
-//    public boolean isRemovableOnPlayerRest() {
-//        return false;
-//    }
+    public boolean isRemovableOnPlayerRest() {
+        return false;
+    }
 }

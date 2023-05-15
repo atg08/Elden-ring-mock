@@ -23,6 +23,8 @@ import game.items.Rune;
 import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
+import java.util.ArrayList;
+
 /**
  * This abstract class represents the player in the game. It implements the Resettable and Respawnable interfaces.
  * It carries around a club to attack a hostile creature in the Lands Between.
@@ -222,7 +224,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 			}
 		}
 		this.addItemToInventory(new Rune());
-		rm.run(this,map);
+		rm.run(this,map,false);
 		map.moveActor(this, getRespawnPoint().getSiteLocation());
 
 
@@ -282,6 +284,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 				.orElse(null);
 
 		return existingRemembranceOfTheGrafted;
+	}
+
+	public boolean isRemovableOnPlayerRest() {
+		return false;
 	}
 
 }

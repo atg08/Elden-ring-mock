@@ -46,10 +46,12 @@ public class ResetManager {
 
      @param map the game map where the resettables reside
      */
-    public void run(Actor actor, GameMap map) {
+    public void run(Actor actor, GameMap map, Boolean rest) {
 
         for (Resettable r : this.resettables){
-            if (r.isRemovable()){
+            if (r.isRemovable() && rest && r.isRemovableOnPlayerRest()){
+                this.removables.add(r);
+            } else if (r.isRemovable() && !rest) {
                 this.removables.add(r);
             }
 //            r.reset(actor,map);

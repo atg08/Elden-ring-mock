@@ -121,6 +121,10 @@ public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
         return false;
     }
 
+    public boolean isRemovableOnPlayerRest() {
+        return false;
+    }
+
     @Override
     public boolean isAvailable() {
         return this.MAX_CONSUME_AMOUNT - this.consumedCount > 0;

@@ -130,4 +130,9 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     public boolean isRemovable() {
         return true;
     }
+
+    @Override
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 }

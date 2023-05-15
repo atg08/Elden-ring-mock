@@ -36,4 +36,8 @@ public abstract class CastleEnemy extends Enemy implements Resettable {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }
+
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 }
