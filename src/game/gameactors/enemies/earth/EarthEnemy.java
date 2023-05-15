@@ -1,4 +1,4 @@
-package game.gameactors.enemies.fire;
+package game.gameactors.enemies.earth;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -8,17 +8,9 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.reset.Resettable;
 
-
-/**
- * This abstract class represents an enemy that can be found in a fire environment in a game.
- * It extends the Enemy class and implements the Resettable interface.
- *
- * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
- */
-public abstract class FireEnemy extends Enemy implements Resettable {
+public abstract class EarthEnemy extends Enemy implements Resettable {
     /**
-     * Constructor for the Enemy class.
+     * Constructor for the EarthEnemy abstract class.
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
@@ -26,15 +18,15 @@ public abstract class FireEnemy extends Enemy implements Resettable {
      * @param minRuneDrop the minimum number of runes this Enemy drops upon death
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
      */
-    public FireEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
+    public EarthEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
-        this.addCapability(EnemyType.FIRE_TYPE);
+        this.addCapability(EnemyType.EARTH_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);
     }
 
     /**
-     * Resets the FireEnemy to its initial state.
+     * Resets the EarthEnemy to its initial state.
      *
      * @param actor the actor to reset
      * @param map   the game map the actor is on
@@ -48,9 +40,9 @@ public abstract class FireEnemy extends Enemy implements Resettable {
 
 
     /**
-     * Determines whether the FireEnemy can be removed from the game.
+     * Determines whether the EarthEnemy can be removed from the game.
      *
-     * @return true if the FireEnemy can be removed, false otherwise
+     * @return true if the EarthEnemy can be removed, false otherwise
      */
     @Override
     public boolean isRemovable() {

@@ -41,7 +41,6 @@ public class FlareOfInferno extends Environment{
     @Override
     public Enemy spawn(Location location, GameMap map) {
         if (detEast(location, map) && detNorth(location, map) || !detEast(location, map) && detNorth(location, map)) {
-            // check east or west
             if (RandomNumberGenerator.getBooleanProbability(3)) {
                 return new FireMonk();
             }
