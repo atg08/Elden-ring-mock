@@ -40,7 +40,8 @@ public class Application {
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
 				new Wall(), new Floor(),
 				new Graveyard(), new PuddleOfWater(),
-				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor(), new SummonSign() , new FlareOfInferno());
+				new GustOfWind(), TheFirstStep.getInstance(), new Cliff(),new GoldenFogDoor(), new SummonSign() ,
+				new FlareOfInferno() , new TrevorOfEarth());
 
 
 		// don't put enemy in the map; they will be spawned automatically
