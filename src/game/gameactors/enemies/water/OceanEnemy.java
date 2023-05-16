@@ -1,6 +1,5 @@
 package game.gameactors.enemies.water;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -37,12 +36,11 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
     /**
      * Resets the OceanEnemy to its initial state.
      *
-     * @param actor the actor to reset
-     * @param map   the game map the actor is on
+     * @param map the game map the actor is on
      * @return a string message indicating the outcome of the reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map , boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }

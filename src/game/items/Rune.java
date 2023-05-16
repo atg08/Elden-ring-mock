@@ -1,6 +1,5 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -99,12 +98,11 @@ public class Rune extends Item implements Resettable{
     /**
      * Resets the state of the object, removing it from the map if it has been reset too many times.
      *
-     * @param actor The actor performing the reset.
      * @param map The game map.
      * @return A string describing the result of the reset operation.
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         if (this.checkForRemoval()){
             runeLocation.removeItem(this);
             return "rune removed from the map";
@@ -125,6 +123,11 @@ public class Rune extends Item implements Resettable{
     @Override
     public boolean isRemovable() {
         return true;
+    }
+
+    @Override
+    public boolean isRemovableOnPlayerRest() {
+        return false;
     }
 
 }

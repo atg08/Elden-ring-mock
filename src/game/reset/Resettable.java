@@ -1,6 +1,5 @@
 package game.reset;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
@@ -12,13 +11,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 public interface Resettable {
     /**
-
-    Resets the state of the object to its initial state.
-    @param actor the actor involved in the reset process
-    @param map the game map on which the actor is present
-    @return a message describing the result of the reset process
-    */
-    String reset(Actor actor, GameMap map);
+     * Resets the state of the object to its initial state.
+     *
+     * @param map the game map on which the actor is present
+     * @return a message describing the result of the reset process
+     */
+    String reset(GameMap map, boolean rest);
 
     /**
 

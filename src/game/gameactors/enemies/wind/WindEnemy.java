@@ -1,6 +1,5 @@
 package game.gameactors.enemies.wind;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -49,13 +48,11 @@ public abstract class WindEnemy extends Enemy implements Resettable{
     /**
      * Resets the WindEnemy by executing a DespawnAction.
      *
-     * @param actor The actor to reset.
      * @param map The game map.
-     *
      * @return The result of executing the DespawnAction on the WindEnemy.
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }

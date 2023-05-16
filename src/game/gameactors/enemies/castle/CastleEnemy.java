@@ -1,6 +1,5 @@
 package game.gameactors.enemies.castle;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
@@ -32,7 +31,7 @@ public abstract class CastleEnemy extends Enemy implements Resettable {
     }
 
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }

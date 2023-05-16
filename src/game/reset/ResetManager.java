@@ -55,7 +55,7 @@ public class ResetManager {
                 this.removables.add(r);
             }
 //            r.reset(actor,map);
-            String message = r.reset(actor,map);
+            String message = r.reset(map, rest);
             if (!message.equals("")){display.println(message);}
         }
 

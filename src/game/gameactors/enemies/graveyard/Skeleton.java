@@ -1,6 +1,5 @@
 package game.gameactors.enemies.graveyard;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -38,14 +37,12 @@ import game.gameactors.enemies.Revivable;
     /**
      * Resets the Skeleton when it is killed by a player or another Actor.
      *
-     * @param actor     the actor that killed the Skeleton
-     * @param map       the game map that the Skeleton is on
-     *
-     * @return          a message indicating that the Skeleton has been removed from the game map
+     * @param map the game map that the Skeleton is on
+     * @return a message indicating that the Skeleton has been removed from the game map
      */
     // in skeleton for extensibility and modifications incase future enemies are not resettable
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         // this is so that enemy that has been removed
         // won't be attempted to be removed again

@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
+import game.utils.RandomNumberGenerator;
 
 import java.util.Random;
 
@@ -27,7 +28,6 @@ public class GoldenRune extends Item {
     }
 
     public Rune getRuneAmount(){
-        Random rand = new Random();
-        return new Rune(rand.nextInt(this.MIN_AMOUNT, this.MAX_AMOUNT+1));
+        return new Rune(RandomNumberGenerator.getRandomIntInRange(this.MIN_AMOUNT, this.MAX_AMOUNT+1));
     }
 }

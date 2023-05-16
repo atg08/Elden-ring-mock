@@ -79,12 +79,15 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		mapsAccessible.add(map);
 	}
 
+
+	private static int maxHP;
+
 	/**
 	 *
 	 * @return players current hitpoints
 	 */
-	public int getMaxHP(){
-		return this.getMaxHp();
+	public static int getMaxHP(){
+		return maxHP;
 	}
 
 	/**
@@ -95,12 +98,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(StatusActor.IS_PLAYER);
 		this.addCapability(StatusActor.CAN_RESPAWN);
-//		this.addWeaponToInventory(new Club());
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
 		this.addItemToInventory(new Rune());  // player always starts with 0 rune
 		respawnPoint = TheFirstStep.getInstance();
+		maxHP = hitPoints;
 
 	}
 
@@ -143,12 +146,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	/**
 	 * Resets the player's hitpoints when the player dies or rests at the site of lost grace.
-	 * @param actor the actor to reset
+	 *
 	 * @param map the game map
 	 * @return a string indicating that the player's health has been reset
 	 */
 	@Override
-	public String reset(Actor actor, GameMap map) {
+	public String reset(GameMap map, boolean rest) {
 		this.resetMaxHp(this.getMaxHp());
 		return "Player health is reset to " + this.printHp();
 	}

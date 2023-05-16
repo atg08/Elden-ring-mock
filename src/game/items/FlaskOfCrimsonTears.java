@@ -1,6 +1,5 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.ResetManager;
@@ -99,14 +98,13 @@ public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
     }
 
     /**
-
-     Resets the count of times this item has been consumed to 0 and returns a string indicating the item has been reset
-     @param actor The actor resetting the item
-     @param map The GameMap on which the reset is taking place
-     @return A string indicating the item has been reset
+     * Resets the count of times this item has been consumed to 0 and returns a string indicating the item has been reset
+     *
+     * @param map The GameMap on which the reset is taking place
+     * @return A string indicating the item has been reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         this.resetConsumed();
         return this + "has been reset";
     }

@@ -1,6 +1,5 @@
 package game.gameactors.enemies.graveyard;
 
-import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -108,12 +107,11 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     /**
      * Resets the current instance of Enemy by despawning it from the GameMap.
      *
-     * @param actor the Actor associated with this Enemy
      * @param map the GameMap instance where this Enemy is located
      * @return the result of the DespawnAction's execution
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         // this is so that enemy that has been removed
         // won't be attempted to be removed again
