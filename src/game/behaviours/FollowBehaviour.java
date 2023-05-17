@@ -6,8 +6,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.behaviours.Behaviour;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.IFollower;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -21,17 +21,6 @@ import game.gameactors.StatusActor;
  */
 public class FollowBehaviour implements Behaviour {
 
-	private final Actor target;
-
-	/**
-	 * Constructor for FollowBehaviour class.
-	 *
-	 * @param subject the Actor to follow
-	 */
-	public FollowBehaviour(Actor subject) {
-		this.target = subject;
-	}
-
 
 	/**
 	 * This method gets the MoveActorAction that will move the actor one step closer to the target Actor.
@@ -42,6 +31,21 @@ public class FollowBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+
+		// if this enemy has been following someone, follow him;
+		IFollower follower = (IFollower) actor;
+		Actor target = follower.getFollowingActor();
+
+		// else, find someone who this actor can follow
+		if (target == null){
+			target = follower.getANewActorToFollow();
+		}
+
+		// if there is no enemy to follow return null
+		if (target == null){
+			return null;
+		}
+
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
 		
@@ -54,7 +58,7 @@ public class FollowBehaviour implements Behaviour {
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
-					actor.addCapability(StatusActor.FOLLOWING_PLAYER);
+					actor.addCapability(StatusActor.FOLLOWING);
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}

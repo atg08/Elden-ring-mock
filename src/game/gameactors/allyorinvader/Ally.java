@@ -1,5 +1,6 @@
 package game.gameactors.allyorinvader;
 
+import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -7,11 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.NPC;
 import game.gameactors.players.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
-public class Ally extends Actor implements Resettable {
+public class Ally extends NPC implements Resettable {
 
     private ResetManager rm = ResetManager.getInstance();
 
@@ -21,6 +23,7 @@ public class Ally extends Actor implements Resettable {
     public Ally(Player player) {
         super("Ally", 'A', player.getMaxHP());
         this.addCapability(StatusActor.IS_ALLY);
+        this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
         this.addWeaponToInventory(player.getWeaponInventory().get(0)); // all players have one weapon in inventory
         rm.registerResettable(this);
     }

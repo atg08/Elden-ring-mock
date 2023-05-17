@@ -73,13 +73,12 @@ public class SummonAction extends Action {
             if (RandomNumberGenerator.getRandomInt(2) == 0) {
                 res = "Ally has been summoned";
                 spawnAlly(map, destination);
-                return res;
-                }
+            }
             else {
                 res = "Invader has been summoned";
                 spawnInvader(map,destination);
-                return res;
             }
+            return res;
         }
         return res;
     }

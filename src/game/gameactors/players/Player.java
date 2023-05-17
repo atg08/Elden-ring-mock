@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
+import game.gameactors.enemies.IFollowable;
 import game.items.RemembranceOfTheGrafted;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
@@ -23,6 +24,8 @@ import game.items.Rune;
 import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
+import java.util.ArrayList;
+
 /**
  * This abstract class represents the player in the game. It implements the Resettable and Respawnable interfaces.
  * It carries around a club to attack a hostile creature in the Lands Between.
@@ -31,7 +34,7 @@ import game.weapons.WeaponSkill;
  * Modified by: Tanul, Satoshi, Aditti
  *
  */
-public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper {
+public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper, IFollowable {
 
 	private final Menu menu = new Menu();
 	/**
@@ -50,6 +53,26 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 * The previous location of the player.
 	 */
 	private Location previousLocation;
+
+	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
+
+	/**
+	 * Constructs a Player object with the specified number of hitpoints.
+	 * @param hitPoints the number of hitpoints the player has
+	 */
+	public Player(int hitPoints) {
+		super("Tarnished", '@', hitPoints);
+		this.addCapability(StatusActor.IS_PLAYER);
+		this.addCapability(StatusActor.CAN_RESPAWN);
+		this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
+		this.addCapability(StatusActor.CAN_REST);
+		this.addItemToInventory(new FlaskOfCrimsonTears());
+		rm.registerResettable(this);
+		this.addItemToInventory(new Rune());  // player always starts with 0 rune
+		respawnPoint = TheFirstStep.getInstance();
+
+	}
+
 	/**
 	 * Returns the location of the respawn point.
 	 * @return the location of the respawn point
@@ -66,12 +89,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 
-
-	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
-
 	public static ArrayList<GameMap> getMapsAccessible() {
 		return mapsAccessible;
 	}
+
 	public static void addMapAccessible(GameMap map){
 
 		mapsAccessible.add(map);
@@ -85,22 +106,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		return this.getMaxHp();
 	}
 
-	/**
-	 * Constructs a Player object with the specified number of hitpoints.
-	 * @param hitPoints the number of hitpoints the player has
-	 */
-	public Player(int hitPoints) {
-		super("Tarnished", '@', hitPoints);
-		this.addCapability(StatusActor.IS_PLAYER);
-		this.addCapability(StatusActor.CAN_RESPAWN);
-//		this.addWeaponToInventory(new Club());
-		this.addCapability(StatusActor.CAN_REST);
-		this.addItemToInventory(new FlaskOfCrimsonTears());
-		rm.registerResettable(this);
-		this.addItemToInventory(new Rune());  // player always starts with 0 rune
-		respawnPoint = TheFirstStep.getInstance();
 
-	}
 
 	/**
 	 * Displays the player's name, hitpoints, and runes.
@@ -255,6 +261,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 Retrieves the player's previous location.
 	 @return The player's previous location.
 	 */
+	@Override
 	public Location getPlayerPreviousLocation(){
 		return this.previousLocation;
 	}
@@ -274,16 +281,15 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 	public RemembranceOfTheGrafted getExistingRemembranceOfTheGrafted(){
-		RemembranceOfTheGrafted existingRemembranceOfTheGrafted
-				= (RemembranceOfTheGrafted) this.getItemInventory()
-				.stream()
-				.filter(item -> "Remembrance of the Grafted".equals(item.toString()))
-				.findFirst()
-				.orElse(null);
 
-		return existingRemembranceOfTheGrafted;
+		return (RemembranceOfTheGrafted) this.getItemInventory()
+		.stream()
+		.filter(item -> "Remembrance of the Grafted".equals(item.toString()))
+		.findFirst()
+		.orElse(null);
 	}
 
 }
+
 
 
