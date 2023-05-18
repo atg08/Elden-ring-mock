@@ -1,7 +1,10 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ConsumeAction;
+import game.gameactors.StatusActor;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.HealAction;
@@ -24,7 +27,7 @@ import game.actions.HealAction;
  @author tanul
  */
 
-public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
+public class FlaskOfCrimsonTears extends Item implements Resettable, Consumable {
 
     /**
 
@@ -65,18 +68,18 @@ public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
         // upon initialization of the object adds the object
         // to the list of resettable
 
-        this.addAction(new HealAction(this));
+        this.addAction(new ConsumeAction(this));
     }
 
 
-    /**
-
-     Returns the amount of hit points this item heals
-     @return The amount of hit points this item heals
-     */
-    public int getHEAL_AMOUNT() {
-        return HEAL_AMOUNT;
-    }
+//    /**
+//
+//     Returns the amount of hit points this item heals
+//     @return The amount of hit points this item heals
+//     */
+//    public int getHEAL_AMOUNT() {
+//        return HEAL_AMOUNT;
+//    }
 
 
     /**
@@ -123,13 +126,10 @@ public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
         return false;
     }
 
-    @Override
     public boolean isAvailable() {
         return this.MAX_CONSUME_AMOUNT - this.consumedCount > 0;
     }
 
-
-    @Override
     public int getHealAmount() {
         return this.HEAL_AMOUNT;
     }
@@ -138,8 +138,19 @@ public class FlaskOfCrimsonTears extends Item implements Resettable, Healer {
 
      Increases the count of times this item has been consumed by 1
      */
-    @Override
     public void updateStatus() {
         this.consumedCount += 1;
+    }
+
+    @Override
+    public String consume(Actor actor) {
+            actor.heal(this.getHealAmount());
+            this.updateStatus();
+            return actor + " health has been restored by " + this.getHealAmount() + " hp";
+    }
+
+    @Override
+    public Boolean consumeBy(Actor actor) {
+        return actor.hasCapability(StatusActor.IS_PLAYER) && this.isAvailable();
     }
 }

@@ -4,15 +4,17 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
+import game.actions.ConsumeAction;
 import game.actions.RestAction;
 import game.actions.TeleportAction;
-import game.items.RemembranceOfTheGrafted;
+import game.items.*;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
 import game.actions.AreaAttackAction;
@@ -20,8 +22,6 @@ import game.environments.SiteOfLostGrace;
 import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.items.FlaskOfCrimsonTears;
-import game.items.Rune;
 import game.reset.Resettable;
 import game.weapons.WeaponSkill;
 
@@ -147,6 +147,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 			}
 
 			// TODO if player's intrinsic weapon has area attack ability, add it here
+		}
+
+		for (Item i : this.getItemInventory()){
+			if (i.hasCapability(ItemUsage.IS_GOLDEN_RUNE)){
+				actions.add(new ConsumeAction((Consumable) i));
+			}
 		}
 
 

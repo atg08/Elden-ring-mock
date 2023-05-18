@@ -20,6 +20,7 @@ import game.grounds.Cliff;
 import game.grounds.Dirt;
 import game.grounds.Floor;
 import game.grounds.Wall;
+import game.items.GoldenRune;
 
 /**
  * The main class to start the game.
@@ -100,6 +101,7 @@ public class Application {
 				"+++++++++++++++++++++++++++#.........___........+++++++++++++++++++++++++++",
 				"+++++++++++++++++++++++++++#........._D_.......#+++++++++++++++++++++++++++");
 		GameMap gameMap2 = new GameMap(groundFactory2, stormveilCastle);
+		gameMap2.at(31,21).addItem(new GoldenRune());
 //		37,38,39 -> x , y = 21,22
 
 		FancyGroundFactory groundFactory3 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
