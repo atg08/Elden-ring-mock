@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public abstract class NPC extends Actor {
-    protected static Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
     public NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
@@ -30,20 +30,10 @@ public abstract class NPC extends Actor {
         return new DoNothingAction();
     }
 
-    /**
-     * Adds a Behaviour object with a specified priority to the Enemy's list of behaviours.
-     *
-     * @param behaviour the Behaviour object to be added
-     * @param priority the priority of the Behaviour object
-     */
-    public static void addBehaviourWithPriority(Behaviour behaviour, int priority){
-        Enemy.behaviours.put(priority, behaviour);
-    }
-
-    public abstract boolean canTarget(Actor actor);
+    public abstract boolean canTarget(Actor subject);
 
     /**
-     * we need to overrid this function because the actor class returns the punch intrinsic weapon always, which is not
+     * we need to override this function because the actor class returns the punch intrinsic weapon always, which is not
      * applicable to NPCs and we are not supposed to change the Actor class
      * @return
      */

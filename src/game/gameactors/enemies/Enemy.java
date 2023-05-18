@@ -1,10 +1,13 @@
 package game.gameactors.enemies;
 
+import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.reset.ResetManager;
@@ -18,7 +21,9 @@ import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -30,15 +35,16 @@ import java.util.List;
  * @version 1.0.0
  */
 
-public abstract class Enemy extends NPC implements DeathRuneDroppper{
+public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower, IFollowable{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
-    protected Actor followingActor;
+    protected IFollowable followingActor = null;
 
     protected Player player;
+    protected Location previousLocation;
 
     /**
      * Constructor for the Enemy class.
@@ -52,6 +58,7 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
     public Enemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(name, displayChar, hitPoints);
         this.addCapability(StatusActor.IS_ENEMY);
+        this.addCapability(StatusActor.HOSTILE_TO_PLAYER);
 
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
@@ -69,6 +76,9 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        // record enemy's current location
+        this.previousLocation = map.locationOf(this);
+
         if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
             if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
                 rm.removeResettable((Resettable) this);
@@ -182,5 +192,64 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
      */
     public int getMaxRune(){
         return this.maxRuneDrop;
+    }
+
+    @Override
+    public IFollowable getFollowingActor(){
+        return this.followingActor;
+    }
+
+    @Override
+    public boolean canFollowActor(Actor actor){
+        return actor.hasCapability(StatusActor.HOSTILE_TO_ENEMY);
+    }
+
+    @Override
+    public void resetFollowingStatus(){
+        this.removeCapability(StatusActor.FOLLOWING);
+        this.followingActor = null;
+    }
+
+    @Override
+    public IFollowable getANewActorToFollow(List<Exit> exits){
+        ArrayList<IFollowable> actors = new ArrayList<>();
+
+        for (Exit exit: exits){
+            Location destination = exit.getDestination();
+            Actor actorAtDestination = destination.getActor();
+            if (actorAtDestination != null && this.canFollowActor(actorAtDestination)){
+                actors.add((IFollowable) actorAtDestination);
+            }
+        }
+
+        if (!actors.isEmpty()) {
+            return actors.get(new Random().nextInt(actors.size()));
+        }
+        else {
+            return null;
+        }
+    }
+    @Override
+    public boolean isFollowingActorInExits(List<Exit> exits){
+        for (Exit exit : exits) {
+            Location destination = exit.getDestination();
+            Actor targetActor = destination.getActor();
+
+            if (targetActor == this.followingActor){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+
+     Retrieves the player's previous location.
+     @return The player's previous location.
+     */
+    @Override
+    public Location getPlayerPreviousLocation(){
+        return this.previousLocation;
     }
 }

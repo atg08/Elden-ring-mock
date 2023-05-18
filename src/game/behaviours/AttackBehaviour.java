@@ -98,7 +98,7 @@ public class AttackBehaviour implements Behaviour {
 
         // need to ensure that this player is still in the exits
         // (if there is a ground where this NPC cannot enter, player might have moved somewhere)
-        if (this.followableIsNotInRange(actor, follower.getFollowingActor(), map)){
+        if (!follower.isFollowingActorInExits(map.locationOf(actor).getExits())){
             return null;
         }
 
@@ -107,8 +107,8 @@ public class AttackBehaviour implements Behaviour {
             return null;
         }
 
-        // remove the following capability since the NPC has attacked once
-        actor.removeCapability(StatusActor.FOLLOWING);
+        // remove the following status since the NPC has attacked once
+        follower.resetFollowingStatus();
 
         // the NPC cannot attack if he does not have a weapon
         if (this.NPCHasNoWeapon(actor)){
@@ -134,19 +134,6 @@ public class AttackBehaviour implements Behaviour {
             return this.getTargetedAction(actor, map, null);
         }
         return this.getTargetedAction(actor, map, actor.getWeaponInventory().get(0));
-    }
-
-    private boolean followableIsNotInRange(Actor actor, Actor followingActor, GameMap map) {
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-            Actor targetActor = destination.getActor();
-
-            if (targetActor == followingActor){
-                return false;
-            }
-
-        }
-        return true;
     }
 
     private boolean NPCHasNoWeapon(Actor actor){

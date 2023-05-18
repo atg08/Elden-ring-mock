@@ -178,18 +178,6 @@ public class Application {
 		world.addPlayer(player, gameMap.at(33, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
-		// add available behaviours to enemy
-		Enemy.addBehaviourWithPriority(new WanderBehaviour(), 3);
-		Enemy.addBehaviourWithPriority(new AttackBehaviour(player), 1);
-		Enemy.addBehaviourWithPriority(new FollowBehaviour(player), 2);
-
-		// add available behaviors to allys and invader
-		Ally.addBehaviourWithPriority(new WanderBehaviour(), 3);
-		Ally.addBehaviourWithPriority(new AttackBehaviour(player), 1);
-		Ally.addBehaviourWithPriority(new FollowBehaviour(player), 2);
-
-		Invader.addBehaviourWithPriority(new WanderBehaviour(), 3);
-		Invader.addBehaviourWithPriority(new AttackBehaviour(player), 1);
 
 		// adding the accessible maps to player
 		Player.addMapAccessible(gameMap); // limgrave

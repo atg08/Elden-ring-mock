@@ -7,7 +7,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.IFollowable;
 import game.gameactors.enemies.IFollower;
+import game.gameactors.enemies.NPC;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -31,26 +37,27 @@ public class FollowBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		//todo
 
 		// if this enemy has been following someone, follow him;
 		IFollower follower = (IFollower) actor;
-		Actor target = follower.getFollowingActor();
+		IFollowable target = follower.getFollowingActor();
 
 		// else, find someone who this actor can follow
 		if (target == null){
-			target = follower.getANewActorToFollow();
+			target = follower.getANewActorToFollow(map.locationOf(actor).getExits());
 		}
 
-		// if there is no enemy to follow return null
+		// if there is no enemy to follow still, return null
 		if (target == null){
 			return null;
 		}
 
-		if(!map.contains(target) || !map.contains(actor))
+		if(!map.contains((Actor) target) || !map.contains(actor))
 			return null;
 		
 		Location here = map.locationOf(actor);
-		Location there = map.locationOf(target);
+		Location there = map.locationOf((Actor) target);
 
 		int currentDistance = distance(here, there);
 		for (Exit exit : here.getExits()) {
