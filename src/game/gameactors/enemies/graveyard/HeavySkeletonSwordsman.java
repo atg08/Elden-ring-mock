@@ -23,8 +23,6 @@ public class HeavySkeletonSwordsman extends Skeleton implements Revivable {
 
     /**
      * Returns a new instance of the HeavySkeletonSwordsman class to revive this enemy.
-     *
-     * @return a new instance of the HeavySkeletonSwordsman class
      */
     @Override
     public Revivable revive(){
