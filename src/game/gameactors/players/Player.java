@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
+import game.gameactors.enemies.IFollowable;
 import game.items.RemembranceOfTheGrafted;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
@@ -55,49 +56,8 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	private static Location respawnLocation;
 
-	/**
-	 * Returns the location of the respawn point.
-	 * @return the location of the respawn point
-	 */
-	public SiteOfLostGrace getRespawnPoint() {
-		return respawnPoint;
-	}
-	/**
-	 * Sets the respawn point.
-	 * @param _respawnPoint the respawn point to set
-	 */
-	public void setRespawnPoint(SiteOfLostGrace _respawnPoint) {
-		respawnPoint = _respawnPoint;
-	}
+	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
 
-
-	public static ArrayList<GameMap> getMapsAccessible() {
-		return mapsAccessible;
-	}
-
-	public static void addMapAccessible(GameMap map){
-
-		mapsAccessible.add(map);
-	}
-
-
-	public Location getRespawnLocation() {
-		return respawnLocation;
-	}
-
-	public static void setRespawnLocation(Location _respawnLocation) {
-		respawnLocation = _respawnLocation;
-	}
-
-	private static int maxHP;
-
-	/**
-	 *
-	 * @return players current hitpoints
-	 */
-	public static int getMaxHP(){
-		return maxHP;
-	}
 
 	/**
 	 * Constructs a Player object with the specified number of hitpoints.
@@ -173,6 +133,50 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	@Override
 	public boolean isRemovable() {
 		return false;
+	}
+
+	/**
+	 * Returns the location of the respawn point.
+	 * @return the location of the respawn point
+	 */
+	public SiteOfLostGrace getRespawnPoint() {
+		return respawnPoint;
+	}
+	/**
+	 * Sets the respawn point.
+	 * @param _respawnPoint the respawn point to set
+	 */
+	public void setRespawnPoint(SiteOfLostGrace _respawnPoint) {
+		respawnPoint = _respawnPoint;
+	}
+
+
+	public static ArrayList<GameMap> getMapsAccessible() {
+		return mapsAccessible;
+	}
+
+	public static void addMapAccessible(GameMap map){
+
+		mapsAccessible.add(map);
+	}
+
+
+	public Location getRespawnLocation() {
+		return respawnLocation;
+	}
+
+	public static void setRespawnLocation(Location _respawnLocation) {
+		respawnLocation = _respawnLocation;
+	}
+
+	private static int maxHP;
+
+	/**
+	 *
+	 * @return players current hitpoints
+	 */
+	public static int getMaxHP(){
+		return maxHP;
 	}
 
 	/**

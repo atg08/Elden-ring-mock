@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -21,7 +22,7 @@ import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.utils.RandomNumberGenerator;
 
-public class Invader extends NPC implements Resettable, DeathRuneDropper, IFollowable {
+public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFollowable {
     private int minDeathRuneAmount = 1358;
     private int maxDeathRuneAmount = 5578;
     private Location previousLocation;
@@ -31,12 +32,12 @@ public class Invader extends NPC implements Resettable, DeathRuneDropper, IFollo
     /**
      * Constructor for the Enemy class.
      */
-    public Invader(Player player) {
-        super("invader", 'ඞ', player.getMaxHP());
+    public Invader(int hitPoints, WeaponItem weapon) {
+        super("invader", 'ඞ', hitPoints);
         this.addCapability(StatusActor.HOSTILE_TO_PLAYER);
         this.addCapability(StatusActor.IS_DEATH_RUNE_DROPPER);
         this.addCapability(StatusActor.IS_INVADER);
-        addWeaponToInventory(player.getWeaponInventory().get(0));
+        this.addWeaponToInventory(weapon);
 
         this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(3, new WanderBehaviour());
@@ -91,4 +92,4 @@ public class Invader extends NPC implements Resettable, DeathRuneDropper, IFollo
         return false;
     }
 }
-}
+
