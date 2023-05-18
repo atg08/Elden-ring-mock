@@ -44,4 +44,8 @@ public class RandomNumberGenerator {
         int range = upperBound - lowerBound + 1;
         return new Random().nextInt(range) + lowerBound;
     }
+
+    public static boolean getTrueOrFalse(){
+        return new Random().nextInt(2) == 0;
+    }
 }

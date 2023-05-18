@@ -14,6 +14,8 @@ import game.behaviours.WanderBehaviour;
 import game.doors.GoldenFogDoor;
 import game.environments.*;
 import game.gameactors.MerchantKale;
+import game.gameactors.allyorinvader.Ally;
+import game.gameactors.allyorinvader.Invader;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.players.*;
 import game.grounds.Cliff;
@@ -190,10 +192,6 @@ public class Application {
 		world.addPlayer(player, gameMap2.at(30, 23));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
-		// add available behaviours to enemy
-		Enemy.addBehaviourWithPriority(new WanderBehaviour(), 3);
-		Enemy.addBehaviourWithPriority(new AttackBehaviour(player), 1);
-		Enemy.addBehaviourWithPriority(new FollowBehaviour(player), 2);
 
 		// adding the accessible maps to player
 		Player.addMapAccessible(gameMap); // limgrave

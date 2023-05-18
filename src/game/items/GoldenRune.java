@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
 import game.utils.RandomNumberGenerator;
 
-import java.util.Random;
+import game.utils.RandomNumberGenerator;
 
 public class GoldenRune extends Item {
 

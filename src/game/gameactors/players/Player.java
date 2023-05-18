@@ -10,8 +10,6 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
-import game.actions.RestAction;
-import game.actions.TeleportAction;
 import game.items.RemembranceOfTheGrafted;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
@@ -35,7 +33,7 @@ import java.util.ArrayList;
  * Modified by: Tanul, Satoshi, Aditti
  *
  */
-public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper {
+public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper, IFollowable {
 
 	private final Menu menu = new Menu();
 	/**
@@ -54,6 +52,9 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 * The previous location of the player.
 	 */
 	private Location previousLocation;
+
+	private static Location respawnLocation;
+
 	/**
 	 * Returns the location of the respawn point.
 	 * @return the location of the respawn point
@@ -70,18 +71,15 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 
-
-	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
-
 	public static ArrayList<GameMap> getMapsAccessible() {
 		return mapsAccessible;
 	}
+
 	public static void addMapAccessible(GameMap map){
 
 		mapsAccessible.add(map);
 	}
 
-	private static Location respawnLocation;
 
 	public Location getRespawnLocation() {
 		return respawnLocation;
@@ -109,6 +107,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(StatusActor.IS_PLAYER);
 		this.addCapability(StatusActor.CAN_RESPAWN);
+		this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
@@ -294,14 +293,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 	public RemembranceOfTheGrafted getExistingRemembranceOfTheGrafted(){
-		RemembranceOfTheGrafted existingRemembranceOfTheGrafted
-				= (RemembranceOfTheGrafted) this.getItemInventory()
-				.stream()
-				.filter(item -> "Remembrance of the Grafted".equals(item.toString()))
-				.findFirst()
-				.orElse(null);
 
-		return existingRemembranceOfTheGrafted;
+		return (RemembranceOfTheGrafted) this.getItemInventory()
+		.stream()
+		.filter(item -> "Remembrance of the Grafted".equals(item.toString()))
+		.findFirst()
+		.orElse(null);
 	}
 
 	public boolean isRemovableOnPlayerRest() {
@@ -309,5 +306,6 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 
 }
+
 
 

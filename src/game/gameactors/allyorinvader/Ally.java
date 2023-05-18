@@ -6,15 +6,18 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.DespawnAction;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.gameactors.StatusActor;
+import game.gameactors.players.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
-public class Ally extends Actor implements Resettable {
+public class Ally extends NPC implements Resettable, IFollowable {
 
     private ResetManager rm = ResetManager.getInstance();
+    private Location previousLocation;
 
     /**
      * Constructor.
@@ -22,13 +25,27 @@ public class Ally extends Actor implements Resettable {
     public Ally(int hitPoints, WeaponItem weapon) {
         super("Ally", 'A', hitPoints);
         this.addCapability(StatusActor.IS_ALLY);
+        this.addCapability(StatusActor.HOSTILE_TO_ENEMY);
+        this.addCapability(StatusActor.IS_DEATH_RUNE_DROPPER);
         this.addWeaponToInventory(weapon); // all players have one weapon in inventory
         rm.registerResettable(this);
+
+        // add  behaviours
+        this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(3, new WanderBehaviour());
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return new DoNothingAction();
+        // record ally's location
+        this.previousLocation = map.locationOf(this);
+
+        return super.playTurn(actions, lastAction, map, display);
+    }
+
+    @Override
+    public boolean canTarget(Actor subject) {
+        return subject.hasCapability(StatusActor.IS_ENEMY);
     }
 
 
@@ -49,5 +66,9 @@ public class Ally extends Actor implements Resettable {
 
     public boolean isRemovableOnPlayerRest() {
         return false;
+    }
+    @Override
+    public Location getPlayerPreviousLocation() {
+        return this.previousLocation;
     }
 }
