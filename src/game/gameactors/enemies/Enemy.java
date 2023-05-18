@@ -10,6 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.AttackAction;
@@ -62,6 +65,10 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower,
 
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
+
+        this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(2, new FollowBehaviour());
+        this.behaviours.put(3, new WanderBehaviour());
 
     }
 
