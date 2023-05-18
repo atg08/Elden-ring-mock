@@ -10,6 +10,8 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
+import game.actions.RestAction;
+import game.actions.TeleportAction;
 import game.items.RemembranceOfTheGrafted;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
@@ -47,7 +49,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	/**
 	 * The respawn point for the player.
 	 */
-	protected static SiteOfLostGrace respawnPoint;
+	protected SiteOfLostGrace respawnPoint;
 	/**
 	 * The previous location of the player.
 	 */
@@ -61,10 +63,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	}
 	/**
 	 * Sets the respawn point.
-	 * @param respawnPoint the respawn point to set
+	 * @param _respawnPoint the respawn point to set
 	 */
-	public void setRespawnPoint(SiteOfLostGrace respawnPoint) {
-		this.respawnPoint = respawnPoint;
+	public void setRespawnPoint(SiteOfLostGrace _respawnPoint) {
+		respawnPoint = _respawnPoint;
 	}
 
 
@@ -79,6 +81,15 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		mapsAccessible.add(map);
 	}
 
+	private static Location respawnLocation;
+
+	public Location getRespawnLocation() {
+		return respawnLocation;
+	}
+
+	public static void setRespawnLocation(Location _respawnLocation) {
+		respawnLocation = _respawnLocation;
+	}
 
 	private static int maxHP;
 
@@ -102,7 +113,6 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
 		this.addItemToInventory(new Rune());  // player always starts with 0 rune
-		respawnPoint = TheFirstStep.getInstance();
 		maxHP = hitPoints;
 
 	}
@@ -228,8 +238,13 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		}
 		this.addItemToInventory(new Rune());
 		rm.run(this,map,false);
-		map.moveActor(this, getRespawnPoint().getSiteLocation());
 
+		if (this.getRespawnLocation() == null){
+			map.moveActor(this, getMapsAccessible().get(0).at(38,12));
+		}
+		else {
+			map.moveActor(this, this.getRespawnLocation());
+		}
 
 	}
 

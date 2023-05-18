@@ -2,8 +2,10 @@ package game.environments;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.ActivateAction;
 import game.actions.RestAction;
 import game.gameactors.StatusActor;
 import game.gameactors.players.Player;
@@ -16,11 +18,32 @@ import game.gameactors.players.Player;
  */
 public abstract class SiteOfLostGrace extends Ground {
 
+
+    protected Boolean isActivated = false;
+
+    protected Boolean isDiscovered = false;
+
+    public Boolean getDiscovered() {
+        return isDiscovered;
+    }
+
+    public void setDiscovered(Boolean discovered) {
+        isDiscovered = discovered;
+    }
+
+    public Boolean getActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(Boolean activated) {
+        isActivated = activated;
+    }
+
     /**
 
      The location of the site.
      */
-    protected static Location siteLocation;
+    protected Location siteLocation;
 
 
     /**
@@ -45,7 +68,7 @@ public abstract class SiteOfLostGrace extends Ground {
     @Override
     public void tick(Location location) {
 //        super.tick(location);
-        this.siteLocation = location;
+        this.siteLocation = location.map().at(location.x(),location.y());
     }
 
     /**
@@ -62,13 +85,29 @@ public abstract class SiteOfLostGrace extends Ground {
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = new ActionList();
         if (actor.hasCapability(StatusActor.CAN_REST)){
-            actions.add(new RestAction());
+            if (this.getActivated()){
+            actions.add(new RestAction(this));
 
             // in future when we rest at a site of lost grace we want it to
             // become new respawn point
-            Player player = (Player) actor;
-            player.setRespawnPoint(this);
+
         }
+            else {
+                if (this.getDiscovered() == false) {
+                    for (String line : ActivateAction.LOST_GRACE_DISCOVERED.split("\n")) {
+                        new Display().println(line);
+                        try {
+                            Thread.sleep(200);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                    this.setDiscovered(true);
+                }
+                actions.add(new ActivateAction(this));
+            }
+
+    }
         return actions;
     }
 

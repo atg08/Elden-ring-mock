@@ -3,6 +3,9 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.environments.SiteOfLostGrace;
+import game.gameactors.StatusActor;
+import game.gameactors.players.Player;
 import game.reset.ResetManager;
 
 
@@ -12,6 +15,12 @@ import game.reset.ResetManager;
  * @version 1
  */
 public class RestAction extends Action {
+
+    private SiteOfLostGrace site;
+
+    public RestAction(SiteOfLostGrace _site) {
+        this.site = _site;
+    }
 
     /**
      * The ResetManager instance
@@ -28,6 +37,9 @@ public class RestAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         rm.run(actor, map, true); // this is because actor is resting
+        Player player = (Player) actor;
+//            player.setRespawnPoint(this);
+        player.setRespawnLocation(this.site.getSiteLocation());
         return actor + " has rested at a site of lost grace";
     }
 

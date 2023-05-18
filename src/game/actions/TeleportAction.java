@@ -15,6 +15,8 @@ public class TeleportAction extends Action {
     private final Location STORMVEIL_LIMGRAVE = Player.getMapsAccessible().get(0).at(29, 0);
     private final Location LIMGRAVE_STORMVEIL = Player.getMapsAccessible().get(1).at(38, 23);
 
+    private final Location STORMVEIL_BOSSROOM = Player.getMapsAccessible().get(3).at(0,3);
+
 //    private final Location
 
     @Override
@@ -41,6 +43,11 @@ public class TeleportAction extends Action {
         else if (currentLocation.x() >= 37 && currentLocation.x() <= 39 && currentLocation.y() >= 22 && currentLocation.y() <= 23){
             map.moveActor(player,STORMVEIL_LIMGRAVE);
         }
+        else if (currentLocation.x() >= 14 && currentLocation.x() <= 16 && currentLocation.y() >= 0 && currentLocation.y() <= 1) {
+            map.moveActor(player, STORMVEIL_BOSSROOM);
+        }
+
+
 
         return "Player has gone to a new map";
     }

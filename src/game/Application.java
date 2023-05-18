@@ -35,7 +35,6 @@ public class Application {
 
 		World world = new World(new Display());
 
-
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
 				new Wall(), new Floor(),
 				new Graveyard(), new PuddleOfWater(),
@@ -73,10 +72,10 @@ public class Application {
 //		gameMap.at(5,21).setGround(new GoldenFogDoor());
 
 		FancyGroundFactory groundFactory2 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				TheFirstStep.getInstance(), new GoldenFogDoor(), new Cliff(), new Cage(), new Barrack(),
+				new GoldenFogDoor(), new Cliff(), new Cage(), new Barrack(),StormveilMainGate.getInstance(),
 				new GustOfWind());
 		List<String> stormveilCastle  = Arrays.asList(
-				"...........................................................................",
+				"...............D...........................................................",
 				"..................<...............<........................................",
 				"...........................................................................",
 				"##############################################...##########################",
@@ -96,22 +95,22 @@ public class Application {
 				".........____......&&......................................................",
 				"...._______..................<..............<....................<.....<...",
 				"#####....##...###..#####...##########___###############......##.....####...",
-				"+++++++++++++++++++++++++++#...................#+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++#..........U........#+++++++++++++++++++++++++++",
 				"+++++++++++++++++++++++++++....................#+++++++++++++++++++++++++++",
-				"+++++++++++++++++++++++++++#....................+++++++++++++++++++++++++++",
-				"+++++++++++++++++++++++++++#..........D........#+++++++++++++++++++++++++++");
+				"+++++++++++++++++++++++++++#.........___........+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++#........._D_.......#+++++++++++++++++++++++++++");
 		GameMap gameMap2 = new GameMap(groundFactory2, stormveilCastle);
 //		37,38,39 -> x , y = 21,22
 
 		FancyGroundFactory groundFactory3 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				 new GoldenFogDoor());
+				 new GoldenFogDoor(), TableOfLostGrace.getInstance());
 		List<String> roundtableHold  = Arrays.asList(
 				"##################",
 				"#________________#",
 				"#________________#",
 				"#________________#",
 				"#________________#",
-				"#________________#",
+				"#________U_______#",
 				"#________________#",
 				"#________________#",
 				"#________________#",
@@ -121,9 +120,24 @@ public class Application {
 //		gameMap3.at(9,10).setGround(new GoldenFogDoor());
 
 
+		FancyGroundFactory groundFactory4 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
+				new Cliff(),new SummonSign());
+		List<String> bossRoom  = Arrays.asList(
+				"+++++++++++++++++++++++++",
+				".........................",
+				"..=......................",
+				".........................",
+				".........................",
+				".........................",
+				".........................",
+				".........................",
+				"+++++++++++++++++++++++++");
+		GameMap gameMap4 = new GameMap(groundFactory4, bossRoom);
+
 		world.addGameMap(gameMap);
 		world.addGameMap(gameMap2);
 		world.addGameMap(gameMap3);
+		world.addGameMap(gameMap4);
 
 
 		Display display = new Display();
@@ -173,7 +187,7 @@ public class Application {
 
 		MerchantKale kale = new MerchantKale();
 
-		world.addPlayer(player, gameMap.at(33, 0));
+		world.addPlayer(player, gameMap2.at(30, 23));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
 		// add available behaviours to enemy
@@ -185,7 +199,7 @@ public class Application {
 		Player.addMapAccessible(gameMap); // limgrave
 		Player.addMapAccessible(gameMap2); // stormveil
 		Player.addMapAccessible(gameMap3); // roundtable
-
+		Player.addMapAccessible(gameMap4); // bossroom
 
 		world.run();
 

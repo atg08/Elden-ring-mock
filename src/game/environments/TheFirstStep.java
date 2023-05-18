@@ -1,5 +1,8 @@
 package game.environments;
 
+import edu.monash.fit2099.engine.positions.Location;
+import game.gameactors.players.Player;
+
 /**
 
  A site of lost grace representing the first step in the game.
@@ -15,7 +18,10 @@ public class TheFirstStep extends SiteOfLostGrace{
      */
     public TheFirstStep() {
         super();
+        this.setActivated(true);
+        this.setDiscovered(true);
     }
+
 
     /**
 
