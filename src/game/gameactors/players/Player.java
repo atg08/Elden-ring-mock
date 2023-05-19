@@ -46,40 +46,12 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 * The Rune object for the player.
 	 */
 	protected Rune runes = new Rune();
-	/**
-	 * The respawn point for the player.
-	 */
-	protected SiteOfLostGrace respawnPoint;
+
 	/**
 	 * The previous location of the player.
 	 */
 	private Location previousLocation;
-	/**
-	 * Returns the location of the respawn point.
-	 * @return the location of the respawn point
-	 */
-	public SiteOfLostGrace getRespawnPoint() {
-		return respawnPoint;
-	}
-	/**
-	 * Sets the respawn point.
-	 * @param _respawnPoint the respawn point to set
-	 */
-	public void setRespawnPoint(SiteOfLostGrace _respawnPoint) {
-		respawnPoint = _respawnPoint;
-	}
 
-
-
-	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
-
-	public static ArrayList<GameMap> getMapsAccessible() {
-		return mapsAccessible;
-	}
-	public static void addMapAccessible(GameMap map){
-
-		mapsAccessible.add(map);
-	}
 
 	private static Location respawnLocation;
 
@@ -209,7 +181,6 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		// Note: it shouldn't be null because we instantiate new Rune everytime we instantiate a player
 		if (existingRune != null){
 			existingRune.increaseRune(rune);
-//			System.out.println("runes " + existingRune.getAmount());
 		}
 
 	}
@@ -245,12 +216,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		this.addItemToInventory(new Rune());
 		rm.run(this,map,false);
 
-		if (this.getRespawnLocation() == null){
-			map.moveActor(this, getMapsAccessible().get(0).at(38,12));
-		}
-		else {
-			map.moveActor(this, this.getRespawnLocation());
-		}
+		map.moveActor(this, this.getRespawnLocation());
 
 	}
 

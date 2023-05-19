@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.TeleportAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -189,7 +190,7 @@ public class Application {
 
 		MerchantKale kale = new MerchantKale();
 
-		world.addPlayer(player, gameMap.at(34, 10));
+		world.addPlayer(player, gameMap.at(29, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
 
 		// add available behaviours to enemy
@@ -197,11 +198,20 @@ public class Application {
 		Enemy.addBehaviourWithPriority(new AttackBehaviour(player), 1);
 		Enemy.addBehaviourWithPriority(new FollowBehaviour(player), 2);
 
-		// adding the accessible maps to player
-		Player.addMapAccessible(gameMap); // limgrave
-		Player.addMapAccessible(gameMap2); // stormveil
-		Player.addMapAccessible(gameMap3); // roundtable
-		Player.addMapAccessible(gameMap4); // bossroom
+		// since access to maps only in application better to get the values here
+		// door in Roundtable to door to limgrave
+		TeleportAction.addFogDoorLocation("ROUNDTABLE_LIMGRAVE",gameMap.at(5,21));
+		// door in limgrave to door to Roundtable
+		TeleportAction.addFogDoorLocation("LIMGRAVE_ROUNDTABLE",gameMap3.at(9,10));
+		// door in Stormveil to door to limgrave
+		TeleportAction.addFogDoorLocation("STORMVEIL_LIMGRAVE",gameMap.at(29, 0));
+		// door in limgrave to door to Stormveil
+		TeleportAction.addFogDoorLocation("LIMGRAVE_STORMVEIL",gameMap2.at(38, 23));
+		// door in Stormveil to door to Bossroom
+		TeleportAction.addFogDoorLocation("STORMVEIL_BOSSROOM",gameMap4.at(0,3));
+
+		Player.setRespawnLocation(gameMap.at(38,12)); // set default spawn location to TheFirstStep
+
 
 		world.run();
 
