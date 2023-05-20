@@ -45,7 +45,7 @@ public class FollowBehaviour implements Behaviour {
 
 		// else, find someone who this actor can follow
 		if (target == null){
-			System.out.println("===================================================");
+//			System.out.println("===================================================");
 			target = follower.getANewActorToFollow(map.locationOf(actor).getExits());
 		}
 
