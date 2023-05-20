@@ -6,7 +6,12 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AttackAction;
+import game.actions.RestAction;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.Revivable;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -46,6 +51,7 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         this.reviveBackTo = reviveBackTo;
         rm.registerResettable(this);
         this.addCapability(StatusActor.IS_ENEMY);
+        this.addCapability(StatusActor.IS_POB);
     }
 
 
@@ -96,12 +102,28 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
         if (checkForRevive()){
-            return new TurnIntoSkeletonAction();
-        }
+            display.println(this.revive(map));
+            return new DoNothingAction();
 
+        }
         return new DoNothingAction();
     }
 
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+
+        ActionList actions =  new ActionList();
+
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)) {
+            actions.add(new AttackAction(this, direction));
+            for (WeaponItem w : otherActor.getWeaponInventory()) {
+                actions.add(new AttackAction(this, direction, w));
+            }
+        }
+
+        return actions;
+    }
 
 
     /**
@@ -132,5 +154,15 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     @Override
     public boolean isRemovableOnPlayerRest() {
         return true;
+    }
+
+
+    public String revive(GameMap map){
+        Revivable skeleton = this.getReviveBackTo().revive();
+        Skeleton revived = (Skeleton) skeleton;
+        Location whereToRevive = map.locationOf(this);
+        map.removeActor(this);
+        map.addActor(revived, whereToRevive);
+        return this + " has been revived to " + revived;
     }
 }

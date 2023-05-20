@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
+import game.gameactors.enemies.graveyard.PileOfBones;
 import game.gameactors.players.Player;
 import game.items.Rune;
 
@@ -81,11 +82,19 @@ public class DeathAction extends Action {
             // player kills enemy
             // when player kills enemy, runes should be directly transferred
             Player player = (Player) this.attacker;
-            Enemy enemy = (Enemy) target;
-            Rune droppedRune = enemy.getDeathRune();
-            player.increaseRune(droppedRune);
-            droppedRuneAmount = droppedRune.getAmount();
-            result += System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
+            if (target.hasCapability(StatusActor.IS_POB)) {
+                PileOfBones pob = (PileOfBones) target;
+                Rune droppedRune = pob.getDeathRune();
+                player.increaseRune(droppedRune);
+                droppedRuneAmount = droppedRune.getAmount();
+                result += System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
+            } else {
+                Enemy enemy = (Enemy) target;
+                Rune droppedRune = enemy.getDeathRune();
+                player.increaseRune(droppedRune);
+                droppedRuneAmount = droppedRune.getAmount();
+                result += System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
+            }
         }
 
         return result;
