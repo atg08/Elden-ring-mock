@@ -76,10 +76,10 @@ public class Application {
 				"...WW........................_._..............",
 				".............................___........WW....",
 				"..........................___....____.........",
-				"................U..................__.........",
+				".............I..U......I...........__.........",
 				"........................_____.................",
 				"...................................._.........",
-				"....WW..................................WW....",
+				"....WW..................II..............WW....",
 				"..............................................");
 
 		GameMap gameMap = new GameMap(groundFactory, limgrave);
@@ -188,7 +188,7 @@ public class Application {
 
 //		world.addPlayer(player, gameMap.at(33, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
-		world.addPlayer(player, gameMap.at(0, 0));
+		world.addPlayer(player, gameMap.at(16, 3));
 
 		// add available behaviours to enemy
 		Enemy.addBehaviourWithPriority(new WanderBehaviour(), 3);
