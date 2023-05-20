@@ -7,11 +7,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.gameactors.enemies.graveyard.PileOfBones;
 import game.gameactors.players.Player;
 import game.items.Rune;
+
+import static game.gameactors.EnemyType.EARTH_TYPE;
 
 /**
  * An action executed if an actor is killed.
@@ -90,6 +93,10 @@ public class DeathAction extends Action {
                 result += System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
             } else {
                 Enemy enemy = (Enemy) target;
+                if (target.hasCapability(EnemyType.EARTH_TYPE)) {
+                   player.heal(player.getMaxHP()); // heals to max hp
+                   result +=  System.lineSeparator() + this.attacker + " has been healed to their maxHP";
+                }
                 Rune droppedRune = enemy.getDeathRune();
                 player.increaseRune(droppedRune);
                 droppedRuneAmount = droppedRune.getAmount();
