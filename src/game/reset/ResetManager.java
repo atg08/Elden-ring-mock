@@ -1,6 +1,5 @@
 package game.reset;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
@@ -41,12 +40,10 @@ public class ResetManager {
      Runs the reset process for all registered resettables. It removes resettables marked as removable, resets all
 
      other resettables, and adds resettables that were marked as removable and need to be added back.
+     * @param map the game map where the resettables reside
 
-     @param actor the actor object that triggers the reset process
-
-     @param map the game map where the resettables reside
      */
-    public void run(Actor actor, GameMap map, Boolean rest) {
+    public void run(GameMap map, Boolean rest) {
 
         for (Resettable r : this.resettables){
             if (r.isRemovable() && rest && r.isRemovableOnPlayerRest()){

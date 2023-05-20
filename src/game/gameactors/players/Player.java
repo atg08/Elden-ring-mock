@@ -18,7 +18,6 @@ import game.reset.ResetManager;
 import game.reset.Respawnable;
 import game.actions.AreaAttackAction;
 import game.environments.SiteOfLostGrace;
-import game.environments.TheFirstStep;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.reset.Resettable;
@@ -139,32 +138,6 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		return false;
 	}
 
-	/**
-	 * Returns the location of the respawn point.
-	 * @return the location of the respawn point
-	 */
-	public SiteOfLostGrace getRespawnPoint() {
-		return respawnPoint;
-	}
-	/**
-	 * Sets the respawn point.
-	 * @param _respawnPoint the respawn point to set
-	 */
-	public void setRespawnPoint(SiteOfLostGrace _respawnPoint) {
-		respawnPoint = _respawnPoint;
-	}
-
-
-	public static ArrayList<GameMap> getMapsAccessible() {
-		return mapsAccessible;
-	}
-
-	public static void addMapAccessible(GameMap map){
-
-		mapsAccessible.add(map);
-	}
-
-
 	public Location getRespawnLocation() {
 		return respawnLocation;
 	}
@@ -243,7 +216,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 			}
 		}
 		this.addItemToInventory(new Rune());
-		rm.run(this,map,false);
+		rm.run(map,false);
 
 		map.moveActor(this, this.getRespawnLocation());
 
