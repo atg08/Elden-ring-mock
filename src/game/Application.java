@@ -218,7 +218,7 @@ public class Application {
 
 //		world.addPlayer(player, gameMap.at(29, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
-		world.addPlayer(player, gameMap.at(16, 3));
+		world.addPlayer(player, gameMap.at(34, 10));
 
 
 		// since access to maps only in application better to get the values here

@@ -67,7 +67,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
-		this.addItemToInventory(new Rune());  // player always starts with 0 rune
+		this.addItemToInventory(new Rune(100));  // player always starts with 0 rune
 		maxHP = hitPoints;
 
 	}
