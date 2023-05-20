@@ -1,14 +1,11 @@
-package game.environments;
-
-import edu.monash.fit2099.engine.positions.Location;
-import game.gameactors.players.Player;
+package game.environments.siteoflostgrace;
 
 /**
 
  A site of lost grace representing the first step in the game.
  @author tanul
  */
-public class TheFirstStep extends SiteOfLostGrace{
+public class TheFirstStep extends SiteOfLostGrace {
 
     private static TheFirstStep instance;
 

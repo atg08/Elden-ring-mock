@@ -41,7 +41,7 @@ public abstract class FireEnemy extends Enemy implements Resettable {
      * @return a string message indicating the outcome of the reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }
@@ -54,6 +54,11 @@ public abstract class FireEnemy extends Enemy implements Resettable {
      */
     @Override
     public boolean isRemovable() {
+        return true;
+    }
+
+    @Override
+    public boolean isRemovableOnPlayerRest() {
         return true;
     }
 }

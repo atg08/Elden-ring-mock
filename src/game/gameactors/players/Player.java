@@ -17,7 +17,6 @@ import game.items.*;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
 import game.actions.AreaAttackAction;
-import game.environments.SiteOfLostGrace;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.reset.Resettable;

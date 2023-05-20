@@ -9,15 +9,12 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actions.TeleportAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
 import game.doors.GoldenFogDoor;
 import game.environments.*;
+import game.environments.siteoflostgrace.StormveilMainGate;
+import game.environments.siteoflostgrace.TableOfLostGrace;
+import game.environments.siteoflostgrace.TheFirstStep;
 import game.gameactors.MerchantKale;
-import game.gameactors.allyorinvader.Ally;
-import game.gameactors.allyorinvader.Invader;
-import game.gameactors.enemies.Enemy;
 import game.gameactors.players.*;
 import game.grounds.Cliff;
 import game.grounds.Dirt;
@@ -78,16 +75,16 @@ public class Application {
 				"......................#....._D_..=..#..........................+++.........",
 				"......................#.....___.....#.......................+++++..........",
 				"......................#..___....____#.........................+++++........",
-				"......................#...........__#............................++........",
-				"......................#_____........#.............................+++......",
-				"......................#............_#..............................+++.....",
-				"......................######...######......................................",
+				"............&&........#...........__#............................++........",
+				"............&.........#_____........#.............................+++......",
+				".........&&...........#............_#..............................+++.....",
+				"..........&...........######...######......................................",
 				"...........................................................................",
 				"...........................................................................",
-				"........++++......................###___###................................",
-				"........+++++++...............nn..________#................................",
-				"..........+++.................nn..#________................................",
-				"............+++...................#___U___#................................",
+				"........++++......................###___###.......&........................",
+				"........+++++++...............nn..________#.......&..........~~............",
+				"..........+++.................nn..#________......&&.........~~.............",
+				"............+++...................#___U___#...................~............",
 				".............+....................###___###................................",
 				"............++......................#___#..................................",
 				"..............+............................................................",
@@ -103,7 +100,7 @@ public class Application {
 //		gameMap.at(5,21).setGround(new GoldenFogDoor());
 
 		FancyGroundFactory groundFactory2 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				new GoldenFogDoor(), new Cliff(), new Cage(), new Barrack(),StormveilMainGate.getInstance(),
+				new GoldenFogDoor(), new Cliff(), new Cage(), new Barrack(), StormveilMainGate.getInstance(),
 				new GustOfWind());
 		List<String> stormveilCastle  = Arrays.asList(
 				"...............D...........................................................",

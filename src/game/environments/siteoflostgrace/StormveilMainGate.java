@@ -1,6 +1,6 @@
-package game.environments;
+package game.environments.siteoflostgrace;
 
-public class StormveilMainGate extends SiteOfLostGrace{
+public class StormveilMainGate extends SiteOfLostGrace {
 
     private static StormveilMainGate instance;
 

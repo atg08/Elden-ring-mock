@@ -28,12 +28,11 @@ public abstract class EarthEnemy extends Enemy implements Resettable {
     /**
      * Resets the EarthEnemy to its initial state.
      *
-     * @param actor the actor to reset
      * @param map   the game map the actor is on
      * @return a string message indicating the outcome of the reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }
@@ -46,6 +45,11 @@ public abstract class EarthEnemy extends Enemy implements Resettable {
      */
     @Override
     public boolean isRemovable() {
+        return true;
+    }
+
+    @Override
+    public boolean isRemovableOnPlayerRest() {
         return true;
     }
 }

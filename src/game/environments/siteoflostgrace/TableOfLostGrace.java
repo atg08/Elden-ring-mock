@@ -1,8 +1,6 @@
-package game.environments;
+package game.environments.siteoflostgrace;
 
-import game.actions.TeleportAction;
-
-public class TableOfLostGrace extends SiteOfLostGrace{
+public class TableOfLostGrace extends SiteOfLostGrace {
     private static TableOfLostGrace instance;
 
     /**
