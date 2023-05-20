@@ -1,21 +1,28 @@
 package game.environments;
 
+
+/**
+ * The StormveilMainGate class represents the main gate of the Stormveil location.
+ * It extends the SiteOfLostGrace class.
+ *
+ * @version 1.0
+ * @see SiteOfLostGrace
+ */
 public class StormveilMainGate extends SiteOfLostGrace{
 
     private static StormveilMainGate instance;
 
     /**
-     * Constructor.
-
+     * Constructs a new instance of the StormveilMainGate class.
      */
     public StormveilMainGate() {
         super();
     }
 
     /**
-
-     Get the singleton instance of TheFirstStep.
-     @return the instance of TheFirstStep
+     * Retrieves the singleton instance of StormveilMainGate.
+     *
+     * @return the singleton instance of StormveilMainGate
      */
     public static StormveilMainGate getInstance(){
         if (instance == null){

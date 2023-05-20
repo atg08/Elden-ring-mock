@@ -17,8 +17,26 @@ import game.weapons.Uchigatana;
 
 import java.nio.file.StandardCopyOption;
 
+
+/**
+ * The SummonAction class represents an action that allows an actor to summon allies or invaders in a game.
+ * It extends the Action class.
+ *
+ * @see Action
+ * @version 1.0
+ */
 public class SummonAction extends Action {
 
+
+    /**
+     * Spawns an ally at the specified destination on the game map.
+     *
+     * @param map         the GameMap object representing the game map
+     * @param destination the Location object representing the destination where the ally will be spawned
+     * @return a String indicating the result of the spawn action
+     * @see GameMap
+     * @see Location
+     */
     public void spawnAlly(GameMap map, Location destination){
 //        Player player;
         int allyType = RandomNumberGenerator.getRandomInt(4);
@@ -44,6 +62,16 @@ public class SummonAction extends Action {
     }
 
 
+
+    /**
+     * Spawns an invader at the specified destination on the game map.
+     *
+     * @param map         the GameMap object representing the game map
+     * @param destination the Location object representing the destination where the invader will be spawned
+     * @return a String indicating the result of the spawn action
+     * @see GameMap
+     * @see Location
+     */
     public void spawnInvader(GameMap map, Location destination){
 //        Player player;
         int enemyType = RandomNumberGenerator.getRandomInt(4);
@@ -67,6 +95,16 @@ public class SummonAction extends Action {
                 break;
         }
     }
+
+    /**
+     * Executes the summon action by spawning an ally or invader at a random exit location on the game map.
+     *
+     * @param actor the Actor object performing the summon action
+     * @param map   the GameMap object representing the game map
+     * @return a String indicating the result of the summon action
+     * @see Actor
+     * @see GameMap
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String res = "";
@@ -88,6 +126,13 @@ public class SummonAction extends Action {
         return res;
     }
 
+
+    /**
+     * Returns a description of the menu option for summoning a guest from another realm.
+     *
+     * @param actor The actor performing the summoning action.
+     * @return A string description of the menu option.
+     */
     @Override
     public String menuDescription(Actor actor) {
         return  "Summon guest from another realm";

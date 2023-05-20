@@ -4,9 +4,12 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.gameactors.players.Player;
 
 /**
-
- A site of lost grace representing the first step in the game.
- @author tanul
+ * TheFirstStep class extends the SiteOfLostGrace class and represents the first step in a process.
+ * It implements the singleton design pattern.
+ *
+ * @author Tanul
+ * @version 1.0
+ * @see SiteOfLostGrace
  */
 public class TheFirstStep extends SiteOfLostGrace{
 

@@ -7,8 +7,15 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.doors.GoldenFogDoor;
 import game.gameactors.players.Player;
 
-public class TeleportAction extends Action {
 
+/**
+ * The TeleportAction class represents an action that allows the player to teleport to different locations.
+ * It extends the Action class.
+ *
+ * @version 1.0
+ * @see Action
+ */
+public class TeleportAction extends Action {
 
     private final Location ROUNDTABLE_LIMGRAVE = Player.getMapsAccessible().get(0).at(5,21);
     private final Location LIMGRAVE_ROUNDTABLE = Player.getMapsAccessible().get(2).at(9,10);
@@ -19,6 +26,16 @@ public class TeleportAction extends Action {
 
 //    private final Location
 
+
+    /**
+     * Executes the teleport action for the given actor and game map.
+     *
+     * @param actor the actor performing the teleport action (must be a Player)
+     * @param map   the game map on which the teleport action is being executed
+     * @return a string indicating that the player has gone to a new map
+     * @see Actor
+     * @see GameMap
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Player player = (Player) actor;
@@ -52,6 +69,13 @@ public class TeleportAction extends Action {
         return "Player has gone to a new map";
     }
 
+
+    /**
+     * Returns a description of the teleport action for the given actor.
+     *
+     * @param actor the actor performing the teleport action
+     * @return a string describing the teleport action for the actor
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " can teleport";

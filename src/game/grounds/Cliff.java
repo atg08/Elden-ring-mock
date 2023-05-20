@@ -7,17 +7,31 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DeathAction;
 import game.gameactors.StatusActor;
 
+
+/**
+ * The Cliff class represents a type of Ground that acts as a cliff.
+ * It extends the Ground class.
+ *
+ * @version 1.0
+ * @see Ground
+ */
 public class Cliff extends Ground {
+
+
     /**
-     * Constructor.
+     * Constructor for creating a Cliff object.
+     * It calls the superclass constructor with the specified symbol.
      */
     public Cliff() {
         super('+');
     }
 
     /**
-     * Ground can also experience the joy of time.
-     * @param location The location of the Ground
+     * Performs a tick operation for the Cliff object.
+     * The Ground can also experience the joy of time.
+     *
+     * @param location The location of the Ground.
+     * @see Location
      */
     public void tick(Location location) {
         // if player -> trigger death action

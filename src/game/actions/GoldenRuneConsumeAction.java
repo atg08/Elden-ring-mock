@@ -7,13 +7,34 @@ import game.gameactors.players.Player;
 import game.items.GoldenRune;
 import game.items.Rune;
 
+
+/**
+ * Represents an action to consume a Golden Rune.
+ *
+ * @version 1.0
+ * @see Action
+ */
 public class GoldenRuneConsumeAction extends Action {
     GoldenRune goldenRune;
 
+
+    /**
+     * Constructs a GoldenRuneConsumeAction object.
+     *
+     * @param goldenRune the Golden Rune to be consumed
+     */
     public GoldenRuneConsumeAction(GoldenRune goldenRune){
         this.goldenRune = goldenRune;
     }
 
+
+    /**
+     * Executes the action of consuming a Golden Rune.
+     *
+     * @param actor the Actor performing the action (should be a Player)
+     * @param map   the GameMap where the action is being executed
+     * @return a message indicating the result of the consumption
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Player player = (Player) actor;
@@ -31,6 +52,12 @@ public class GoldenRuneConsumeAction extends Action {
         return "The golden rune is already consumed";
     }
 
+    /**
+     * Returns the menu description for the action.
+     *
+     * @param actor the Actor for whom the menu description is generated
+     * @return the menu description
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Consume Golden Rune";

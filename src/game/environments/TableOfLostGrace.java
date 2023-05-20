@@ -2,21 +2,28 @@ package game.environments;
 
 import game.actions.TeleportAction;
 
+
+/**
+ * The TableOfLostGrace class represents a table of lost grace.
+ * It is a singleton class that extends the SiteOfLostGrace class.
+ *
+ * @version 1.0
+ * @see SiteOfLostGrace
+ */
 public class TableOfLostGrace extends SiteOfLostGrace{
     private static TableOfLostGrace instance;
 
     /**
-     * Constructor.
-
+     * Constructs a new TableOfLostGrace object.
      */
     public TableOfLostGrace() {
         super();
     }
 
     /**
-
-     Get the singleton instance of TheFirstStep.
-     @return the instance of TheFirstStep
+     * Returns the singleton instance of the TableOfLostGrace class.
+     *
+     * @return the instance of TableOfLostGrace
      */
     public static TableOfLostGrace getInstance(){
         if (instance == null){

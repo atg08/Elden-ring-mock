@@ -11,7 +11,9 @@ import game.items.Rune;
  * It deals 75 damage with 70% hit rate
  * Created by:
  * @author Aditti
- * Modified by:
+ * @see WeaponItem
+ * @see Purchasable
+ * @see Sellable
  *
  */
 
@@ -27,21 +29,43 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
         this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
+    /**
+     * Retrieves the skill associated with the GreatKnife weapon.
+     *
+     * @param target    the actor to perform the skill on
+     * @param direction the direction in which the skill is performed
+     * @return an Action object representing the skill
+     */
     @Override
     public Action getSkill(Actor target, String direction) {
         return new QuickStepAction(target, direction, this);
     }
 
+    /**
+     * Retrieves the purchasing price of the GreatKnife weapon.
+     *
+     * @return a Rune object representing the purchasing price
+     */
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(3500);
     }
 
+    /**
+     * Restocks the GreatKnife weapon item.
+     *
+     * @return a new instance of the GreatKnife weapon item
+     */
     @Override
     public WeaponItem restock() {
         return new GreatKnife();
     }
 
+    /**
+     * Retrieves the selling price of the GreatKnife weapon.
+     *
+     * @return a Rune object representing the selling price
+     */
     @Override
     public Rune getSellingPrice() {
         return new Rune(350);

@@ -12,7 +12,10 @@ import game.items.Rune;
  * It deals 75 damage with 70% hit rate
  * Created by:
  * @author Aditti
- * Modified by:
+ * @version 1.0
+ * @see WeaponItem
+ * @see Purchasable
+ * @see Sellable
  *
  */
 
@@ -30,24 +33,49 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
 
     }
 
+    /**
+     * Retrieves the skill action associated with the Uchigatana.
+     *
+     * @param target    The target actor for the skill action.
+     * @param direction The direction of the skill action.
+     * @return The UnsheatheAction representing the skill action.
+     */
     public Action getSkill(Actor target, String direction) {
         return new UnsheatheAction(target, direction, this);
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {}
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return The purchasing price of the Uchigatana as a Rune.
+     */
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(5000);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return A new instance of the Uchigatana to restock the item.
+     */
     @Override
     public WeaponItem restock() {
         return new Uchigatana();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return The selling price of the Uchigatana as a Rune.
+     */
     @Override
     public Rune getSellingPrice() {
         return new Rune(500);

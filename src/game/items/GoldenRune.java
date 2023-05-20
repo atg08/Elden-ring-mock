@@ -9,14 +9,22 @@ import game.utils.RandomNumberGenerator;
 
 import game.utils.RandomNumberGenerator;
 
+
+/**
+ * Represents a Golden Rune, which is a consumable item.
+ *
+ * @version 1.0
+ * @see Item
+ * @see Consumable
+ */
 public class GoldenRune extends Item implements Consumable{
 
     boolean consumed = false;
     final int MAX_AMOUNT = 100000;
     final int MIN_AMOUNT = 200;
 
-    /***
-     * Constructor.
+    /**
+     * Constructor for creating a Golden Rune.
      */
     public GoldenRune() {
         super("Golden Rune", '*', true);
@@ -24,18 +32,41 @@ public class GoldenRune extends Item implements Consumable{
 
     }
 
+
+    /**
+     * Checks if the Golden Rune is available for consumption.
+     *
+     * @return true if the Golden Rune is available, false otherwise
+     */
     public boolean isAvailable(){
         return !this.consumed;
     }
 
+
+    /**
+     * Updates the status of the Golden Rune to consumed.
+     */
     public void updateStatus(){
         this.consumed = true;
     }
 
+
+    /**
+     * Gets a random amount of Rune from the Golden Rune.
+     *
+     * @return a Rune object representing the amount obtained from the Golden Rune
+     */
     public Rune getRuneAmount(){
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.MIN_AMOUNT, this.MAX_AMOUNT+1));
     }
 
+
+    /**
+     * Consumes the Golden Rune and increases the player's Rune amount.
+     *
+     * @param actor the actor who consumes the Golden Rune
+     * @return a string indicating the result of the consumption
+     */
     @Override
     public String consume(Actor actor) {
 
@@ -50,6 +81,13 @@ public class GoldenRune extends Item implements Consumable{
 
     }
 
+
+    /**
+     * Determines if the Golden Rune can be consumed by the given actor.
+     *
+     * @param actor the actor attempting to consume the Golden Rune
+     * @return true if the actor is a player and the Golden Rune is available, false otherwise
+     */
     @Override
     public Boolean consumeBy(Actor actor) {
         return actor.hasCapability(StatusActor.IS_PLAYER) && this.isAvailable();

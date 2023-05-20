@@ -22,6 +22,17 @@ import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.utils.RandomNumberGenerator;
 
+
+/**
+ * The Invader class represents an invader character in a game. It extends the NPC class and implements the Resettable,
+ * DeathRuneDroppper, and IFollowable interfaces.
+ *
+ * @version 1.0
+ * @see NPC
+ * @see Resettable
+ * @see DeathRuneDroppper
+ * @see IFollowable
+ */
 public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFollowable {
     private int minDeathRuneAmount = 1358;
     private int maxDeathRuneAmount = 5578;
@@ -30,7 +41,10 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
     private ResetManager rm = ResetManager.getInstance();
 
     /**
-     * Constructor for the Enemy class.
+     * Constructor for the Invader class.
+     *
+     * @param hitPoints the hit points of the invader.
+     * @param weapon the weapon item of the invader.
      */
     public Invader(int hitPoints, WeaponItem weapon) {
         super("invader", 'ඞ', hitPoints);
@@ -45,6 +59,16 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
 
     }
 
+
+    /**
+     * Plays a turn for the invader.
+     *
+     * @param actions the list of available actions.
+     * @param lastAction the last action performed.
+     * @param map the game map.
+     * @param display the display used for rendering.
+     * @return the action to be performed.
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
         // record invader's current location
@@ -53,26 +77,47 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
         return super.playTurn(actions, lastAction, map, display);
     }
 
+
+    /**
+     * Checks if the invader can target a given actor.
+     *
+     * @param subject the actor to be targeted.
+     * @return true if the invader can target the actor, false otherwise.
+     */
     @Override
     public boolean canTarget(Actor subject) {
         return !subject.hasCapability(StatusActor.IS_INVADER);
     }
 
+
+    /**
+     * Retrieves the death rune dropped by the invader.
+     *
+     * @return the death rune.
+     */
     @Override
     public Rune getDeathRune() {
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minDeathRuneAmount, this.maxDeathRuneAmount));
     }
 
     /**
-
-     Retrieves the player's previous location.
-     @return The player's previous location.
+     * Retrieves the previous location of the player.
+     *
+     * @return the player's previous location.
      */
     @Override
     public Location getPlayerPreviousLocation(){
         return this.previousLocation;
     }
 
+
+    /**
+     * Resets the invader's state.
+     *
+     * @param map the game map.
+     * @param rest indicates if the invader is resting.
+     * @return the result of the reset operation.
+     */
     @Override
     public String reset(GameMap map, boolean rest) {
         if (!rest) {
@@ -82,11 +127,21 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
         return this + " is not despawned";
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return true if the Invader is removable, false otherwise
+     */
     @Override
     public boolean isRemovable() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return false as the Invader should not be removed on player rest
+     */
     @Override
     public boolean isRemovableOnPlayerRest() {
         return false;
