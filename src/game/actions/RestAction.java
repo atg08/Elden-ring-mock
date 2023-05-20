@@ -35,7 +35,7 @@ public class RestAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        rm.run(map, true); // this is because actor is resting
+        rm.run(actor, map, true); // this is because actor is resting
         Player player = (Player) actor;
 //            player.setRespawnPoint(this);
         player.setRespawnLocation(this.site.getSiteLocation());
