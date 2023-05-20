@@ -6,8 +6,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.gameactors.players.Player;
 import game.items.GoldenRune;
 import game.items.Rune;
+import game.items.RuneManager;
 
 public class GoldenRuneConsumeAction extends Action {
+
+    RuneManager rm = RuneManager.getInstance();
     GoldenRune goldenRune;
 
     public GoldenRuneConsumeAction(GoldenRune goldenRune){
@@ -20,7 +23,7 @@ public class GoldenRuneConsumeAction extends Action {
 
         if (this.goldenRune.isAvailable()) {
             Rune droppedRune = this.goldenRune.getRuneAmount();
-            player.increaseRune(droppedRune);
+            rm.increaseRune(droppedRune);
             this.goldenRune.updateStatus();
 
             // remove golden rune from the inventory

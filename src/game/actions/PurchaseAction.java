@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.gameactors.MerchantKale;
 import game.gameactors.players.Player;
+import game.items.RuneManager;
 import game.weapons.Purchasable;
 
 /**
@@ -22,6 +23,9 @@ public class PurchaseAction extends Action {
      * the trader
      */
     private MerchantKale trader;
+
+    RuneManager rm = RuneManager.getInstance();
+
 
     /**
      * Constructor for PurchaseAction.
@@ -48,7 +52,7 @@ public class PurchaseAction extends Action {
         String result;
         Player player = (Player) actor;
         Purchasable purchasableWeapon = (Purchasable) this.weapon;
-        if (player.decreaseRune(purchasableWeapon.getPurchasingPrice())){
+        if (rm.decreaseRune(purchasableWeapon.getPurchasingPrice())){
             player.addWeaponToInventory(this.weapon);
             trader.restock(this.weapon);
             result = "Tarnished purchased " + this.weapon.toString();
