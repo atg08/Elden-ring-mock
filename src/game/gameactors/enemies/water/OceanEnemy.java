@@ -27,7 +27,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
      * @return an instance of OceanEnemy
      */
     public OceanEnemy(String name, char displayChar, int hitPoints, int minMaxDrop, int maxDropRune) {
-        super(name, displayChar, hitPoints, minMaxDrop, maxDropRune);
+        super(displayChar, hitPoints, minMaxDrop, maxDropRune, name);
         this.addCapability(EnemyType.OCEAN_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);

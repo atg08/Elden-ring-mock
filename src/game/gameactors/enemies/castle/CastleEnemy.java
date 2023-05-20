@@ -18,7 +18,7 @@ public abstract class CastleEnemy extends Enemy implements Resettable {
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
      */
     public CastleEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.CASTLE_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);

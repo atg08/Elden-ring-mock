@@ -1,6 +1,5 @@
 package game.gameactors.enemies;
 
-import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -19,7 +18,6 @@ import game.actions.AttackAction;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
-import game.gameactors.players.Player;
 import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
@@ -38,27 +36,25 @@ import java.util.Random;
  * @version 1.0.0
  */
 
-public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower, IFollowable{
+public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
-    protected IFollowable followingActor = null;
-
-    protected Player player;
-    protected Location previousLocation;
+    protected IFollowable followingActor;
+    protected boolean followingActorAssigned = false;
+    protected IFollowable followingActorBuffer = null;
 
     /**
      * Constructor for the Enemy class.
-     *
-     * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      * @param minRuneDrop the minimum number of runes this Enemy drops upon death
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
+     * @param name        the name of the Actor
      */
-    public Enemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
+    public Enemy(char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop, String name) {
         super(name, displayChar, hitPoints);
         this.addCapability(StatusActor.IS_ENEMY);
         this.addCapability(StatusActor.HOSTILE_TO_PLAYER);
@@ -66,9 +62,11 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower,
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
 
-        this.behaviours.put(1, new AttackBehaviour());
-        this.behaviours.put(2, new FollowBehaviour());
+        this.behaviours.put(1, new FollowBehaviour());
+        this.behaviours.put(2, new AttackBehaviour());
         this.behaviours.put(3, new WanderBehaviour());
+
+//        this.followingActor = this.getANewActorToFollow(exits);
 
     }
 
@@ -84,7 +82,18 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower,
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // record enemy's current location
-        this.previousLocation = map.locationOf(this);
+//        this.previousLocation = map.locationOf(this);
+
+        // ensure to store potential actor that can be followed in next turn
+        if (!this.followingActorAssigned){
+            if (this.followingActorBuffer != null){
+                this.followingActor = this.followingActorBuffer;
+                this.followingActorAssigned = true;
+                this.addCapability(StatusActor.FOLLOWING);
+            }else{
+                this.followingActorBuffer = this.getANewCandidateActorToFollow(map.locationOf(this).getExits());
+            }
+        }
 
         if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
             if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
@@ -211,26 +220,42 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower,
         return actor.hasCapability(StatusActor.HOSTILE_TO_ENEMY);
     }
 
-    @Override
-    public void resetFollowingStatus(){
-        this.removeCapability(StatusActor.FOLLOWING);
-        this.followingActor = null;
-    }
+//    @Override
+//    public void resetFollowingStatus(){
+//        this.removeCapability(StatusActor.FOLLOWING);
+//        this.followingActor = null;
+//    }
+
+    /**
+     * Note this method does not yet assign the follwable this enemy will follow. It just returns candidates.
+     *
+     * @param exits
+     * @return
+     */
 
     @Override
-    public IFollowable getANewActorToFollow(List<Exit> exits){
+    public IFollowable getANewCandidateActorToFollow(List<Exit> exits){
+        if (this.followingActorAssigned){
+            return this.followingActor;
+        }
+
         ArrayList<IFollowable> actors = new ArrayList<>();
 
         for (Exit exit: exits){
             Location destination = exit.getDestination();
             Actor actorAtDestination = destination.getActor();
             if (actorAtDestination != null && this.canFollowActor(actorAtDestination)){
+
+                // prioritize player, if there is
+                if (actorAtDestination.hasCapability(StatusActor.IS_PLAYER)){
+                    return (IFollowable) actorAtDestination;
+                }
                 actors.add((IFollowable) actorAtDestination);
             }
         }
 
         if (!actors.isEmpty()) {
-            return actors.get(new Random().nextInt(actors.size()));
+           return actors.get(new Random().nextInt(actors.size()));
         }
         else {
             return null;
@@ -250,13 +275,13 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower,
         return false;
     }
 
-    /**
-
-     Retrieves the player's previous location.
-     @return The player's previous location.
-     */
     @Override
-    public Location getPlayerPreviousLocation(){
-        return this.previousLocation;
+    public void setFollowingActor(IFollowable followable){
+        if(!this.followingActorAssigned){
+            this.followingActor = followable;
+            this.followingActorAssigned = true;
+            this.addCapability(StatusActor.FOLLOWING);
+        }
     }
+
 }

@@ -28,7 +28,7 @@ public abstract class WindEnemy extends Enemy implements Resettable{
      * @return A new WindEnemy object.
      */
     public WindEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.WIND_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);

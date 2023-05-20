@@ -1,6 +1,5 @@
 package game.gameactors.enemies.fire;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DespawnAction;
 import game.gameactors.EnemyType;
@@ -27,7 +26,7 @@ public abstract class FireEnemy extends Enemy implements Resettable {
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
      */
     public FireEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.FIRE_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);

@@ -92,9 +92,7 @@ public class AttackBehaviour implements Behaviour {
     private Action getActionIfHaveBeenFollowing(Actor actor, GameMap map){
         // check if player has moved or not
         IFollower follower = (IFollower) actor;
-        IFollowable followable = (IFollowable) follower.getFollowingActor();
-        Location previousLocation = followable.getPlayerPreviousLocation();
-        Location currentLocation = map.locationOf((Actor)followable);
+
 
         // need to ensure that this player is still in the exits
         // (if there is a ground where this NPC cannot enter, player might have moved somewhere)
@@ -102,13 +100,8 @@ public class AttackBehaviour implements Behaviour {
             return null;
         }
 
-        // the NPC still needs to follow this enemy
-        if (previousLocation != currentLocation){
-            return null;
-        }
-
         // remove the following status since the NPC has attacked once
-        follower.resetFollowingStatus();
+//        follower.resetFollowingStatus();
 
         // the NPC cannot attack if he does not have a weapon
         if (this.NPCHasNoWeapon(actor)){

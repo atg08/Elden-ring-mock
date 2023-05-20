@@ -6,14 +6,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.gameactors.StatusActor;
 import game.gameactors.enemies.IFollowable;
 import game.gameactors.enemies.IFollower;
-import game.gameactors.enemies.NPC;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -38,21 +32,21 @@ public class FollowBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		//todo
-
+		System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
 		// if this enemy has been following someone, follow him;
 		IFollower follower = (IFollower) actor;
 		IFollowable target = follower.getFollowingActor();
 
 		// else, find someone who this actor can follow
-		if (target == null){
+//		if (target == null){
 //			System.out.println("===================================================");
-			target = follower.getANewActorToFollow(map.locationOf(actor).getExits());
-		}
+//			target = follower.getANewCandidateActorToFollow(map.locationOf(actor).getExits());
+//			System.out.println("aaaaaaaaaaaaaaaaaaaaa"+ target);
+//		}
 
-		// if there is no enemy to follow still, return null
-		if (target == null){
+		// if there is no enemy to follow still or the location is the same, return null
+		if (target == null || target.getPlayerPreviousLocation() == map.locationOf((Actor) target))
 			return null;
-		}
 
 		if(!map.contains((Actor) target) || !map.contains(actor))
 			return null;
@@ -65,13 +59,16 @@ public class FollowBehaviour implements Behaviour {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
+
+				// note: if player or any followable stays in the same position from the previous iteration
+				// this if statement will always yield false -> cannot perform FollowBehaviour. -> performs ActionBehaviour
 				if (newDistance < currentDistance) {
-					actor.addCapability(StatusActor.FOLLOWING);
+					follower.setFollowingActor(target);
+					System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}
 		}
-
 		return null;
 	}
 

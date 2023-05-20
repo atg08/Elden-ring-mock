@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface IFollower {
     IFollowable getFollowingActor();
-    IFollowable getANewActorToFollow(List<Exit> exits);
-    void resetFollowingStatus();
+    IFollowable getANewCandidateActorToFollow(List<Exit> exits);
+//    void resetFollowingStatus();
     boolean canFollowActor(Actor actor);
     boolean isFollowingActorInExits(List<Exit> exits);
+    void setFollowingActor(IFollowable followable);
 
 }
