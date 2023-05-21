@@ -2,6 +2,12 @@ package game.items;
 
 import game.reset.ResetManager;
 
+/**
+ * The RuneManager class manages the player's rune and provides operations to increase, decrease, and reset the rune.
+ *
+ * @version 1.0
+ * @see Rune
+ */
 public class RuneManager {
     private static RuneManager instance;
 
@@ -51,18 +57,36 @@ public class RuneManager {
         }
     }
 
+    /**
+     * Sets the dropped rune.
+     *
+     * @param droppedRune the Rune object that has been dropped
+     */
     public void setDroppedRune(Rune droppedRune) {
         this.droppedRune = droppedRune;
     }
 
+    /**
+     * Retrieves the player's rune.
+     *
+     * @return the player's Rune object
+     */
     public Rune getPlayerRune() {
         return playerRune;
     }
 
+    /**
+     * Retrieves the dropped rune.
+     *
+     * @return the dropped Rune object
+     */
     public Rune getDroppedRune() {
         return droppedRune;
     }
 
+    /**
+     * Resets the player's rune to a new Rune object.
+     */
     public void resetPlayerRune(){
         playerRune = new Rune();
     }
