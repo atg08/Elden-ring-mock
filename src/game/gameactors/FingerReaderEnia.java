@@ -2,6 +2,7 @@ package game.gameactors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -11,16 +12,15 @@ import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.gameactors.players.Player;
 import game.items.RemembranceOfTheGrafted;
+import game.weapons.Sellable;
+import game.weapons.WeaponTradingAvailabilityStatus;
 
 public class FingerReaderEnia extends Actor {
     /**
      * Constructor.
      *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
      */
-    public FingerReaderEnia(String name, char displayChar, int hitPoints) {
+    public FingerReaderEnia() {
         super("Finger Reader Enia", 'E', 9999999);
 
         this.addCapability(StatusActor.IS_TRADER);
@@ -29,7 +29,7 @@ public class FingerReaderEnia extends Actor {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return null;
+        return new DoNothingAction();
     }
 
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
@@ -37,7 +37,18 @@ public class FingerReaderEnia extends Actor {
         if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
             Player player = (Player) otherActor;
             RemembranceOfTheGrafted remembranceOfTheGrafted = player.getExistingRemembranceOfTheGrafted();
-            actions.add(new ExchangeItemToWeaponAction(remembranceOfTheGrafted, this));
+            if (remembranceOfTheGrafted != null){actions.add(new ExchangeItemToWeaponAction(remembranceOfTheGrafted, this));}
+
+            // create SellActions for each sellable weapon
+            for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
+                if (weaponItem.hasCapability(WeaponTradingAvailabilityStatus.SELLABLE)) {
+                    Sellable sellable = (Sellable) weaponItem;
+                    if (sellable.isSellableToAnActor(this)){
+                        actions.add(new SellAction(weaponItem));
+                    }
+                }
+            }
+
         }
         return actions;
     }

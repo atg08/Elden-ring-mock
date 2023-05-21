@@ -6,26 +6,22 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
+import game.behaviours.Behaviour;
 import game.gameactors.StatusActor;
-import game.gameactors.enemies.IFollowable;
-import game.gameactors.enemies.IFollower;
-import game.gameactors.enemies.NPC;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-/**
- * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
- * @see edu.monash.fit2099.demo.mars.Application
- *
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
- *
- */
 public class FollowBehaviour implements Behaviour {
+
+	private final Actor target;
+
+	/**
+	 * Constructor for FollowBehaviour class.
+	 *
+	 * @param subject the Actor to follow
+	 */
+	public FollowBehaviour(Actor subject) {
+		this.target = subject;
+	}
 
 
 	/**
@@ -37,28 +33,11 @@ public class FollowBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		//todo
-
-		// if this enemy has been following someone, follow him;
-		IFollower follower = (IFollower) actor;
-		IFollowable target = follower.getFollowingActor();
-
-		// else, find someone who this actor can follow
-		if (target == null){
-//			System.out.println("===================================================");
-			target = follower.getANewActorToFollow(map.locationOf(actor).getExits());
-		}
-
-		// if there is no enemy to follow still, return null
-		if (target == null){
+		if(!map.contains(target) || !map.contains(actor))
 			return null;
-		}
 
-		if(!map.contains((Actor) target) || !map.contains(actor))
-			return null;
-		
 		Location here = map.locationOf(actor);
-		Location there = map.locationOf((Actor) target);
+		Location there = map.locationOf(target);
 
 		int currentDistance = distance(here, there);
 		for (Exit exit : here.getExits()) {
@@ -77,7 +56,7 @@ public class FollowBehaviour implements Behaviour {
 
 	/**
 	 * Compute the Manhattan distance between two locations.
-	 * 
+	 *
 	 * @param a the first location
 	 * @param b the first location
 	 * @return the number of steps between a and b if you only move in the four cardinal directions.

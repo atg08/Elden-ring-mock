@@ -27,7 +27,7 @@ import game.gameactors.enemies.Revivable;
      * @param maxRuneDrop   the maximum number of Death Runes that the Skeleton can drop upon death
      */
     public Skeleton(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.SKELETON_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);

@@ -8,11 +8,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
+import game.gameactors.players.Player;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public abstract class NPC extends Actor {
+    protected static Player player;
     protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
     public NPC(String name, char displayChar, int hitPoints) {
@@ -41,4 +43,9 @@ public abstract class NPC extends Actor {
     public IntrinsicWeapon getIntrinsicWeapon() {
         return null;
     }
+
+    public static void addPlayer(Player player){
+        NPC.player = player;
+    }
+
 }

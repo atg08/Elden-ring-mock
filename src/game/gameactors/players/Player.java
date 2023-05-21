@@ -12,7 +12,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.actions.ConsumeAction;
-import game.gameactors.enemies.IFollowable;
 import game.items.*;
 import game.reset.ResetManager;
 import game.reset.Respawnable;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
  * Modified by: Tanul, Satoshi, Aditti
  *
  */
-public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper, IFollowable {
+public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper {
 
 	private final Menu menu = new Menu();
 	/**
@@ -73,6 +72,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		maxHP = hitPoints;
 		runeManager.increaseRune(new Rune());
 
+		this.addItemToInventory(new RemembranceOfTheGrafted());  // start with a sample RemembranceOfTheGrafted
 	}
 
 	/**

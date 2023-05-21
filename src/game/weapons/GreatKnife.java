@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.QuickStepAction;
+import game.gameactors.MerchantKale;
 import game.items.Rune;
 
 /**
@@ -45,6 +46,11 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
     @Override
     public Rune getSellingPrice() {
         return new Rune(350);
+    }
+
+    @Override
+    public boolean isSellableToAnActor(Actor actor) {
+        return actor instanceof MerchantKale;
     }
 
 }

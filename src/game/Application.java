@@ -14,7 +14,9 @@ import game.environments.*;
 import game.environments.siteoflostgrace.StormveilMainGate;
 import game.environments.siteoflostgrace.TableOfLostGrace;
 import game.environments.siteoflostgrace.TheFirstStep;
+import game.gameactors.FingerReaderEnia;
 import game.gameactors.MerchantKale;
+import game.gameactors.enemies.NPC;
 import game.gameactors.players.*;
 import game.grounds.Cliff;
 import game.grounds.Dirt;
@@ -75,16 +77,16 @@ public class Application {
 				"......................#....._D_..=..#..........................+++.........",
 				"......................#.....___.....#.......................+++++..........",
 				"......................#..___....____#.........................+++++........",
-				"............&&........#...........__#............................++........",
-				"............&.........#_____........#.............................+++......",
-				".........&&...........#............_#..............................+++.....",
-				"..........&...........######...######......................................",
+				".............&........#...........__#............................++........",
+				"......................#_____........#.............................+++......",
+				"......................#............_#..............................+++.....",
+				"......................######...######......................................",
 				"...........................................................................",
 				"...........................................................................",
-				"........++++......................###___###.......&........................",
-				"........+++++++...............nn..________#.......&..........~~............",
-				"..........+++.................nn..#________......&&.........~~.............",
-				"............+++...................#___U___#...................~............",
+				"........++++......................###___###................................",
+				"........+++++++...................________#................................",
+				"..........+++.....................#________................................",
+				"............+++...................#___U___#................................",
 				".............+....................###___###................................",
 				"............++......................#___#..................................",
 				"..............+............................................................",
@@ -164,10 +166,9 @@ public class Application {
 		GameMap gameMap4 = new GameMap(groundFactory4, bossRoom);
 
 		world.addGameMap(gameMap);
-		world.addGameMap(gameMap2);
-		world.addGameMap(gameMap3);
-		world.addGameMap(gameMap4);
-
+//		world.addGameMap(gameMap2);
+//		world.addGameMap(gameMap3);
+//		world.addGameMap(gameMap4);
 
 		Display display = new Display();
 
@@ -215,11 +216,13 @@ public class Application {
 
 
 		MerchantKale kale = new MerchantKale();
+		FingerReaderEnia fre = new FingerReaderEnia();
 
 //		world.addPlayer(player, gameMap.at(29, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
+		world.addPlayer(fre, gameMap.at(16, 5));
+		NPC.addPlayer(player);
 		world.addPlayer(player, gameMap.at(34, 10));
-
 
 		// since access to maps only in application better to get the values here
 		// door in Roundtable to door to limgrave
