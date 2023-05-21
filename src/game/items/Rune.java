@@ -100,7 +100,7 @@ public class Rune extends Item implements Resettable{
 
     /**
      * Checks for removal of this rune from the map.
-     * @return true if need to be removed
+     * @return true if it needs to be removed
      */
     public boolean checkForRemoval(){
         this.reset_attempts += 1;

@@ -8,6 +8,8 @@ import game.weapons.Scimitar;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Skeleton
+ * @see Revivable
  */
 
 public class SkeletalBandit extends Skeleton implements Revivable{

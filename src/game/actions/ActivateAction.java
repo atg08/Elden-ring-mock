@@ -5,10 +5,23 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.environments.siteoflostgrace.SiteOfLostGrace;
 
+/**
+ * The ActivateAction class represents an action to activate a lost grace.
+ * It extends the Action class.
+ *
+ * @version 1.0
+ * @see Action
+ */
 public class ActivateAction extends Action {
 
     private SiteOfLostGrace site;
 
+
+    /**
+     * Constructs an ActivateAction object with the specified SiteOfLostGrace.
+     *
+     * @param _site the SiteOfLostGrace to activate
+     */
     public ActivateAction(SiteOfLostGrace _site) {
         this.site = _site;
     }
@@ -28,12 +41,27 @@ public class ActivateAction extends Action {
                     "                                                                                                                                                                                                                                     \n" +
                     "\n";
 
+
+    /**
+     * Executes the action of activating the lost grace.
+     *
+     * @param actor the Actor performing the action
+     * @param map   the GameMap in which the action is performed
+     * @return a message indicating that the lost grace has been activated
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         site.setActivated(true);
         return "The lost grace has been activated";
     }
 
+
+    /**
+     * Provides a description of the action for displaying in the menu.
+     *
+     * @param actor the Actor performing the action
+     * @return a description of the action
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + "can activate the lost grace";

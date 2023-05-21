@@ -8,6 +8,8 @@ import game.weapons.Grossmesser;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Skeleton
+ * @see Revivable
  */
 
 public class HeavySkeletonSwordsman extends Skeleton implements Revivable {

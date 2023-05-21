@@ -11,16 +11,38 @@ import java.io.WriteAbortedException;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ * The ExchangeItemToWeaponAction class represents an action where an actor exchanges an item with a weapon.
+ * It extends the Action class.
+ *
+ * @version 1.0
+ * @see Action
+ */
 public class ExchangeItemToWeaponAction extends Action{
     Random rand = new Random();
     Item item;
     Actor trader;
 
+
+    /**
+     * Constructs an ExchangeItemToWeaponAction object with the specified item and trader.
+     *
+     * @param item   the item to be exchanged
+     * @param trader the trader actor involved in the exchange
+     */
     public ExchangeItemToWeaponAction(Item item, Actor trader){
         this.item = item;
         this.trader = trader;
     }
 
+    /**
+     * Executes the exchange item to weapon action.
+     *
+     * @param actor the actor performing the action
+     * @param map   the game map
+     * @return a string indicating the result of the action
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
@@ -35,6 +57,13 @@ public class ExchangeItemToWeaponAction extends Action{
 
     }
 
+
+    /**
+     * Retrieves a weapon item for the exchange from the available options.
+     *
+     * @return a weapon item for the exchange
+     * @see Exchangeable
+     */
     private WeaponItem getWeaponForExchange(){
         Exchangeable exchangeableItem = (Exchangeable) this.item;
         List<WeaponItem> availableWeaponsForExchange = exchangeableItem.getAvailableWeaponsForExchange();
@@ -42,6 +71,13 @@ public class ExchangeItemToWeaponAction extends Action{
         return availableWeaponsForExchange.get(itemIdx);
     }
 
+
+    /**
+     * Returns the menu description of the exchange action.
+     *
+     * @param actor the actor performing the action
+     * @return a string describing the exchange action
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Tarnished exchanges " + this.item + " with " + this.trader;

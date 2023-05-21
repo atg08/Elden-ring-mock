@@ -11,7 +11,10 @@ import game.items.Rune;
  * It deals 75 damage with 70% hit rate
  * Created by:
  * @author Aditti
- * Modified by:
+ * @see WeaponItem
+ * @see Purchasable
+ * @see Sellable
+ * @version 1.0
  *
  */
 
@@ -26,16 +29,37 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
         this.addCapability(WeaponTradingAvailabilityStatus.PURCHASABLE);
         this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
+
+    /**
+     * Retrieves the purchasing price of the Scimitar.
+     *
+     * @return the Rune object representing the purchasing price
+     * @see Rune
+     */
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(600);
     }
 
+
+    /**
+     * Restocks the Scimitar weapon item.
+     *
+     * @return a new Scimitar object
+     * @see Scimitar
+     */
     @Override
     public WeaponItem restock() {
         return new Scimitar();
     }
 
+
+    /**
+     * Retrieves the selling price of the Scimitar.
+     *
+     * @return the Rune object representing the selling price
+     * @see Rune
+     */
     @Override
     public Rune getSellingPrice() {
         return new Rune(100);

@@ -9,6 +9,13 @@ import game.gameactors.players.Player;
 
 import java.util.HashMap;
 
+/**
+ * The TeleportAction class represents an action that allows the player to teleport to different locations.
+ * It extends the Action class.
+ *
+ * @version 1.0
+ * @see Action
+ */
 public class TeleportAction extends Action {
 
 
@@ -18,6 +25,16 @@ public class TeleportAction extends Action {
        fogDoorLocations.put(locationName,locationOfEndPoint);
     }
 
+
+    /**
+     * Executes the teleport action for the given actor and game map.
+     *
+     * @param actor the actor performing the teleport action (must be a Player)
+     * @param map   the game map on which the teleport action is being executed
+     * @return a string indicating that the player has gone to a new map
+     * @see Actor
+     * @see GameMap
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Player player = (Player) actor;
@@ -40,6 +57,13 @@ public class TeleportAction extends Action {
         return "Player has gone to a new map";
     }
 
+
+    /**
+     * Returns a description of the teleport action for the given actor.
+     *
+     * @param actor the actor performing the teleport action
+     * @return a string describing the teleport action for the actor
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " can teleport";

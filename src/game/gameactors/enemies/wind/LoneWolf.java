@@ -13,6 +13,7 @@ import game.gameactors.players.Player;
  * @author Adrian Kristanto
  * @modifiedBy Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see WindEnemy
  */
 public class LoneWolf extends WindEnemy {
 

@@ -6,6 +6,13 @@ import game.gameactors.FingerReaderEnia;
 import game.gameactors.MerchantKale;
 import game.items.Rune;
 
+
+/**
+ * The GraftedDragon class represents a weapon item called "Grafted Dragon" that extends the WeaponItem class.
+ *
+ * @version 1.0
+ * @see WeaponItem
+ */
 public class GraftedDragon extends WeaponItem implements Sellable{
     /**
      * Constructor.

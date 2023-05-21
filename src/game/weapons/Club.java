@@ -12,6 +12,9 @@ import game.items.Rune;
  * Created by:
  * @author Adrian Kristanto
  * Modified by: Aditti
+ * @see WeaponItem
+ * @see Purchasable
+ * @see Sellable
  *
  */
 
@@ -30,16 +33,31 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     @Override
     public void tick(Location currentLocation, Actor actor) {}
 
+    /**
+     * Returns the purchasing price of the Club.
+     *
+     * @return the purchasing price of the Club as a Rune object
+     */
     @Override
     public Rune getPurchasingPrice() {
         return new Rune(600);
     }
 
+    /**
+     * Restocks the Club weapon item.
+     *
+     * @return a new Club object as a restocked item
+     */
     @Override
     public WeaponItem restock() {
         return new Club();
     }
 
+    /**
+     * Returns the selling price of the Club.
+     *
+     * @return the selling price of the Club as a Rune object
+     */
     @Override
     public Rune getSellingPrice() {
         return new Rune(100);

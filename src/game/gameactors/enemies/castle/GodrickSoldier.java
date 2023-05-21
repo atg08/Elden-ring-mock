@@ -3,6 +3,13 @@ package game.gameactors.enemies.castle;
 
 import game.weapons.Grossmesser;
 
+/**
+ * The GodrickSoldier class represents a soldier enemy named Godrick Soldier
+ * that extends the CastleEnemy class.
+ *
+ * @version 1.0
+ * @see CastleEnemy
+ */
 public class GodrickSoldier extends CastleEnemy {
     /**
      * Constructor for the Enemy class.
