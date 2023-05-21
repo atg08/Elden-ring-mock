@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.gameactors.PlayerFollowingManager;
 import game.gameactors.StatusActor;
@@ -51,7 +52,7 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper {
         this.addWeaponToInventory(weapon);
 
         this.behaviours.put(1, new AttackBehaviour(NPC.player));
-        this.behaviours.put(1, new FollowBehaviour(NPC.player));
+        this.behaviours.put(2, new FollowBehaviour(NPC.player));
         this.behaviours.put(3, new WanderBehaviour());
 
         this.playerFollowingManager = new PlayerFollowingManager(NPC.player);

@@ -47,7 +47,7 @@ public class DeathAction extends Action {
      */
     @Override
     public String execute(Actor target, GameMap map) {
-        String result = System.lineSeparator() + target + "is killed";
+        String result = System.lineSeparator() + target + " is killed";
         int droppedRuneAmount = 0;
 
         // if player is dead
@@ -63,8 +63,8 @@ public class DeathAction extends Action {
         }
 
         // drop items & remove actor if needed
-        if (target.hasCapability(StatusActor.IS_ENEMY)){
-            // enemy is dying
+        if (target.hasCapability(StatusActor.IS_NPC)){
+            // npc is dying
 
             // drop all items
             ActionList dropActions = new ActionList();
@@ -82,7 +82,7 @@ public class DeathAction extends Action {
         }
 
         // transfer Rune if needed
-        if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && target.hasCapability(StatusActor.IS_ENEMY)) {
+        if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && target.hasCapability(StatusActor.IS_NPC)) {
             // player kills enemy
             // when player kills enemy, runes should be directly transferred
             Player player = (Player) this.attacker;

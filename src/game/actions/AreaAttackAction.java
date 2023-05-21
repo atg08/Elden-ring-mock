@@ -47,7 +47,7 @@ public class AreaAttackAction extends Action {
      * @return a string describing the results of the area attack
      */
     public String execute(Actor actor, GameMap map) {
-        String results = actor.toString() + "attacks his surrounding!";
+        String results = actor.toString() + " attacks his surrounding!";
 
         // check all exits
 

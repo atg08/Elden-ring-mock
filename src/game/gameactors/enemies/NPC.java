@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Behaviour;
+import game.gameactors.StatusActor;
 import game.gameactors.players.Player;
 
 import java.util.Map;
@@ -35,6 +36,7 @@ public abstract class NPC extends Actor {
      */
     public NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        this.addCapability(StatusActor.IS_NPC);
 
     }
 
