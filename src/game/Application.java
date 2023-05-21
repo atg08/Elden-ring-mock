@@ -77,7 +77,7 @@ public class Application {
 				"......................#....._D_..=..#..........................+++.........",
 				"......................#.....___.....#.......................+++++..........",
 				"......................#..___....____#.........................+++++........",
-				".............&........#...........__#............................++........",
+				".............=........#...........__#............................++........",
 				"......................#_____........#.............................+++......",
 				"......................#............_#..............................+++.....",
 				"......................######...######......................................",
@@ -98,7 +98,7 @@ public class Application {
 				"_____D_______#.....+....++........................++.........._.....__.#...",
 				"_____________#.........+..+.....................+++...........###..__###...",
 				"_____________#.............++..............................................");
-		GameMap gameMap = new GameMap(groundFactory, limgrave);
+		GameMap limgraveMap = new GameMap(groundFactory, limgrave);
 //		gameMap.at(5,21).setGround(new GoldenFogDoor());
 
 		FancyGroundFactory groundFactory2 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
@@ -129,8 +129,8 @@ public class Application {
 				"+++++++++++++++++++++++++++....................#+++++++++++++++++++++++++++",
 				"+++++++++++++++++++++++++++#.........___........+++++++++++++++++++++++++++",
 				"+++++++++++++++++++++++++++#........._D_.......#+++++++++++++++++++++++++++");
-		GameMap gameMap2 = new GameMap(groundFactory2, stormveilCastle);
-		gameMap2.at(31,21).addItem(new GoldenRune());
+		GameMap stormveilCastleMap = new GameMap(groundFactory2, stormveilCastle);
+		stormveilCastleMap.at(31,21).addItem(new GoldenRune());
 //		37,38,39 -> x , y = 21,22
 
 		FancyGroundFactory groundFactory3 = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
@@ -147,7 +147,7 @@ public class Application {
 				"#________________#",
 				"#________________#",
 				"########_D_#######");
-		GameMap gameMap3 = new GameMap(groundFactory3, roundtableHold);
+		GameMap roundtableHoldMap = new GameMap(groundFactory3, roundtableHold);
 //		gameMap3.at(9,10).setGround(new GoldenFogDoor());
 
 
@@ -163,12 +163,12 @@ public class Application {
 				".........................",
 				".........................",
 				"+++++++++++++++++++++++++");
-		GameMap gameMap4 = new GameMap(groundFactory4, bossRoom);
+		GameMap bossRoomMap = new GameMap(groundFactory4, bossRoom);
 
-		world.addGameMap(gameMap);
-//		world.addGameMap(gameMap2);
-//		world.addGameMap(gameMap3);
-//		world.addGameMap(gameMap4);
+		world.addGameMap(limgraveMap);
+		world.addGameMap(stormveilCastleMap);
+		world.addGameMap(roundtableHoldMap);
+		world.addGameMap(bossRoomMap);
 
 		Display display = new Display();
 
@@ -218,25 +218,25 @@ public class Application {
 		MerchantKale kale = new MerchantKale();
 		FingerReaderEnia fre = new FingerReaderEnia();
 
-		world.addPlayer(player, gameMap.at(13, 4));
-		world.addPlayer(kale, gameMap.at(40, 12));
-		world.addPlayer(fre, gameMap.at(16, 5));
+		world.addPlayer(player, limgraveMap.at(13, 4));
+		world.addPlayer(kale, limgraveMap.at(40, 12));
+		world.addPlayer(fre, roundtableHoldMap.at(5, 5));
 		NPC.addPlayer(player);
 //		world.addPlayer(player, gameMap.at(29, 0));
 
 		// since access to maps only in application better to get the values here
 		// door in Roundtable to door to limgrave
-		TeleportAction.addFogDoorLocation("ROUNDTABLE_LIMGRAVE",gameMap.at(5,21));
+		TeleportAction.addFogDoorLocation("ROUNDTABLE_LIMGRAVE",limgraveMap.at(5,21));
 		// door in limgrave to door to Roundtable
-		TeleportAction.addFogDoorLocation("LIMGRAVE_ROUNDTABLE",gameMap3.at(9,10));
+		TeleportAction.addFogDoorLocation("LIMGRAVE_ROUNDTABLE",roundtableHoldMap.at(9,10));
 		// door in Stormveil to door to limgrave
-		TeleportAction.addFogDoorLocation("STORMVEIL_LIMGRAVE",gameMap.at(29, 0));
+		TeleportAction.addFogDoorLocation("STORMVEIL_LIMGRAVE",limgraveMap.at(29, 0));
 		// door in limgrave to door to Stormveil
-		TeleportAction.addFogDoorLocation("LIMGRAVE_STORMVEIL",gameMap2.at(38, 23));
+		TeleportAction.addFogDoorLocation("LIMGRAVE_STORMVEIL",stormveilCastleMap.at(38, 23));
 		// door in Stormveil to door to Bossroom
-		TeleportAction.addFogDoorLocation("STORMVEIL_BOSSROOM",gameMap4.at(0,3));
+		TeleportAction.addFogDoorLocation("STORMVEIL_BOSSROOM",bossRoomMap.at(0,3));
 
-		Player.setRespawnLocation(gameMap.at(38,12)); // set default spawn location to TheFirstStep
+		Player.setRespawnLocation(limgraveMap.at(38,12)); // set default spawn location to TheFirstStep
 
 
 		world.run();

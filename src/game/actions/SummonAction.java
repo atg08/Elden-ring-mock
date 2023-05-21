@@ -108,6 +108,7 @@ public class SummonAction extends Action {
             if (!map.isAnActorAt(exit.getDestination())) {
                 Location destination = exit.getDestination();
                 // ally if 0 else invader
+
                 if (RandomNumberGenerator.getRandomInt(2) == 0) {
                     res = "Ally has been summoned";
                     spawnAlly(map, destination);

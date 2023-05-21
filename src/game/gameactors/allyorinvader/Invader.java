@@ -55,6 +55,7 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper {
         this.addWeaponToInventory(weapon);
 
         this.behaviours.put(1, new AttackBehaviour(NPC.player));
+        this.behaviours.put(1, new FollowBehaviour(NPC.player));
         this.behaviours.put(3, new WanderBehaviour());
 
         this.playerFollowingManager = new PlayerFollowingManager(NPC.player);

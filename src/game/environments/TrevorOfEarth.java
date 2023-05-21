@@ -36,11 +36,11 @@ public class TrevorOfEarth extends Environment{
      */
     @Override
     public Enemy spawn(Location location, GameMap map) {
-        if (detEast(location, map) && detNorth(location, map) || !detEast(location, map) && detNorth(location, map)) {
+        if (detNorth(location, map)) {
             if (RandomNumberGenerator.getBooleanProbability(1)) {
                 return new TrollKnight();
             }
-        } else if (!detEast(location, map) && !detNorth(location, map) || detEast(location, map) && !detNorth(location, map)) {
+        } else{
             if (RandomNumberGenerator.getBooleanProbability(4)) {
                 return new GlintstoneSorcerer();
             }

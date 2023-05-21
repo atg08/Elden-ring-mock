@@ -45,7 +45,7 @@ public class DeathAction extends Action {
      */
     @Override
     public String execute(Actor target, GameMap map) {
-        String result = System.lineSeparator() + menuDescription(target);
+        String result = System.lineSeparator() + target + "is killed";
         int droppedRuneAmount = 0;
 
         // if player is dead
@@ -108,6 +108,6 @@ public class DeathAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " is killed.";
+        return actor + " kills.";
     }
 }

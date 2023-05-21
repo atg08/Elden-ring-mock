@@ -157,22 +157,27 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
 
     public boolean canTarget(Actor otherActor){
 
-        // if otherActor is a player, Enemy can attack him
-        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
-            return true;
+//        // if otherActor is a player/ally, Enemy can attack him
+//        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+//            return true;
+//        }
+
+        if (otherActor.hasCapability(StatusActor.IS_ENEMY)){
+            // if otherActor is an enemy of not same type, Enemy can attack it
+            List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
+            List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
+            if (actorTypeList.size() == 0 ||  otherActorTypeList.size() == 0){
+                return false;
+            }
+
+            EnemyType actorType = actorTypeList.get(0); // the type we are looking for
+            EnemyType otherActorType = otherActorTypeList.get(0);
+
+            return !actorType.equals(otherActorType);
         }
 
-        // if otherActor is an enemy of not same type, Enemy can attack it
-        List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
-        List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
-        if (actorTypeList.size() == 0 ||  otherActorTypeList.size() == 0){
-            return false;
-        }
-
-        EnemyType actorType = actorTypeList.get(0); // the type we are looking for
-        EnemyType otherActorType = otherActorTypeList.get(0);
-
-        return !actorType.equals(otherActorType);
+        // enemy can attack player, invader, ally (basically anyone)
+        return true;
     }
 
     /**
