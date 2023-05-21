@@ -23,7 +23,6 @@ import game.reset.Resettable;
  * @version 1.0
  * @see NPC
  * @see Resettable
- * @see IFollowable
  */
 public class Ally extends NPC implements Resettable {
 
@@ -85,7 +84,6 @@ public class Ally extends NPC implements Resettable {
      * @param rest true if the player is resting, false otherwise
      * @return a string indicating the result of the reset operation
      */
-    // TODO: 5/14/2023 make it so that not removed on rest but only on players death
     @Override
     public String reset(GameMap map, boolean rest) {
         if (!rest) {

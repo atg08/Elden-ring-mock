@@ -37,7 +37,7 @@ public class SummonAction extends Action {
      * @see GameMap
      * @see Location
      */
-    public void spawnAlly(GameMap map, Location destination){
+    private void spawnAlly(GameMap map, Location destination){
 //        Player player;
         int allyType = RandomNumberGenerator.getRandomInt(4);
 
@@ -72,25 +72,21 @@ public class SummonAction extends Action {
      * @see GameMap
      * @see Location
      */
-    public void spawnInvader(GameMap map, Location destination){
+    private void spawnInvader(GameMap map, Location destination){
 //        Player player;
         int enemyType = RandomNumberGenerator.getRandomInt(4);
 
         switch (enemyType) {
             case 0:
-//                player = new Astrologer();
                 map.addActor(new Invader(Astrologer.getMaxHP(),new Uchigatana()), destination);
                 break;
             case 1:
-//                player = new Bandit();
                 map.addActor(new Invader(Bandit.getMaxHP(),new GreatKnife()), destination);
                 break;
             case 2:
-//                player = new Samurai();
                 map.addActor(new Invader(Samurai.getMaxHP(), new Uchigatana()), destination);
                 break;
             case 3:
-//                player = new Wretch();
                 map.addActor(new Invader(Wretch.getMaxHP(),new Club()), destination);
                 break;
         }
