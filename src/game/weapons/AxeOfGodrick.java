@@ -10,8 +10,10 @@ import game.items.Rune;
 /**
  * The AxeOfGodrick class represents an axe item called "Axe of Godrick" that extends the WeaponItem class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see WeaponItem
+ * @see Sellable
  */
 public class AxeOfGodrick extends WeaponItem implements Sellable{
 

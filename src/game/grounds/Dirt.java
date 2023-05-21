@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.positions.Ground;
  *
  * Created by: Riordan D. Alfredo
  * Modified by: Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Ground
  */
 public class Dirt extends Ground {
 

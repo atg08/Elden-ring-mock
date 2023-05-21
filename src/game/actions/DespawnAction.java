@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * A class that represents the action of despawning an actor from a game map.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Action
  */
 public class DespawnAction extends Action {
 

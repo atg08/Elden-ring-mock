@@ -7,6 +7,7 @@ import game.weapons.Grossmesser;
  * The GodrickSoldier class represents a soldier enemy named Godrick Soldier
  * that extends the CastleEnemy class.
  *
+ * @author Aditti
  * @version 1.0
  * @see CastleEnemy
  */

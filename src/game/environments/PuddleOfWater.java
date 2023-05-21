@@ -14,7 +14,8 @@ import game.utils.RandomNumberGenerator;
  Class representing the PuddleOfWater environment, a type of game environment.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Environment
  */
 public class PuddleOfWater extends Environment {
 

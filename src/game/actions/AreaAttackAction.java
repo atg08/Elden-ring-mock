@@ -13,6 +13,8 @@ import game.gameactors.enemies.Enemy;
  * The AreaAttackAction class represents an action that allows an Actor to perform an area attack on all surrounding Actors in a given GameMap.
  * This action can be done with a Weapon or the intrinsic weapon of the Actor. The AreaAttackAction extends the Action abstract class.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class AreaAttackAction extends Action {
 

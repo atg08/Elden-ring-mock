@@ -9,6 +9,9 @@ import game.gameactors.StatusActor;
 
 /**
  * Environment to summon ally or invader
+ * @author Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Ground
  */
 public class SummonSign extends Ground {
     /**

@@ -29,6 +29,7 @@ import java.util.ArrayList;
  * Created by:
  * @author Adrian Kristanto
  * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
  * @see Actor
  * @see Resettable
  * @see Respawnable

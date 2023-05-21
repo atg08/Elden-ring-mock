@@ -14,7 +14,11 @@ import game.reset.Resettable;
 /**
  * A class representing a Rune item in the game, which can be picked up and used as a form of currency.
  * Implements the Resettable interface for map resetting functionality.
+ *
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Item
+ * @see Resettable
  */
 public class Rune extends Item implements Resettable{
 

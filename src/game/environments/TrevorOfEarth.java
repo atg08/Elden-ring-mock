@@ -13,7 +13,8 @@ import game.utils.RandomNumberGenerator;
  Class representing the Gust of Earth environment, a type of game environment.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Environment
  */
 public class TrevorOfEarth extends Environment{
     /**

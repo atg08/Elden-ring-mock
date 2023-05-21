@@ -17,7 +17,9 @@ import game.items.PlayerRuneManager;
  * An action executed if an actor is killed.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Action
  *
  */
 public class DeathAction extends Action {

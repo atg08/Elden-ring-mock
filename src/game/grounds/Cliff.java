@@ -12,6 +12,7 @@ import game.gameactors.StatusActor;
  * The Cliff class represents a type of Ground that acts as a cliff.
  * It extends the Ground class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Ground
  */

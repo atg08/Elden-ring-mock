@@ -2,11 +2,9 @@ package game.gameactors.allyorinvader;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
@@ -20,6 +18,7 @@ import game.reset.Resettable;
  * The Ally class represents an ally NPC that can follow the player and perform actions in the game.
  * It extends the NPC class and implements the Resettable and IFollowable interfaces.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see NPC
  * @see Resettable

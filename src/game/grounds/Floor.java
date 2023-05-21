@@ -12,7 +12,8 @@ import game.gameactors.StatusActor;
  *
  * Created by: Riordan D. Alfredo
  * Modified by: Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Ground
  */
 
 

@@ -6,10 +6,16 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.behaviours.Behaviour;
 import game.gameactors.StatusActor;
 
-
+/**
+ * The FollowBehaviour class implements the Behaviour interface and represents the behavior of an actor following a target actor.
+ * It provides methods to calculate the next action for the actor to move closer to the target actor.
+ *
+ * @author Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Behaviour
+ */
 public class FollowBehaviour implements Behaviour {
 
 	private final Actor target;

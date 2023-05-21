@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.gameactors.StatusActor;
 import game.gameactors.allyorinvader.Ally;
 import game.gameactors.allyorinvader.Invader;
 import game.gameactors.players.*;
@@ -15,15 +14,15 @@ import game.weapons.Club;
 import game.weapons.GreatKnife;
 import game.weapons.Uchigatana;
 
-import java.nio.file.StandardCopyOption;
 
 
 /**
  * The SummonAction class represents an action that allows an actor to summon allies or invaders in a game.
  * It extends the Action class.
  *
- * @see Action
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
+ * @see Action
  */
 public class SummonAction extends Action {
 

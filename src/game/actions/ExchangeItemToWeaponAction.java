@@ -6,8 +6,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.Exchangeable;
-
-import java.io.WriteAbortedException;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +14,7 @@ import java.util.Random;
  * The ExchangeItemToWeaponAction class represents an action where an actor exchanges an item with a weapon.
  * It extends the Action class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Action
  */

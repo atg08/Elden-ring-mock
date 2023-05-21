@@ -4,6 +4,7 @@ package game.environments.siteoflostgrace;
  * The TableOfLostGrace class represents a table of lost grace.
  * It is a singleton class that extends the SiteOfLostGrace class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see SiteOfLostGrace
  */

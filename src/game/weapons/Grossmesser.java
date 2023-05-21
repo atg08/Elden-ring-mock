@@ -11,6 +11,8 @@ import game.items.Rune;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see WeaponItem
+ * @see Sellable
  */
 
 public class Grossmesser extends WeaponItem implements Sellable {

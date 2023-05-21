@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  * It also has an intrinsic weapon bite that allows it to deal damage to its enemies.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see WindEnemy
  */
 public class DireWolf extends WindEnemy{
 

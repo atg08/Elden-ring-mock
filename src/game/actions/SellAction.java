@@ -11,6 +11,8 @@ import game.weapons.Sellable;
 /**
  * Action to sell weapons from trader to an actor.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class SellAction extends Action {
     /**

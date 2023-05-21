@@ -12,6 +12,7 @@ import game.items.Rune;
  * The DropRuneAction class represents an action where a player drops a rune at their previous location.
  * This action should only be used for players.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Action
  */

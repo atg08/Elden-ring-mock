@@ -8,7 +8,9 @@ import game.weapons.Grossmesser;
  * A type of enemy that holds a weapon called Grossmesser.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Skeleton
+ * @see Revivable
  */
 public class SkeletonMage extends Skeleton implements Revivable {
 

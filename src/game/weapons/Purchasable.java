@@ -7,6 +7,7 @@ import game.items.Rune;
  * The Purchasable interface represents an item that can be purchased.
  * It defines methods for retrieving the purchasing price and restocking the item.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Rune
  * @see WeaponItem

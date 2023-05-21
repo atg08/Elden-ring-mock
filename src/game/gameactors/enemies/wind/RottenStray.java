@@ -8,7 +8,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  * It extends the WindEnemy class and overrides the getIntrinsicWeapon method to return a specific weapon.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see WindEnemy
  */
 public class RottenStray extends WindEnemy{
 

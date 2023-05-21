@@ -7,24 +7,19 @@ import game.actions.ConsumeAction;
 import game.gameactors.StatusActor;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-import game.actions.HealAction;
+
 
 
 /**
 
- An Item that can be consumed to heal the player's hit points
-
- Has a limited number of uses before becoming unusable
-
- Implements the Resettable interface to allow for resetting the item's usage count
-
- @see Resettable
-
- @see game.reset.ResetManager
-
- @see HealAction
-
- @author tanul
+ * An Item that can be consumed to heal the player's hit points
+ * Has a limited number of uses before becoming unusable
+ * Implements the Resettable interface to allow for resetting the item's usage count
+ *
+ * @see Resettable
+ * @see game.reset.ResetManager
+ * @author tanul
+ * @version 1.0
  */
 
 public class FlaskOfCrimsonTears extends Item implements Resettable, Consumable {

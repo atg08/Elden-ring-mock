@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
  The Respawnable interface provides a contract for objects that can be respawned on a GameMap after being removed.
  Created by: tanul
  @author tanul
- Modified by:
  */
 public interface Respawnable {
 

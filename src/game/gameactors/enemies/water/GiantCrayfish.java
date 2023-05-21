@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  * A powerful enemy of the player that can perform a powerful slam attack
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
  * @see OceanEnemy
  */
 

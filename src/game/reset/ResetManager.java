@@ -8,17 +8,13 @@ import java.util.List;
 
 /**
 
- A reset manager class that manages a list of {@code Resettable} objects. This class allows the registration of
-
- {@code Resettable} objects, which can be reset when needed. It also provides methods to remove or re-add
-
- {@code Resettable} objects.
-
- This class implements the singleton pattern, so there can only be one instance of it in the system.
-
- Created by: Adrian Kristanto
-
- Modified by:
+ * A reset manager class that manages a list of {@code Resettable} objects. This class allows the registration of
+ * {@code Resettable} objects, which can be reset when needed. It also provides methods to remove or re-add
+ * {@code Resettable} objects.
+ * This class implements the singleton pattern, so there can only be one instance of it in the system.
+ * Created by: Adrian Kristanto
+ * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
  */
 public class ResetManager {
     private List<Resettable> resettables;

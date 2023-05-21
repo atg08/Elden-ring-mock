@@ -14,6 +14,8 @@ import java.util.Random;
 /**
  * An action for unsheathe action.
  * @author Aditti Gupta
+ * @version 1.0
+ * @see Action
  */
 public class UnsheatheAction extends Action {
 

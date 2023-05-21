@@ -8,7 +8,9 @@ import game.weapons.Scimitar;
  * A type of enemy that holds a weapon called Scimitar.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Skeleton
+ * @see Revivable
  */
 public class SkeletalMilitiaman extends Skeleton implements Revivable {
 

@@ -8,6 +8,7 @@ import game.items.Rune;
  * The Sellable interface represents an item that can be sold.
  * It defines a method for retrieving the selling price of the item.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Rune
  */

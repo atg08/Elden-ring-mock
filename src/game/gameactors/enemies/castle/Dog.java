@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  * The Dog class represents a dog enemy in a castle.
  * It extends the CastleEnemy class.
  *
+ * @author Aditti
  * @version 1.0
  * @see CastleEnemy
  */
