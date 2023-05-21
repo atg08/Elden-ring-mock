@@ -6,11 +6,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.gameactors.players.Player;
 import game.items.GoldenRune;
 import game.items.Rune;
-import game.items.RuneManager;
+import game.items.PlayerRuneManager;
 
 public class GoldenRuneConsumeAction extends Action {
 
-    RuneManager rm = RuneManager.getInstance();
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
     GoldenRune goldenRune;
 
     public GoldenRuneConsumeAction(GoldenRune goldenRune){

@@ -1,15 +1,13 @@
 package game.items;
 
-import game.reset.ResetManager;
-
-public class RuneManager {
-    private static RuneManager instance;
+public class PlayerRuneManager {
+    private static PlayerRuneManager instance;
 
     private Rune playerRune;
 
     private Rune droppedRune;
 
-    private RuneManager(){
+    private PlayerRuneManager(){
         playerRune = new Rune();
     };
 
@@ -20,9 +18,9 @@ public class RuneManager {
      Returns the instance of this reset manager. If it doesn't exist yet, it creates a new instance and returns it.
      @return the instance of this reset manager
      */
-    public static RuneManager getInstance(){
+    public static PlayerRuneManager getInstance(){
         if (instance == null){
-            instance = new RuneManager();
+            instance = new PlayerRuneManager();
         }
         return instance;
     }

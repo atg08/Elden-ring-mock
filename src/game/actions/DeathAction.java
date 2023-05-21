@@ -1,6 +1,5 @@
 package game.actions;
 
-import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -10,13 +9,9 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.gameactors.enemies.Enemy;
-import game.gameactors.enemies.graveyard.PileOfBones;
 import game.gameactors.players.Player;
 import game.items.Rune;
-import game.items.RuneManager;
-
-import static game.gameactors.EnemyType.EARTH_TYPE;
+import game.items.PlayerRuneManager;
 
 /**
  * An action executed if an actor is killed.
@@ -27,7 +22,7 @@ import static game.gameactors.EnemyType.EARTH_TYPE;
  */
 public class DeathAction extends Action {
     private final Actor attacker;
-    private RuneManager  rm = RuneManager.getInstance();
+    private PlayerRuneManager rm = PlayerRuneManager.getInstance();
 
 //    private ResetManager rm = ResetManager.getInstance();
 
