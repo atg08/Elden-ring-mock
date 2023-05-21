@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see WindEnemy
  */
 public class RottenStray extends WindEnemy{
 

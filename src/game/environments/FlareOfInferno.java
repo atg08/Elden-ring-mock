@@ -17,6 +17,7 @@ import game.utils.RandomNumberGenerator;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Environment
  */
 public class FlareOfInferno extends Environment{
 
@@ -54,6 +55,15 @@ public class FlareOfInferno extends Environment{
     }
 
 
+    /**
+     * Player dies if he steps on this spawning ground
+     *
+     * @param location the location to update
+     * @return the result of the tick operation
+     * @see Actor
+     * @see Location
+     * @see DeathAction
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);

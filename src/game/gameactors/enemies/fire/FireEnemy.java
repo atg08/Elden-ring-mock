@@ -15,6 +15,8 @@ import game.reset.Resettable;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Enemy
+ * @see Resettable
  */
 public abstract class FireEnemy extends Enemy implements Resettable {
     /**

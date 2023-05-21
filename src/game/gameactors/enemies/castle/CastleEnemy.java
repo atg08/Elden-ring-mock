@@ -8,6 +8,14 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.reset.Resettable;
 
+/**
+ * This class represents an abstract CastleEnemy that extends the Enemy class
+ * and implements the Resettable interface.
+ *
+ * @version 1.0
+ * @see Enemy
+ * @see Resettable
+ */
 public abstract class CastleEnemy extends Enemy implements Resettable {
     /**
      * Constructor for the Enemy class.
@@ -26,11 +34,24 @@ public abstract class CastleEnemy extends Enemy implements Resettable {
     }
 
 
+    /**
+     * Checks if the CastleEnemy is removable.
+     *
+     * @return true if the CastleEnemy is removable, false otherwise
+     */
     @Override
     public boolean isRemovable() {
         return true;
     }
 
+    /**
+     * Resets the CastleEnemy.
+     *
+     * @param actor the Actor to reset
+     * @param map   the GameMap the Actor belongs to
+     * @return a String representing the result of the reset operation
+     * @see DespawnAction
+     */
     @Override
     public String reset(Actor actor, GameMap map) {
         DespawnAction despawn = new DespawnAction();

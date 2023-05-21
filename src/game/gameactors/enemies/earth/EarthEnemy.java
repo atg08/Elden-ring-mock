@@ -8,6 +8,14 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.reset.Resettable;
 
+/**
+ * The EarthEnemy class represents an abstract class for enemies in an Earth-based game.
+ * It extends the Enemy class and implements the Resettable interface.
+ *
+ * @version 1.0
+ * @see Enemy
+ * @see Resettable
+ */
 public abstract class EarthEnemy extends Enemy implements Resettable {
     /**
      * Constructor for the EarthEnemy abstract class.
@@ -17,6 +25,7 @@ public abstract class EarthEnemy extends Enemy implements Resettable {
      * @param hitPoints   the Actor's starting hit points
      * @param minRuneDrop the minimum number of runes this Enemy drops upon death
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
+     * @see Enemy#Enemy(String, char, int, int, int)
      */
     public EarthEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
@@ -31,6 +40,7 @@ public abstract class EarthEnemy extends Enemy implements Resettable {
      * @param actor the actor to reset
      * @param map   the game map the actor is on
      * @return a string message indicating the outcome of the reset
+     * @see Resettable#reset(Actor, GameMap)
      */
     @Override
     public String reset(Actor actor, GameMap map) {
