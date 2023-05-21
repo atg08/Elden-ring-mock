@@ -15,7 +15,6 @@ import game.gameactors.enemies.Revivable;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
-import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.items.Rune;
 import game.utils.RandomNumberGenerator;
