@@ -3,29 +3,26 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ConsumeAction;
+import game.gameactors.StatusActor;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-import game.actions.ConsumeAction;
+
 
 
 /**
 
- An Item that can be consumed to heal the player's hit points
-
- Has a limited number of uses before becoming unusable
-
- Implements the Resettable interface to allow for resetting the item's usage count
-
- @see Resettable
-
- @see game.reset.ResetManager
-
- @see game.actions.ConsumeAction
-
- @author tanul
+ * An Item that can be consumed to heal the player's hit points
+ * Has a limited number of uses before becoming unusable
+ * Implements the Resettable interface to allow for resetting the item's usage count
+ *
+ * @see Resettable
+ * @see game.reset.ResetManager
+ * @author tanul
+ * @version 1.0
  */
 
-public class FlaskOfCrimsonTears extends Item implements Resettable {
+public class FlaskOfCrimsonTears extends Item implements Resettable, Consumable {
 
     /**
 
@@ -42,7 +39,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
 
      The number of times this item has been consumed
      */
-    private int consumed;
+    private int consumedCount;
 
     /**
 
@@ -61,8 +58,7 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         //not portable so cannot be piccked up and dropped
         super("Flask Of Crimson Tears",'E', false);
         this.addCapability(ItemUsage.CAN_CONSUME_TO_HEAL);
-        this.addCapability(ItemUsage.IS_FLASK);
-        this.consumed = 0;
+        this.consumedCount = 0;
         rm.registerResettable(this);
         // upon initialization of the object adds the object
         // to the list of resettable
@@ -70,47 +66,23 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         this.addAction(new ConsumeAction(this));
     }
 
-    /**
 
-     Returns the number of times this item has been consumed
-     @return The number of times this item has been consumed
-     */
-    public int getConsumed() {
-        return consumed;
-    }
+//    /**
+//
+//     Returns the amount of hit points this item heals
+//     @return The amount of hit points this item heals
+//     */
+//    public int getHEAL_AMOUNT() {
+//        return HEAL_AMOUNT;
+//    }
 
-    /**
-
-     Returns the maximum number of times this item can be consumed
-     @return The maximum number of times this item can be consumed
-     */
-    public int getMAX_CONSUME_AMOUNT() {
-        return MAX_CONSUME_AMOUNT;
-    }
-
-    /**
-
-     Returns the amount of hit points this item heals
-     @return The amount of hit points this item heals
-     */
-    public int getHEAL_AMOUNT() {
-        return HEAL_AMOUNT;
-    }
-
-    /**
-
-     Increases the count of times this item has been consumed by 1
-     */
-    public void updateConsumed() {
-        this.consumed += 1;
-    }
 
     /**
 
      Resets the count of times this item has been consumed to 0
      */
     private void resetConsumed() {
-        this.consumed = 0;
+        this.consumedCount = 0;
     }
 
     /**
@@ -120,18 +92,17 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
      */
     @Override
     public String toString() {
-        return "Flask Of Crimson Tears (" + (this.getMAX_CONSUME_AMOUNT()-this.getConsumed()) + "/" + this.getMAX_CONSUME_AMOUNT() + ")";
+        return "Flask Of Crimson Tears (" + (this.MAX_CONSUME_AMOUNT-this.consumedCount) + "/" + this.MAX_CONSUME_AMOUNT + ")";
     }
 
     /**
-
-     Resets the count of times this item has been consumed to 0 and returns a string indicating the item has been reset
-     @param actor The actor resetting the item
-     @param map The GameMap on which the reset is taking place
-     @return A string indicating the item has been reset
+     * Resets the count of times this item has been consumed to 0 and returns a string indicating the item has been reset
+     *
+     * @param map The GameMap on which the reset is taking place
+     * @return A string indicating the item has been reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         this.resetConsumed();
         return this + "has been reset";
     }
@@ -146,4 +117,35 @@ public class FlaskOfCrimsonTears extends Item implements Resettable {
         return false;
     }
 
+    public boolean isRemovableOnPlayerRest() {
+        return false;
+    }
+
+    public boolean isAvailable() {
+        return this.MAX_CONSUME_AMOUNT - this.consumedCount > 0;
+    }
+
+    public int getHealAmount() {
+        return this.HEAL_AMOUNT;
+    }
+
+    /**
+
+     Increases the count of times this item has been consumed by 1
+     */
+    public void updateStatus() {
+        this.consumedCount += 1;
+    }
+
+    @Override
+    public String consume(Actor actor) {
+            actor.heal(this.getHealAmount());
+            this.updateStatus();
+            return actor + " health has been restored by " + this.getHealAmount() + " hp";
+    }
+
+    @Override
+    public Boolean consumeBy(Actor actor) {
+        return actor.hasCapability(StatusActor.IS_PLAYER) && this.isAvailable();
+    }
 }

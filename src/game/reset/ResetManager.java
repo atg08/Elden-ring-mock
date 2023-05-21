@@ -1,6 +1,5 @@
 package game.reset;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
@@ -9,17 +8,13 @@ import java.util.List;
 
 /**
 
- A reset manager class that manages a list of {@code Resettable} objects. This class allows the registration of
-
- {@code Resettable} objects, which can be reset when needed. It also provides methods to remove or re-add
-
- {@code Resettable} objects.
-
- This class implements the singleton pattern, so there can only be one instance of it in the system.
-
- Created by: Adrian Kristanto
-
- Modified by:
+ * A reset manager class that manages a list of {@code Resettable} objects. This class allows the registration of
+ * {@code Resettable} objects, which can be reset when needed. It also provides methods to remove or re-add
+ * {@code Resettable} objects.
+ * This class implements the singleton pattern, so there can only be one instance of it in the system.
+ * Created by: Adrian Kristanto
+ * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
  */
 public class ResetManager {
     private List<Resettable> resettables;
@@ -41,19 +36,19 @@ public class ResetManager {
      Runs the reset process for all registered resettables. It removes resettables marked as removable, resets all
 
      other resettables, and adds resettables that were marked as removable and need to be added back.
+     * @param map the game map where the resettables reside
 
-     @param actor the actor object that triggers the reset process
-
-     @param map the game map where the resettables reside
      */
-    public void run(Actor actor, GameMap map) {
+    public void run(GameMap map, Boolean rest) {
 
         for (Resettable r : this.resettables){
-            if (r.isRemovable()){
+            if (r.isRemovable() && rest && r.isRemovableOnPlayerRest()){
+                this.removables.add(r);
+            } else if (r.isRemovable() && !rest) {
                 this.removables.add(r);
             }
 //            r.reset(actor,map);
-            String message = r.reset(actor,map);
+            String message = r.reset(map, rest);
             if (!message.equals("")){display.println(message);}
         }
 

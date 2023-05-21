@@ -12,7 +12,8 @@ import game.gameactors.enemies.Enemy;
  Abstract class representing a game environment, which is a type of Ground object.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Ground
  */
 
 public abstract class Environment extends Ground {
@@ -47,7 +48,23 @@ public abstract class Environment extends Ground {
         NumberRange widths = map.getXRange();
         // East
         // assume middle is part of west
-        return widths.max()/2 < location.x();
+        //return widths.max()/2 < location.x();
+        return location.x() > widths.max()/2;
+    }
+
+    /**
+     * Determines if a location is north the map.
+     *
+     * @param location the location to be checked
+     * @param map the game map containing the location
+     * @return true if the location is north of the middle of the map, false if it is the south side
+     */
+    public Boolean detNorth (Location location, GameMap map){
+        NumberRange lengths = map.getYRange();
+        // East
+        // assume middle is part of south
+        //return lengths.max()/2 > location.y();
+        return location.y() < lengths.max()/2;
     }
 
     /**

@@ -6,18 +6,15 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.behaviours.Behaviour;
 import game.gameactors.StatusActor;
 
 /**
- * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
- * @see edu.monash.fit2099.demo.mars.Application
+ * The FollowBehaviour class implements the Behaviour interface and represents the behavior of an actor following a target actor.
+ * It provides methods to calculate the next action for the actor to move closer to the target actor.
  *
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
- *
+ * @author Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Behaviour
  */
 public class FollowBehaviour implements Behaviour {
 
@@ -44,7 +41,13 @@ public class FollowBehaviour implements Behaviour {
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
-		
+
+		// check actor is supposed to follow
+		if (!actor.hasCapability(StatusActor.FOLLOWING)){
+			System.out.println("===================================");
+			return null;
+		}
+
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
@@ -54,7 +57,7 @@ public class FollowBehaviour implements Behaviour {
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
-					actor.addCapability(StatusActor.FOLLOWING_PLAYER);
+					actor.addCapability(StatusActor.FOLLOWING);
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}
@@ -65,7 +68,7 @@ public class FollowBehaviour implements Behaviour {
 
 	/**
 	 * Compute the Manhattan distance between two locations.
-	 * 
+	 *
 	 * @param a the first location
 	 * @param b the first location
 	 * @return the number of steps between a and b if you only move in the four cardinal directions.

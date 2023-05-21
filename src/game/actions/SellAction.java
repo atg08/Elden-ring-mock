@@ -5,17 +5,22 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.gameactors.players.Player;
+import game.items.PlayerRuneManager;
 import game.weapons.Sellable;
 
 /**
  * Action to sell weapons from trader to an actor.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class SellAction extends Action {
     /**
      * Weapon to be sold by player.
      */
     private WeaponItem weapon;
+
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
 
     /**
      * Constructor. Requires rune as input.
@@ -40,7 +45,7 @@ public class SellAction extends Action {
         Player player = (Player) actor;
         Sellable sellableWeapon = (Sellable) this.weapon;
         player.removeWeaponFromInventory(this.weapon);
-        player.increaseRune(sellableWeapon.getSellingPrice());
+        rm.increaseRune(sellableWeapon.getSellingPrice());
         return  "Tarnished sold " + this.weapon.toString();
     }
 

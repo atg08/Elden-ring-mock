@@ -1,18 +1,24 @@
-package game.runes;
+package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
-import edu.monash.fit2099.engine.items.RecoverRuneAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.RecoverRuneAction;
+import game.gameactors.StatusActor;
+import game.gameactors.players.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
 /**
  * A class representing a Rune item in the game, which can be picked up and used as a form of currency.
  * Implements the Resettable interface for map resetting functionality.
+ *
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Item
+ * @see Resettable
  */
 public class Rune extends Item implements Resettable{
 
@@ -49,14 +55,10 @@ public class Rune extends Item implements Resettable{
 
     }
 
-    /**
-     * Increases the amount of this type of rune by the amount of another Rune object.
-     *
-     * @param rune The Rune object to add to this one.
-     */
-    public void increaseRune(Rune rune){
-        this.amount += rune.getAmount();
+    public void setAmount(int amount) {
+        this.amount += amount;
     }
+
 
     /**
      * Returns the amount of this type of rune.
@@ -67,20 +69,6 @@ public class Rune extends Item implements Resettable{
         return this.amount;
     }
 
-    /**
-     * Decreases the amount of this type of rune by the amount of another Rune object.
-     *
-     * @param rune The Rune object to subtract from this one.
-     * @return True if the operation was successful (i.e. the amount of this type of rune is not negative after the operation), false otherwise.
-     */
-    public boolean decreaseRune(Rune rune){
-        if (this.amount - rune.getAmount() >= 0){
-            this.amount -= rune.getAmount();
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * Sets the location of the rune.
@@ -101,13 +89,12 @@ public class Rune extends Item implements Resettable{
     /**
      * Resets the state of the object, removing it from the map if it has been reset too many times.
      *
-     * @param actor The actor performing the reset.
      * @param map The game map.
      * @return A string describing the result of the reset operation.
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
-        if (this.checkForRemoval()){
+    public String reset(GameMap map, boolean rest) {
+        if (!rest && this.checkForRemoval()){
             runeLocation.removeItem(this);
             return "rune removed from the map";
         }
@@ -117,7 +104,7 @@ public class Rune extends Item implements Resettable{
 
     /**
      * Checks for removal of this rune from the map.
-     * @return true if need to be removed
+     * @return true if it needs to be removed
      */
     public boolean checkForRemoval(){
         this.reset_attempts += 1;
@@ -129,4 +116,14 @@ public class Rune extends Item implements Resettable{
         return true;
     }
 
+    @Override
+    public boolean isRemovableOnPlayerRest() {
+        return false;
+    }
+
+
+    @Override
+    public PickUpAction getPickUpAction(Actor actor) {
+        return new RecoverRuneAction(this);
+    }
 }

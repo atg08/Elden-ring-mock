@@ -1,6 +1,5 @@
 package game.gameactors.enemies.water;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -13,7 +12,9 @@ import game.gameactors.enemies.Enemy;
  * It extends the Enemy class and implements the Resettable interface.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Enemy
+ * @see Resettable
  */
 public abstract class OceanEnemy extends Enemy implements Resettable{
 
@@ -28,7 +29,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
      * @return an instance of OceanEnemy
      */
     public OceanEnemy(String name, char displayChar, int hitPoints, int minMaxDrop, int maxDropRune) {
-        super(name, displayChar, hitPoints, minMaxDrop, maxDropRune);
+        super(displayChar, hitPoints, minMaxDrop, maxDropRune, name);
         this.addCapability(EnemyType.OCEAN_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);
@@ -37,12 +38,11 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
     /**
      * Resets the OceanEnemy to its initial state.
      *
-     * @param actor the actor to reset
-     * @param map   the game map the actor is on
+     * @param map the game map the actor is on
      * @return a string message indicating the outcome of the reset
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map , boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
     }
@@ -58,5 +58,7 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
         return true;
     }
 
-
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 }

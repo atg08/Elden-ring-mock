@@ -6,15 +6,17 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.RestAction;
 import game.gameactors.StatusActor;
+import game.gameactors.enemies.Revivable;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
-import game.actions.TurnIntoSkeletonAction;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.runes.Rune;
+import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 
 
@@ -24,6 +26,9 @@ import game.utils.RandomNumberGenerator;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Actor
+ * @see Resettable
+ * @see DeathRuneDroppper
  */
 public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper {
 
@@ -47,6 +52,8 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         this.maxRuneDrop = reviveBackTo.getMaxRune();
         this.reviveBackTo = reviveBackTo;
         rm.registerResettable(this);
+        this.addCapability(StatusActor.IS_ENEMY);
+        this.addCapability(StatusActor.IS_POB);
     }
 
 
@@ -97,23 +104,38 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
         if (checkForRevive()){
-            return new TurnIntoSkeletonAction();
-        }
+            display.println(this.revive(map));
+            return new DoNothingAction();
 
+        }
         return new DoNothingAction();
     }
 
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+
+        ActionList actions =  new ActionList();
+
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)) {
+            actions.add(new AttackAction(this, direction));
+            for (WeaponItem w : otherActor.getWeaponInventory()) {
+                actions.add(new AttackAction(this, direction, w));
+            }
+        }
+
+        return actions;
+    }
 
 
     /**
      * Resets the current instance of Enemy by despawning it from the GameMap.
      *
-     * @param actor the Actor associated with this Enemy
      * @param map the GameMap instance where this Enemy is located
      * @return the result of the DespawnAction's execution
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         // this is so that enemy that has been removed
         // won't be attempted to be removed again
@@ -131,19 +153,18 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
         return true;
     }
 
-
     @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 
-        ActionList actions =  new ActionList();
 
-        if (otherActor.hasCapability(StatusActor.IS_PLAYER)) {
-            actions.add(new AttackAction(this, direction));
-            for (WeaponItem w : otherActor.getWeaponInventory()) {
-                actions.add(new AttackAction(this, direction, w));
-            }
-        }
-
-        return actions;
+    public String revive(GameMap map){
+        Revivable skeleton = this.getReviveBackTo().revive();
+        Skeleton revived = (Skeleton) skeleton;
+        Location whereToRevive = map.locationOf(this);
+        map.removeActor(this);
+        map.addActor(revived, whereToRevive);
+        return this + " has been revived to " + revived;
     }
 }

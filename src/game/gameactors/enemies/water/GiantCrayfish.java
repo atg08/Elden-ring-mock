@@ -1,19 +1,14 @@
 package game.gameactors.enemies.water;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.Behaviour;
-import game.gameactors.EnemyType;
-import game.gameactors.players.Player;
+
 
 /**
  * A powerful enemy of the player that can perform a powerful slam attack
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see OceanEnemy
  */
 
 public class GiantCrayfish extends OceanEnemy{

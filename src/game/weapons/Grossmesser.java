@@ -1,14 +1,18 @@
 package game.weapons;
 
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.runes.Rune;
+import game.gameactors.MerchantKale;
+import game.items.Rune;
 
 /**
  * A simple weapon that can be used to attack the enemy.
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see WeaponItem
+ * @see Sellable
  */
 
 public class Grossmesser extends WeaponItem implements Sellable {
@@ -20,6 +24,7 @@ public class Grossmesser extends WeaponItem implements Sellable {
         super("Grossmesser", '?', 115, "hit", 85);
         this.addCapability(WeaponSkill.AREA_ATTACK);
         this.addCapability(WeaponSkill.TARGETED_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
 
@@ -31,5 +36,10 @@ public class Grossmesser extends WeaponItem implements Sellable {
     @Override
     public Rune getSellingPrice() {
         return new Rune(100);
+    }
+
+    @Override
+    public boolean isSellableToAnActor(Actor actor) {
+        return actor instanceof MerchantKale;
     }
 }

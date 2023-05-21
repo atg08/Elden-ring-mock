@@ -1,12 +1,12 @@
 package game.gameactors.enemies;
 
-import game.runes.Rune;
+import game.items.Rune;
 
 /**
  * The DeathRuneDropper interface represents an enemy that drops a death rune when defeated.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
  */
 public interface DeathRuneDroppper {
 

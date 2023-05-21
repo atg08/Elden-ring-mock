@@ -4,13 +4,16 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.gameactors.Trader;
+import game.gameactors.MerchantKale;
 import game.gameactors.players.Player;
+import game.items.PlayerRuneManager;
 import game.weapons.Purchasable;
 
 /**
  * Action for a player to purchase a weapon from a trader.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class PurchaseAction extends Action {
     /**
@@ -21,7 +24,10 @@ public class PurchaseAction extends Action {
     /**
      * the trader
      */
-    private Trader trader;
+    private MerchantKale trader;
+
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
+
 
     /**
      * Constructor for PurchaseAction.
@@ -29,7 +35,7 @@ public class PurchaseAction extends Action {
      * @param weapon The weapon to be purchased.
      * @param trader The trader selling the weapon.
      */
-    public PurchaseAction(WeaponItem weapon, Trader trader) {
+    public PurchaseAction(WeaponItem weapon, MerchantKale trader) {
         this.weapon = weapon;
         this.trader = trader;
     }
@@ -48,7 +54,7 @@ public class PurchaseAction extends Action {
         String result;
         Player player = (Player) actor;
         Purchasable purchasableWeapon = (Purchasable) this.weapon;
-        if (player.decreaseRune(purchasableWeapon.getPurchasingPrice())){
+        if (rm.decreaseRune(purchasableWeapon.getPurchasingPrice())){
             player.addWeaponToInventory(this.weapon);
             trader.restock(this.weapon);
             result = "Tarnished purchased " + this.weapon.toString();

@@ -1,6 +1,5 @@
 package game.gameactors.enemies.graveyard;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -16,6 +15,10 @@ import game.gameactors.enemies.Revivable;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Enemy
+ * @see Resettable
+ * @see Revivable
+ * @see DeathRuneDroppper
  */
  public abstract class Skeleton extends Enemy implements Revivable, Resettable, DeathRuneDroppper {
     /**
@@ -28,7 +31,7 @@ import game.gameactors.enemies.Revivable;
      * @param maxRuneDrop   the maximum number of Death Runes that the Skeleton can drop upon death
      */
     public Skeleton(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.SKELETON_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);
@@ -38,14 +41,12 @@ import game.gameactors.enemies.Revivable;
     /**
      * Resets the Skeleton when it is killed by a player or another Actor.
      *
-     * @param actor     the actor that killed the Skeleton
-     * @param map       the game map that the Skeleton is on
-     *
-     * @return          a message indicating that the Skeleton has been removed from the game map
+     * @param map the game map that the Skeleton is on
+     * @return a message indicating that the Skeleton has been removed from the game map
      */
     // in skeleton for extensibility and modifications incase future enemies are not resettable
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         // this is so that enemy that has been removed
         // won't be attempted to be removed again
@@ -62,6 +63,8 @@ import game.gameactors.enemies.Revivable;
         return true;
     }
 
-
+    public boolean isRemovableOnPlayerRest() {
+        return true;
+    }
 
 }

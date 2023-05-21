@@ -1,6 +1,5 @@
 package game.gameactors.enemies.wind;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.Resettable;
 import game.actions.DespawnAction;
@@ -13,7 +12,9 @@ import game.gameactors.enemies.Enemy;
  * This class represents a Wind-type enemy, which extends the abstract class Enemy and implements the Resettable interface.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Enemy
+ * @see Resettable
  */
 public abstract class WindEnemy extends Enemy implements Resettable{
 
@@ -29,7 +30,7 @@ public abstract class WindEnemy extends Enemy implements Resettable{
      * @return A new WindEnemy object.
      */
     public WindEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
-        super(name, displayChar, hitPoints, minRuneDrop, maxRuneDrop);
+        super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);
         this.addCapability(EnemyType.WIND_TYPE);
         rm.registerResettable(this);
         this.addCapability(StatusActor.CAN_DESPAWN);
@@ -49,14 +50,16 @@ public abstract class WindEnemy extends Enemy implements Resettable{
     /**
      * Resets the WindEnemy by executing a DespawnAction.
      *
-     * @param actor The actor to reset.
      * @param map The game map.
-     *
      * @return The result of executing the DespawnAction on the WindEnemy.
      */
     @Override
-    public String reset(Actor actor, GameMap map) {
+    public String reset(GameMap map, boolean rest) {
         DespawnAction despawn = new DespawnAction();
         return despawn.execute(this, map);
+    }
+
+    public boolean isRemovableOnPlayerRest() {
+        return true;
     }
 }

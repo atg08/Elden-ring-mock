@@ -12,8 +12,6 @@ public interface Revivable {
 
     /**
      * Revives the enemy.
-     *
-     * @return a new instance of the revived enemy.
      */
     public Revivable revive();
 }

@@ -1,20 +1,24 @@
-package edu.monash.fit2099.engine.items;
+package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.gameactors.players.Player;
-import game.runes.Rune;
+import game.items.Rune;
+import game.items.PlayerRuneManager;
 
 /**
  * Action to allow an actor to pick up previously dropped runes.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see PickUpAction
  */
 public class RecoverRuneAction extends PickUpAction {
     /**
      * the rune to be recovered
      */
     private final Rune rune;
+
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
 
     /**
      * Constructor. Requires rune as input.
@@ -36,8 +40,7 @@ public class RecoverRuneAction extends PickUpAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Player player = (Player) actor;
-        player.increaseRune(this.rune);
+        rm.increaseRune(this.rune);
 
         super.execute(actor, map);
 

@@ -2,27 +2,29 @@ package game.gameactors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
+import game.gameactors.PlayerFollowingManager;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.AttackAction;
 import game.actions.DespawnAction;
-import game.behaviours.Behaviour;
 import game.gameactors.EnemyType;
 import game.gameactors.StatusActor;
-import game.gameactors.players.Player;
-import game.runes.Rune;
+import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
 
+import java.awt.*;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 /**
@@ -32,44 +34,44 @@ import java.util.TreeMap;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see NPC
+ * @see DeathRuneDroppper
  */
 
-public abstract class Enemy extends Actor implements DeathRuneDroppper{
+public abstract class Enemy extends NPC implements DeathRuneDroppper{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
-    protected static Map<Integer, Behaviour> behaviours = new TreeMap<>();
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
-
-    protected Player player;
+    protected final PlayerFollowingManager playerFollowingManager;
 
     /**
      * Constructor for the Enemy class.
-     *
-     * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      * @param minRuneDrop the minimum number of runes this Enemy drops upon death
      * @param maxRuneDrop the maximum number of runes this Enemy drops upon death
+     * @param name        the name of the Actor
      */
-    public Enemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
+    public Enemy(char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop, String name) {
         super(name, displayChar, hitPoints);
-        addCapability(StatusActor.IS_ENEMY);
+        this.addCapability(StatusActor.IS_ENEMY);
+        this.addCapability(StatusActor.HOSTILE_TO_PLAYER);
 
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
 
-    }
+        this.behaviours.put(1, new AttackBehaviour(NPC.player));
+        this.behaviours.put(2, new FollowBehaviour(NPC.player));
+        this.behaviours.put(3, new WanderBehaviour());
 
-    /**
-     * Adds a Behaviour object with a specified priority to the Enemy's list of behaviours.
-     *
-     * @param behaviour the Behaviour object to be added
-     * @param priority the priority of the Behaviour object
-     */
-    public static void addBehaviourWithPriority(Behaviour behaviour, int priority){
-        Enemy.behaviours.put(priority, behaviour);
+        this.playerFollowingManager = new PlayerFollowingManager(NPC.player);
+
+//        this.nextTurnShouldFollow = this.isPlayerAround()
+
+//        this.followingActor = this.getANewActorToFollow(exits);
+
     }
 
     /**
@@ -83,7 +85,10 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (!this.hasCapability(StatusActor.FOLLOWING_PLAYER) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
+        this.playerFollowingManager.updateFollowingStatusIfNeeded(this, map);
+
+
+        if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
             if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
                 rm.removeResettable((Resettable) this);
                 return new DespawnAction();
@@ -91,16 +96,7 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
 
         }
 
-        // reset following status
-        this.removeCapability(StatusActor.FOLLOWING_PLAYER);
-
-        // put behaviors into actions
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-        return new DoNothingAction();
+        return super.playTurn(actions, lastAction, map, display);
     }
 
 
@@ -115,10 +111,10 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions =  new ActionList();
 
-        // add targeted attack if player
+        // add targeted attack if hostile to enemy
         if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
 
-            // for intrinsic weapon
+            // for intrinsic weapon - assumption: player's intrinsic weapon can only use targeted action
             actions.add(new AttackAction(this, direction));
 
             // for regular weapons
@@ -159,22 +155,27 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
 
     public boolean canTarget(Actor otherActor){
 
-        // if otherActor is a player, Enemy can attack him
-        if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
-            return true;
+//        // if otherActor is a player/ally, Enemy can attack him
+//        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+//            return true;
+//        }
+
+        if (otherActor.hasCapability(StatusActor.IS_ENEMY)){
+            // if otherActor is an enemy of not same type, Enemy can attack it
+            List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
+            List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
+            if (actorTypeList.size() == 0 ||  otherActorTypeList.size() == 0){
+                return false;
+            }
+
+            EnemyType actorType = actorTypeList.get(0); // the type we are looking for
+            EnemyType otherActorType = otherActorTypeList.get(0);
+
+            return !actorType.equals(otherActorType);
         }
 
-        // if otherActor is an enemy of not same type, Enemy can attack it
-        List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
-        List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
-        if (actorTypeList.size() == 0 ||  otherActorTypeList.size() == 0){
-            return false;
-        }
-
-        EnemyType actorType = actorTypeList.get(0); // the type we are looking for
-        EnemyType otherActorType = otherActorTypeList.get(0);
-
-        return !actorType.equals(otherActorType);
+        // enemy can attack player, invader, ally (basically anyone)
+        return true;
     }
 
     /**
@@ -206,4 +207,5 @@ public abstract class Enemy extends Actor implements DeathRuneDroppper{
     public int getMaxRune(){
         return this.maxRuneDrop;
     }
+
 }

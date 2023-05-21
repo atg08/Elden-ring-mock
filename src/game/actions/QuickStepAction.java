@@ -7,14 +7,14 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.gameactors.EnemyType;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Action for quick step.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class QuickStepAction extends Action {
 

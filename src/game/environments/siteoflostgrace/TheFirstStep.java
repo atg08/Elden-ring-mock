@@ -1,11 +1,14 @@
-package game.environments;
+package game.environments.siteoflostgrace;
 
 /**
-
- A site of lost grace representing the first step in the game.
- @author tanul
+ * TheFirstStep class extends the SiteOfLostGrace class and represents the first step in a process.
+ * It implements the singleton design pattern.
+ *
+ * @author Tanul
+ * @version 1.0
+ * @see SiteOfLostGrace
  */
-public class TheFirstStep extends SiteOfLostGrace{
+public class TheFirstStep extends SiteOfLostGrace {
 
     private static TheFirstStep instance;
 
@@ -15,7 +18,10 @@ public class TheFirstStep extends SiteOfLostGrace{
      */
     public TheFirstStep() {
         super();
+        this.setActivated(true);
+        this.setDiscovered(true);
     }
+
 
     /**
 

@@ -6,7 +6,7 @@ import java.util.Random;
  * A random number generator
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
  *
  */
 public class RandomNumberGenerator {
@@ -43,5 +43,9 @@ public class RandomNumberGenerator {
     public static int getRandomIntInRange(int lowerBound, int upperBound) {
         int range = upperBound - lowerBound + 1;
         return new Random().nextInt(range) + lowerBound;
+    }
+
+    public static boolean getTrueOrFalse(){
+        return new Random().nextInt(2) == 0;
     }
 }

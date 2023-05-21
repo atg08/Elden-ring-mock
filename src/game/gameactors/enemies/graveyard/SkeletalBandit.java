@@ -1,7 +1,6 @@
 package game.gameactors.enemies.graveyard;
 
 import game.gameactors.enemies.Revivable;
-import game.gameactors.players.Player;
 import game.weapons.Scimitar;
 
 /**
@@ -9,6 +8,8 @@ import game.weapons.Scimitar;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Skeleton
+ * @see Revivable
  */
 
 public class SkeletalBandit extends Skeleton implements Revivable{
@@ -23,9 +24,9 @@ public class SkeletalBandit extends Skeleton implements Revivable{
     }
 
 
+
     /**
      * Revives a dead SkeletalBandit.
-     * @return a new SkeletalBandit object
      */
     @Override
     public Revivable revive() {

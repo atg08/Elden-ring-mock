@@ -8,6 +8,8 @@ import game.weapons.Grossmesser;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Skeleton
+ * @see Revivable
  */
 
 public class HeavySkeletonSwordsman extends Skeleton implements Revivable {
@@ -23,8 +25,6 @@ public class HeavySkeletonSwordsman extends Skeleton implements Revivable {
 
     /**
      * Returns a new instance of the HeavySkeletonSwordsman class to revive this enemy.
-     *
-     * @return a new instance of the HeavySkeletonSwordsman class
      */
     @Override
     public Revivable revive(){

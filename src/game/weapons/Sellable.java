@@ -1,7 +1,24 @@
 package game.weapons;
 
-import game.runes.Rune;
+import edu.monash.fit2099.engine.actors.Actor;
+import game.items.Rune;
+
+
+/**
+ * The Sellable interface represents an item that can be sold.
+ * It defines a method for retrieving the selling price of the item.
+ *
+ * @author Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Rune
+ */
 
 public interface Sellable {
-    public Rune getSellingPrice();
+    /**
+     * Retrieves the selling price of the item.
+     *
+     * @return the selling price of the item
+     */
+    Rune getSellingPrice();
+    boolean isSellableToAnActor(Actor actor);
 }
