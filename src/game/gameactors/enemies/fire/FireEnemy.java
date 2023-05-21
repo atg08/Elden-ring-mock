@@ -37,7 +37,6 @@ public abstract class FireEnemy extends Enemy implements Resettable {
     /**
      * Resets the FireEnemy to its initial state.
      *
-     * @param actor the actor to reset
      * @param map   the game map the actor is on
      * @return a string message indicating the outcome of the reset
      */

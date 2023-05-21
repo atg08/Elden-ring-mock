@@ -11,7 +11,6 @@ import game.gameactors.players.Player;
  * It also has an intrinsic weapon bite that allows it to deal damage to its enemies.
  *
  * @author Adrian Kristanto
- * @modifiedBy Tanul , Satoshi , Aditti
  * @version 1.0
  * @see WindEnemy
  */

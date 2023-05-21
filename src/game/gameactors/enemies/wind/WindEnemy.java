@@ -26,8 +26,6 @@ public abstract class WindEnemy extends Enemy implements Resettable{
      * @param hitPoints The starting hit points of the WindEnemy.
      * @param minRuneDrop The minimum number of runes that can be dropped by the WindEnemy.
      * @param maxRuneDrop The maximum number of runes that can be dropped by the WindEnemy.
-     *
-     * @return A new WindEnemy object.
      */
     public WindEnemy(String name, char displayChar, int hitPoints, int minRuneDrop, int maxRuneDrop) {
         super(displayChar, hitPoints, minRuneDrop, maxRuneDrop, name);

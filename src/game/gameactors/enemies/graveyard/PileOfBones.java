@@ -44,7 +44,7 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
     /**
      * Constructor for creating a new PileOfBones.
      *
-     * @param reviveBackTo the {@see Skeleton} instance that this pile of bones can revive to.
+     * @param reviveBackTo skeleton instance that this pile of bones can revive to.
      */
     public PileOfBones(Skeleton reviveBackTo) {
         super("Pile Of Bones", 'X', 1);
@@ -70,9 +70,9 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
 
 
     /**
-     * Returns the {@see Rune} that should be dropped by the PileOfBones when it dies.
+     * Returns the Rune that should be dropped by the PileOfBones when it dies.
      *
-     * @return a new instance of {@see Rune} that should be dropped by the PileOfBones when it dies.
+     * @return a new instance of @see Rune that should be dropped by the PileOfBones when it dies.
      */
     @Override
     public Rune getDeathRune(){
@@ -81,9 +81,9 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
 
 
     /**
-     * Returns the {@see Skeleton} instance that this pile of bones can revive back to.
+     * Returns the @see Skeleton instance that this pile of bones can revive back to.
      *
-     * @return the {@see Skeleton} instance that this pile of bones can revive back to.
+     * @return the @see Skeleton instance that this pile of bones can revive back to.
      */
     public Skeleton getReviveBackTo(){
         return this.reviveBackTo;
@@ -91,14 +91,14 @@ public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper 
 
 
     /**
-     * Overrides the playTurn method of {@see Actor} to make the PileOfBones revive back into a {@see Skeleton} after
+     * Overrides the playTurn method of @see Actor to make the PileOfBones revive back into a @see Skeleton after
      * a certain number of turns or do nothing otherwise.
      *
      * @param actions    a list of available actions for the PileOfBones.
      * @param lastAction the last Action performed.
      * @param map        the GameMap containing the PileOfBones.
      * @param display    the Display that will display the map.
-     * @return a new instance of {@see Action}
+     * @return a new instance of @see Action
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

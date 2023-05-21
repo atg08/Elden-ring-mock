@@ -26,7 +26,6 @@ public abstract class OceanEnemy extends Enemy implements Resettable{
      * @param hitPoints   the Actor's starting hit points
      * @param minMaxDrop  the minimum amount of gold that the Actor can drop
      * @param maxDropRune the maximum amount of gold that the Actor can drop
-     * @return an instance of OceanEnemy
      */
     public OceanEnemy(String name, char displayChar, int hitPoints, int minMaxDrop, int maxDropRune) {
         super(displayChar, hitPoints, minMaxDrop, maxDropRune, name);

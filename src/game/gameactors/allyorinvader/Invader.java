@@ -45,7 +45,7 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper {
      * @param weapon the weapon item of the invader.
      */
     public Invader(int hitPoints, WeaponItem weapon) {
-        super("invader", 'ඞ', hitPoints);
+        super("invader", 'V', hitPoints);
         this.addCapability(StatusActor.HOSTILE_TO_PLAYER);
         this.addCapability(StatusActor.IS_DEATH_RUNE_DROPPER);
         this.addCapability(StatusActor.IS_INVADER);
