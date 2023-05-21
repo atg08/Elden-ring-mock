@@ -22,9 +22,8 @@ import game.items.Rune;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
 
-import java.util.ArrayList;
+import java.awt.*;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -36,15 +35,12 @@ import java.util.Random;
  * @version 1.0.0
  */
 
-public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower{
+public abstract class Enemy extends NPC implements DeathRuneDroppper{
     protected ResetManager rm = ResetManager.getInstance();
     protected StatusActor enemyType;
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
-    protected IFollowable followingActor;
-    protected boolean followingActorAssigned = false;
-    protected IFollowable followingActorBuffer = null;
 
     /**
      * Constructor for the Enemy class.
@@ -62,9 +58,11 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower{
         this.maxRuneDrop = maxRuneDrop;
         this.minRuneDrop = minRuneDrop;
 
-        this.behaviours.put(1, new FollowBehaviour());
-        this.behaviours.put(2, new AttackBehaviour());
+        this.behaviours.put(1, new AttackBehaviour(NPC.player));
+        this.behaviours.put(2, new FollowBehaviour(NPC.player));
         this.behaviours.put(3, new WanderBehaviour());
+
+//        this.nextTurnShouldFollow = this.isPlayerAround()
 
 //        this.followingActor = this.getANewActorToFollow(exits);
 
@@ -81,19 +79,12 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        // record enemy's current location
-//        this.previousLocation = map.locationOf(this);
-
-        // ensure to store potential actor that can be followed in next turn
-        if (!this.followingActorAssigned){
-            if (this.followingActorBuffer != null){
-                this.followingActor = this.followingActorBuffer;
-                this.followingActorAssigned = true;
-                this.addCapability(StatusActor.FOLLOWING);
-            }else{
-                this.followingActorBuffer = this.getANewCandidateActorToFollow(map.locationOf(this).getExits());
-            }
+        if (!this.hasCapability(StatusActor.FOLLOWING) && this.wasPlayerAround(map.locationOf(this).getExits())){
+            this.addCapability(StatusActor.FOLLOWING);
         }
+
+        System.out.println("following status should be true foreever once it become true");
+        System.out.println(this.hasCapability(StatusActor.FOLLOWING));
 
         if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
             if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
@@ -210,78 +201,13 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper, IFollower{
         return this.maxRuneDrop;
     }
 
-    @Override
-    public IFollowable getFollowingActor(){
-        return this.followingActor;
-    }
-
-    @Override
-    public boolean canFollowActor(Actor actor){
-        return actor.hasCapability(StatusActor.HOSTILE_TO_ENEMY);
-    }
-
-//    @Override
-//    public void resetFollowingStatus(){
-//        this.removeCapability(StatusActor.FOLLOWING);
-//        this.followingActor = null;
-//    }
-
-    /**
-     * Note this method does not yet assign the follwable this enemy will follow. It just returns candidates.
-     *
-     * @param exits
-     * @return
-     */
-
-    @Override
-    public IFollowable getANewCandidateActorToFollow(List<Exit> exits){
-        if (this.followingActorAssigned){
-            return this.followingActor;
-        }
-
-        ArrayList<IFollowable> actors = new ArrayList<>();
-
+    private boolean wasPlayerAround(List<Exit> exits){
         for (Exit exit: exits){
             Location destination = exit.getDestination();
-            Actor actorAtDestination = destination.getActor();
-            if (actorAtDestination != null && this.canFollowActor(actorAtDestination)){
-
-                // prioritize player, if there is
-                if (actorAtDestination.hasCapability(StatusActor.IS_PLAYER)){
-                    return (IFollowable) actorAtDestination;
-                }
-                actors.add((IFollowable) actorAtDestination);
-            }
+            return destination == NPC.player.getPlayerPreviousLocation();
         }
 
-        if (!actors.isEmpty()) {
-           return actors.get(new Random().nextInt(actors.size()));
-        }
-        else {
-            return null;
-        }
-    }
-    @Override
-    public boolean isFollowingActorInExits(List<Exit> exits){
-        for (Exit exit : exits) {
-            Location destination = exit.getDestination();
-            Actor targetActor = destination.getActor();
-
-            if (targetActor == this.followingActor){
-                return true;
-            }
-
-        }
         return false;
-    }
-
-    @Override
-    public void setFollowingActor(IFollowable followable){
-        if(!this.followingActorAssigned){
-            this.followingActor = followable;
-            this.followingActorAssigned = true;
-            this.addCapability(StatusActor.FOLLOWING);
-        }
     }
 
 }

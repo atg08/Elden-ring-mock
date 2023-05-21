@@ -53,7 +53,10 @@ public class MerchantKale extends Actor {
             // create SellActions for each sellable weapon
             for (WeaponItem weaponItem: otherActor.getWeaponInventory()){
                 if (weaponItem.hasCapability(WeaponTradingAvailabilityStatus.SELLABLE)) {
-                    actions.add(new SellAction(weaponItem));
+                    Sellable sellable = (Sellable) weaponItem;
+                    if (sellable.isSellableToAnActor(this)){
+                        actions.add(new SellAction(weaponItem));
+                    }
                 }
             }
 

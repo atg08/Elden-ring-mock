@@ -15,6 +15,7 @@ import game.environments.siteoflostgrace.StormveilMainGate;
 import game.environments.siteoflostgrace.TableOfLostGrace;
 import game.environments.siteoflostgrace.TheFirstStep;
 import game.gameactors.MerchantKale;
+import game.gameactors.enemies.NPC;
 import game.gameactors.players.*;
 import game.grounds.Cliff;
 import game.grounds.Dirt;
@@ -168,7 +169,6 @@ public class Application {
 //		world.addGameMap(gameMap3);
 //		world.addGameMap(gameMap4);
 
-
 		Display display = new Display();
 
 		// BEHOLD, ELDEN RING
@@ -218,8 +218,8 @@ public class Application {
 
 //		world.addPlayer(player, gameMap.at(29, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
+		NPC.addPlayer(player);
 		world.addPlayer(player, gameMap.at(16, 3));
-
 
 		// since access to maps only in application better to get the values here
 		// door in Roundtable to door to limgrave

@@ -3,6 +3,7 @@ package game.weapons;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.gameactors.MerchantKale;
 import game.items.Rune;
 
 /**
@@ -42,6 +43,11 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     @Override
     public Rune getSellingPrice() {
         return new Rune(100);
+    }
+
+    @Override
+    public boolean isSellableToAnActor(Actor actor) {
+        return actor instanceof MerchantKale;
     }
 }
 

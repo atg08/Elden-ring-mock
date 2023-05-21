@@ -1,7 +1,9 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import game.items.Rune;
 
 public interface Sellable {
-    public Rune getSellingPrice();
+    Rune getSellingPrice();
+    boolean isSellableToAnActor(Actor actor);
 }

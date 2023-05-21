@@ -1,6 +1,5 @@
 package game.gameactors.allyorinvader;
 
-import edu.monash.fit2099.demo.conwayslife.Status;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -10,22 +9,19 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
-import game.gameactors.enemies.Enemy;
-import game.gameactors.enemies.IFollowable;
 import game.gameactors.enemies.NPC;
-import game.gameactors.players.Player;
 import game.items.Rune;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.utils.RandomNumberGenerator;
 
-public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFollowable {
-    private int minDeathRuneAmount = 1358;
-    private int maxDeathRuneAmount = 5578;
-    private Location previousLocation;
+public class Invader extends NPC implements Resettable, DeathRuneDroppper {
+    private final int minDeathRuneAmount = 1358;
+    private final int maxDeathRuneAmount = 5578;
 
     private ResetManager rm = ResetManager.getInstance();
 
@@ -39,7 +35,7 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
         this.addCapability(StatusActor.IS_INVADER);
         this.addWeaponToInventory(weapon);
 
-        this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(1, new AttackBehaviour(NPC.player));
         this.behaviours.put(3, new WanderBehaviour());
 
 
@@ -47,9 +43,6 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
-        // record invader's current location
-        this.previousLocation = map.locationOf(this);
-
         return super.playTurn(actions, lastAction, map, display);
     }
 
@@ -61,16 +54,6 @@ public class Invader extends NPC implements Resettable, DeathRuneDroppper, IFoll
     @Override
     public Rune getDeathRune() {
         return new Rune(RandomNumberGenerator.getRandomIntInRange(this.minDeathRuneAmount, this.maxDeathRuneAmount));
-    }
-
-    /**
-
-     Retrieves the player's previous location.
-     @return The player's previous location.
-     */
-    @Override
-    public Location getPlayerPreviousLocation(){
-        return this.previousLocation;
     }
 
     @Override

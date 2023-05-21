@@ -6,20 +6,22 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.gameactors.enemies.IFollowable;
-import game.gameactors.enemies.IFollower;
+import game.behaviours.Behaviour;
+import game.gameactors.StatusActor;
 
-/**
- * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
- * @see edu.monash.fit2099.demo.mars.Application
- *
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
- *
- */
+
 public class FollowBehaviour implements Behaviour {
+
+	private final Actor target;
+
+	/**
+	 * Constructor for FollowBehaviour class.
+	 *
+	 * @param subject the Actor to follow
+	 */
+	public FollowBehaviour(Actor subject) {
+		this.target = subject;
+	}
 
 
 	/**
@@ -31,50 +33,32 @@ public class FollowBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		//todo
-		System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-		// if this enemy has been following someone, follow him;
-		IFollower follower = (IFollower) actor;
-		IFollowable target = follower.getFollowingActor();
-
-		// else, find someone who this actor can follow
-//		if (target == null){
-//			System.out.println("===================================================");
-//			target = follower.getANewCandidateActorToFollow(map.locationOf(actor).getExits());
-//			System.out.println("aaaaaaaaaaaaaaaaaaaaa"+ target);
-//		}
-
-		// if there is no enemy to follow still or the location is the same, return null
-		if (target == null || target.getPlayerPreviousLocation() == map.locationOf((Actor) target))
+		System.out.println("============================");
+		if(!map.contains(target) || !map.contains(actor))
 			return null;
 
-		if(!map.contains((Actor) target) || !map.contains(actor))
-			return null;
-		
 		Location here = map.locationOf(actor);
-		Location there = map.locationOf((Actor) target);
+		Location there = map.locationOf(target);
 
 		int currentDistance = distance(here, there);
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
-
-				// note: if player or any followable stays in the same position from the previous iteration
-				// this if statement will always yield false -> cannot perform FollowBehaviour. -> performs ActionBehaviour
 				if (newDistance < currentDistance) {
-					follower.setFollowingActor(target);
-					System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+					actor.addCapability(StatusActor.FOLLOWING);
+					System.out.println("follows");
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}
 		}
+
 		return null;
 	}
 
 	/**
 	 * Compute the Manhattan distance between two locations.
-	 * 
+	 *
 	 * @param a the first location
 	 * @param b the first location
 	 * @return the number of steps between a and b if you only move in the four cardinal directions.

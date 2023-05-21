@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.behaviours.Behaviour;
+import game.gameactors.StatusActor;
+import game.gameactors.enemies.Enemy;
 
 /**
  * Created by:
@@ -30,6 +32,10 @@ public class WanderBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		if (actor.hasCapability(StatusActor.FOLLOWING)){
+			return null;
+		}
+
 		ArrayList<Action> actions = new ArrayList<>();
 		
 		for (Exit exit : map.locationOf(actor).getExits()) {
