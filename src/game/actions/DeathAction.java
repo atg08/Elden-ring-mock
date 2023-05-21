@@ -62,8 +62,9 @@ public class DeathAction extends Action {
 
         }
 
+
         // drop items & remove actor if needed
-        if (target.hasCapability(StatusActor.IS_NPC)){
+        if (target.hasCapability(StatusActor.IS_POB) || target.hasCapability(StatusActor.IS_NPC) ){
             // npc is dying
 
             // drop all items
@@ -82,7 +83,7 @@ public class DeathAction extends Action {
         }
 
         // transfer Rune if needed
-        if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && target.hasCapability(StatusActor.IS_NPC)) {
+        if (this.attacker.hasCapability(StatusActor.IS_PLAYER) && (target.hasCapability(StatusActor.IS_NPC) || target.hasCapability(StatusActor.IS_POB))) {
             // player kills enemy
             // when player kills enemy, runes should be directly transferred
             Player player = (Player) this.attacker;

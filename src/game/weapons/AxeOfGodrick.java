@@ -26,6 +26,7 @@ public class AxeOfGodrick extends WeaponItem implements Sellable{
     public AxeOfGodrick() {
         super("Axe of Godrick", 'T', 142, "chop", 84);
         this.addCapability(WeaponSkill.TARGETED_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
     @Override
