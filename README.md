@@ -5,3 +5,6 @@
 Team members: Satoshi Kashima, Tanul Gupta, Aditti Gupta
 
 ## Design Rationale
+
+## Contribution log
+https://docs.google.com/spreadsheets/d/1XwBDR87s39Gtv3NWy94DF-U9vQUq9DwdsreGggonu3s/edit#gid=846598609
