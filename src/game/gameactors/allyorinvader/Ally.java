@@ -43,7 +43,7 @@ public class Ally extends NPC implements Resettable {
 
     @Override
     public boolean canTarget(Actor subject) {
-        return subject.hasCapability(StatusActor.IS_ENEMY);
+        return subject.hasCapability(StatusActor.HOSTILE_TO_PLAYER);
     }
 
 

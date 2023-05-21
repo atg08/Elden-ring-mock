@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.gameactors.PlayerFollowingManager;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actions.AttackAction;
@@ -41,6 +42,7 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
     protected int despawnRate = 10;
     protected int maxRuneDrop;
     protected int minRuneDrop;
+    protected final PlayerFollowingManager playerFollowingManager;
 
     /**
      * Constructor for the Enemy class.
@@ -62,6 +64,8 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
         this.behaviours.put(2, new FollowBehaviour(NPC.player));
         this.behaviours.put(3, new WanderBehaviour());
 
+        this.playerFollowingManager = new PlayerFollowingManager(NPC.player);
+
 //        this.nextTurnShouldFollow = this.isPlayerAround()
 
 //        this.followingActor = this.getANewActorToFollow(exits);
@@ -79,12 +83,8 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (!this.hasCapability(StatusActor.FOLLOWING) && this.wasPlayerAround(map.locationOf(this).getExits())){
-            this.addCapability(StatusActor.FOLLOWING);
-        }
+        this.playerFollowingManager.updateFollowingStatusIfNeeded(this, map);
 
-        System.out.println("following status should be true foreever once it become true");
-        System.out.println(this.hasCapability(StatusActor.FOLLOWING));
 
         if (!this.hasCapability(StatusActor.FOLLOWING) && RandomNumberGenerator.getBooleanProbability(this.despawnRate)){
             if (this.hasCapability(StatusActor.CAN_DESPAWN)) {
@@ -110,7 +110,7 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
         ActionList actions =  new ActionList();
 
         // add targeted attack if hostile to enemy
-        if (otherActor.hasCapability(StatusActor.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.IS_PLAYER)){
 
             // for intrinsic weapon - assumption: player's intrinsic weapon can only use targeted action
             actions.add(new AttackAction(this, direction));
@@ -199,15 +199,6 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
      */
     public int getMaxRune(){
         return this.maxRuneDrop;
-    }
-
-    private boolean wasPlayerAround(List<Exit> exits){
-        for (Exit exit: exits){
-            Location destination = exit.getDestination();
-            return destination == NPC.player.getPlayerPreviousLocation();
-        }
-
-        return false;
     }
 
 }

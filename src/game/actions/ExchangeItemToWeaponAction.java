@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.Exchangeable;
 
+import java.io.WriteAbortedException;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ public class ExchangeItemToWeaponAction extends Action{
         this.item = item;
         this.trader = trader;
     }
+
     @Override
     public String execute(Actor actor, GameMap map) {
 
