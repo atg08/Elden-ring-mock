@@ -8,13 +8,14 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ActivateAction;
 import game.actions.RestAction;
 import game.gameactors.StatusActor;
-import game.gameactors.players.Player;
 
 
 /**
 
- A class representing a site of lost grace, a type of ground where a player can rest and set a new respawn point.
- @author tanul
+ * A class representing a site of lost grace, a type of ground where a player can rest and set a new respawn point.
+ * @author tanul
+ * @version 1.0
+ * @see Ground
  */
 public abstract class SiteOfLostGrace extends Ground {
 

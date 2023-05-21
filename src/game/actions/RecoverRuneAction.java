@@ -9,6 +9,8 @@ import game.items.PlayerRuneManager;
 /**
  * Action to allow an actor to pick up previously dropped runes.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see PickUpAction
  */
 public class RecoverRuneAction extends PickUpAction {
     /**

@@ -11,7 +11,7 @@ import game.items.Rune;
 /**
  * A simple weapon that can be used to attack the enemy.
  * It deals 75 damage with 70% hit rate
- * Created by:
+ *
  * @author Aditti
  * @version 1.0
  * @see WeaponItem

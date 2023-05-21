@@ -11,7 +11,8 @@ import game.reset.ResetManager;
 /**
  * Represents an action where an actor rests at a site of lost grace.
  * @author tanul
- * @version 1
+ * @version 1.0
+ * @see Action
  */
 public class RestAction extends Action {
 

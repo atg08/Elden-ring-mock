@@ -16,7 +16,9 @@ import game.gameactors.enemies.graveyard.Skeleton;
  * An Action to attack another Actor.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Action
  *
  */
 public class AttackAction extends Action {

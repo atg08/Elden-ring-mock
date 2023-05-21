@@ -1,7 +1,15 @@
 package game.gameactors.enemies.fire;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.gameactors.enemies.earth.EarthEnemy;
 
+/**
+ * A powerful enemy of the player that can perform a powerful burn attack
+ *
+ * @author Tanul , Satoshi , Aditti
+ * @version 1.0
+ * @see FireEnemy
+ */
 public class BlackflameMonk extends FireEnemy{
     /**
      * Constructor for the Enemy class.

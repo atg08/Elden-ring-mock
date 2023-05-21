@@ -12,7 +12,8 @@ import game.gameactors.enemies.Enemy;
  Abstract class representing a game environment, which is a type of Ground object.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Ground
  */
 
 public abstract class Environment extends Ground {

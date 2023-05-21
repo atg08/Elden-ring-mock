@@ -11,6 +11,7 @@ import game.utils.RandomNumberGenerator;
  * The Barrack class represents a type of environment in the game, that spawns Godrick Soldiers
  * It extends the Environment class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Environment
  */

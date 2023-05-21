@@ -11,6 +11,7 @@ import game.reset.Resettable;
  * The CastleEnemy class is an abstract class that extends the Enemy class and implements the Resettable interface.
  * It represents enemies in a castle in a game.
  *
+ * @author Aditti
  * @see Enemy
  * @see Resettable
  * @version 1.0

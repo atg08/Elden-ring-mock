@@ -12,6 +12,7 @@ import game.utils.RandomNumberGenerator;
 /**
  * Represents a Golden Rune, which is a consumable item.
  *
+ * @author Satoshi
  * @version 1.0
  * @see Item
  * @see Consumable

@@ -15,7 +15,8 @@ import game.utils.RandomNumberGenerator;
  Class representing a Graveyard environment, which is a type of Environment object.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
+ * @see Environment
  */
 public class Graveyard extends Environment{
     /**

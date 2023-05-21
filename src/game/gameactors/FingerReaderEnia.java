@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.ExchangeItemToWeaponAction;
-import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.gameactors.players.Player;
 import game.items.RemembranceOfTheGrafted;
@@ -18,6 +17,7 @@ import game.weapons.WeaponTradingAvailabilityStatus;
 /**
  * Represents a Finger Reader Enia, a type of Actor in the game.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Actor
  */

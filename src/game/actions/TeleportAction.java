@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.doors.GoldenFogDoor;
 import game.gameactors.players.Player;
 
 import java.util.HashMap;
@@ -13,6 +12,7 @@ import java.util.HashMap;
  * The TeleportAction class represents an action that allows the player to teleport to different locations.
  * It extends the Action class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Action
  */

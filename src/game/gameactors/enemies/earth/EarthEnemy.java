@@ -7,6 +7,15 @@ import game.gameactors.StatusActor;
 import game.gameactors.enemies.Enemy;
 import game.reset.Resettable;
 
+/**
+ * The EarthEnemy class represents an abstract enemy that belongs to the Earth type.
+ * It extends the Enemy class and implements the Resettable interface.
+ *
+ * @author Aditti Gupta
+ * @version 1.0
+ * @see Enemy
+ * @see Resettable
+ */
 public abstract class EarthEnemy extends Enemy implements Resettable {
     /**
      * Constructor for the EarthEnemy abstract class.

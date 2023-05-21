@@ -10,8 +10,10 @@ import game.items.Rune;
 /**
  * The GraftedDragon class represents a weapon item called "Grafted Dragon" that extends the WeaponItem class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see WeaponItem
+ * @see Sellable
  */
 public class GraftedDragon extends WeaponItem implements Sellable{
     /**

@@ -9,6 +9,7 @@ import game.items.Consumable;
  * The ConsumeAction class represents an action where an actor consumes a consumable object.
  * It extends the Action class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Action
  */

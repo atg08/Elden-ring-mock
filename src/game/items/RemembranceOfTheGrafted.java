@@ -14,6 +14,7 @@ import java.util.List;
  * It is a subclass of the {@code Item} class and implements the {@code Exchangeable} interface.
  * It contains a list of available weapons for exchange.
  *
+ * @author Satoshi
  * @version 1.0
  * @see Item
  * @see Exchangeable

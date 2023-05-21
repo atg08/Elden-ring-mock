@@ -11,6 +11,7 @@ import game.utils.RandomNumberGenerator;
  * The Cage class represents a specific type of environment called Cage, that spawns Dogs,
  * which is a subclass of the Environment class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Environment
  */

@@ -5,7 +5,7 @@ import game.weapons.Club;
 
  * This is the concrete class for Wretch players
  * @author tanul, aditti, satoshi
- * @version 1
+ * @version 1.0
  * @see Player
  */
 public class Wretch extends Player{

@@ -6,7 +6,7 @@ import java.util.Random;
  * A random number generator
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
  *
  */
 public class RandomNumberGenerator {

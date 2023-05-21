@@ -4,6 +4,7 @@ package game.environments.siteoflostgrace;
  * The StormveilMainGate class represents the main gate of the Stormveil location.
  * It extends the SiteOfLostGrace class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see SiteOfLostGrace
  */

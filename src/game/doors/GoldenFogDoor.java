@@ -2,19 +2,19 @@ package game.doors;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.positions.World;
-import game.actions.AttackAction;
 import game.actions.TeleportAction;
 import game.gameactors.StatusActor;
-import game.gameactors.players.Player;
 
 
 /**
  * The GoldenFogDoor class represents a special type of Ground called a golden fog door.
  * It extends the Ground class and implements specific behavior for this type of door.
+ *
+ * @author Tanul, Satoshi, Aditti
+ * @version 1.0
+ * @see Ground
  */
 public class GoldenFogDoor extends Ground {
 

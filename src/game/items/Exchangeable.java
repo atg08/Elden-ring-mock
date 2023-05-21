@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * The Exchangeable interface represents an entity that can provide a list of available weapons for exchange.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see WeaponItem
  */

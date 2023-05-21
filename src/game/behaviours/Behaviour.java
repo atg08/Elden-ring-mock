@@ -7,7 +7,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 /**
  * Created by:
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Tanul, Satoshi, Aditti
+ * @version 1.0
  *
  */
 public interface Behaviour {

@@ -12,6 +12,8 @@ import game.weapons.Purchasable;
 /**
  * Action for a player to purchase a weapon from a trader.
  * @author Satoshi Kashima
+ * @version 1.0
+ * @see Action
  */
 public class PurchaseAction extends Action {
     /**

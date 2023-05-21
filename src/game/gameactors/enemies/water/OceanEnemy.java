@@ -12,7 +12,7 @@ import game.gameactors.enemies.Enemy;
  * It extends the Enemy class and implements the Resettable interface.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
  * @see Enemy
  * @see Resettable
  */

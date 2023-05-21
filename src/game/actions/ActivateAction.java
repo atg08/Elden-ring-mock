@@ -9,6 +9,7 @@ import game.environments.siteoflostgrace.SiteOfLostGrace;
  * The ActivateAction class represents an action to activate a lost grace.
  * It extends the Action class.
  *
+ * @author Tanul, Satoshi, Aditti
  * @version 1.0
  * @see Action
  */

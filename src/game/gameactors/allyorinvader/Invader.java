@@ -4,14 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.gameactors.PlayerFollowingManager;
 import game.gameactors.StatusActor;
@@ -23,7 +20,6 @@ import game.reset.Resettable;
 import game.utils.RandomNumberGenerator;
 import game.weapons.WeaponSkill;
 
-import java.util.List;
 
 /**
  * The Invader class represents an invader character in a game. It extends the NPC class and implements the Resettable,

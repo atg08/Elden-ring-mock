@@ -36,8 +36,6 @@ import java.util.List;
  * @version 1.0.0
  * @see NPC
  * @see DeathRuneDroppper
- * @see IFollowable
- * @see IFollower
  */
 
 public abstract class Enemy extends NPC implements DeathRuneDroppper{

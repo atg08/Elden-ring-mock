@@ -12,7 +12,7 @@ import game.gameactors.enemies.Enemy;
  * This class represents a Wind-type enemy, which extends the abstract class Enemy and implements the Resettable interface.
  *
  * @author Tanul , Satoshi , Aditti
- * @version 1.0.0
+ * @version 1.0
  * @see Enemy
  * @see Resettable
  */
