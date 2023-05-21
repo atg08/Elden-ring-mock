@@ -1,21 +1,13 @@
 package game.items;
 
-import game.reset.ResetManager;
-
-/**
- * The RuneManager class manages the player's rune and provides operations to increase, decrease, and reset the rune.
- *
- * @version 1.0
- * @see Rune
- */
-public class RuneManager {
-    private static RuneManager instance;
+public class PlayerRuneManager {
+    private static PlayerRuneManager instance;
 
     private Rune playerRune;
 
     private Rune droppedRune;
 
-    private RuneManager(){
+    private PlayerRuneManager(){
         playerRune = new Rune();
     };
 
@@ -26,9 +18,9 @@ public class RuneManager {
      Returns the instance of this reset manager. If it doesn't exist yet, it creates a new instance and returns it.
      @return the instance of this reset manager
      */
-    public static RuneManager getInstance(){
+    public static PlayerRuneManager getInstance(){
         if (instance == null){
-            instance = new RuneManager();
+            instance = new PlayerRuneManager();
         }
         return instance;
     }
@@ -57,36 +49,18 @@ public class RuneManager {
         }
     }
 
-    /**
-     * Sets the dropped rune.
-     *
-     * @param droppedRune the Rune object that has been dropped
-     */
     public void setDroppedRune(Rune droppedRune) {
         this.droppedRune = droppedRune;
     }
 
-    /**
-     * Retrieves the player's rune.
-     *
-     * @return the player's Rune object
-     */
     public Rune getPlayerRune() {
         return playerRune;
     }
 
-    /**
-     * Retrieves the dropped rune.
-     *
-     * @return the dropped Rune object
-     */
     public Rune getDroppedRune() {
         return droppedRune;
     }
 
-    /**
-     * Resets the player's rune to a new Rune object.
-     */
     public void resetPlayerRune(){
         playerRune = new Rune();
     }

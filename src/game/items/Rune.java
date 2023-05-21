@@ -55,14 +55,6 @@ public class Rune extends Item implements Resettable{
         this.amount += amount;
     }
 
-    /**
-     * Increases the amount of this type of rune by the amount of another Rune object.
-     *
-     * @param rune The Rune object to add to this one.
-     */
-    public void increaseRune(Rune rune){
-        this.amount += rune.getAmount();
-    }
 
     /**
      * Returns the amount of this type of rune.
@@ -73,20 +65,6 @@ public class Rune extends Item implements Resettable{
         return this.amount;
     }
 
-    /**
-     * Decreases the amount of this type of rune by the amount of another Rune object.
-     *
-     * @param rune The Rune object to subtract from this one.
-     * @return True if the operation was successful (i.e. the amount of this type of rune is not negative after the operation), false otherwise.
-     */
-    public boolean decreaseRune(Rune rune){
-        if (this.amount - rune.getAmount() >= 0){
-            this.amount -= rune.getAmount();
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * Sets the location of the rune.

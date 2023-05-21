@@ -43,7 +43,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 */
 	protected Rune runes = new Rune();
 
-	protected RuneManager runeManager = RuneManager.getInstance();
+	protected PlayerRuneManager runeManager = PlayerRuneManager.getInstance();
 
 	/**
 	 * The previous location of the player.

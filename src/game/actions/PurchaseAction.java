@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.gameactors.MerchantKale;
 import game.gameactors.players.Player;
-import game.items.RuneManager;
+import game.items.PlayerRuneManager;
 import game.weapons.Purchasable;
 
 /**
@@ -24,7 +24,7 @@ public class PurchaseAction extends Action {
      */
     private MerchantKale trader;
 
-    RuneManager rm = RuneManager.getInstance();
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
 
 
     /**

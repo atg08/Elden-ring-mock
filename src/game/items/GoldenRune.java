@@ -2,17 +2,14 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
-import game.actions.ConsumeAction;
 import game.gameactors.StatusActor;
 import game.gameactors.players.Player;
-import game.utils.RandomNumberGenerator;
-
 import game.utils.RandomNumberGenerator;
 
 public class GoldenRune extends Item implements Consumable{
 
 
-    RuneManager rm = RuneManager.getInstance();
+    PlayerRuneManager rm = PlayerRuneManager.getInstance();
     boolean consumed = false;
     final int MAX_AMOUNT = 100000;
     final int MIN_AMOUNT = 200;
