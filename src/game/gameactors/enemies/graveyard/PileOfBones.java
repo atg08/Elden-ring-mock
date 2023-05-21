@@ -22,6 +22,9 @@ import game.utils.RandomNumberGenerator;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Actor
+ * @see Resettable
+ * @see DeathRuneDroppper
  */
 public class PileOfBones extends Actor implements Resettable, DeathRuneDroppper {
 

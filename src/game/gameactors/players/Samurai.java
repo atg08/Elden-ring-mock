@@ -4,9 +4,10 @@ import game.weapons.Uchigatana;
 
 /**
 
- This is the concrete class for Samurai
- @author tanul, aditti, satoshi
- @version 1
+ * This is the concrete class for Samurai
+ * @author tanul, aditti, satoshi
+ * @version 1
+ * @see Player
  */
 public class Samurai extends Player{
     /**

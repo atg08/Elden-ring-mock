@@ -12,6 +12,12 @@ import game.actions.SellAction;
 import game.gameactors.players.Player;
 import game.items.RemembranceOfTheGrafted;
 
+/**
+ * Represents a Finger Reader Enia, a type of Actor in the game.
+ *
+ * @version 1.0
+ * @see Actor
+ */
 public class FingerReaderEnia extends Actor {
     /**
      * Constructor.
@@ -27,11 +33,29 @@ public class FingerReaderEnia extends Actor {
         this.addCapability(StatusActor.CANNOT_BE_ATTACKED);
     }
 
+    /**
+     * Plays a turn for the FingerReaderEnia.
+     *
+     * @param actions    the list of available actions for the FingerReaderEnia
+     * @param lastAction the last action performed
+     * @param map        the GameMap object representing the game map
+     * @param display    the Display object used to display the game
+     * @return the Action to be performed by the FingerReaderEnia
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return null;
     }
 
+    /**
+     * Returns a list of allowable actions for the FingerReaderEnia towards another Actor.
+     *
+     * @param otherActor the other Actor involved in the interaction
+     * @param direction  the direction of the interaction
+     * @param map        the GameMap object representing the game map
+     * @return an ActionList containing allowable actions for the FingerReaderEnia
+     * @see ActionList
+     */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(StatusActor.IS_PLAYER)){

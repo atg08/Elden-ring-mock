@@ -32,6 +32,11 @@ import java.util.ArrayList;
  * Created by:
  * @author Adrian Kristanto
  * Modified by: Tanul, Satoshi, Aditti
+ * @see Actor
+ * @see Resettable
+ * @see Respawnable
+ * @see DeathRuneDroppper
+ * @see IFollowable
  *
  */
 public abstract class Player extends Actor implements Resettable, Respawnable, DeathRuneDroppper, IFollowable {

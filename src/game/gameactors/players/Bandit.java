@@ -5,13 +5,11 @@ import game.weapons.GreatKnife;
 
 /**
 
- The Bandit class represents a player of the game who is a bandit.
-
- It extends the Player class and adds a GreatKnife weapon to the inventory.
-
- @author aditti, tanul, Satoshi
-
- @version 2
+ * The Bandit class represents a player of the game who is a bandit.
+ * It extends the Player class and adds a GreatKnife weapon to the inventory.
+ * @author aditti, tanul, Satoshi
+ * @version 2
+ * @see Player
  */
 public class Bandit extends Player{
     /**

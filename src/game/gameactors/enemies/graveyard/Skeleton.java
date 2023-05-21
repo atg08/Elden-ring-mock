@@ -15,6 +15,10 @@ import game.gameactors.enemies.Revivable;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Enemy
+ * @see Resettable
+ * @see Revivable
+ * @see DeathRuneDroppper
  */
  public abstract class Skeleton extends Enemy implements Revivable, Resettable, DeathRuneDroppper {
     /**

@@ -13,6 +13,8 @@ import game.gameactors.enemies.Enemy;
  *
  * @author Tanul , Satoshi , Aditti
  * @version 1.0.0
+ * @see Enemy
+ * @see Resettable
  */
 public abstract class OceanEnemy extends Enemy implements Resettable{
 
