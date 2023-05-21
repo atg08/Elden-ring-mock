@@ -11,6 +11,8 @@ import game.utils.RandomNumberGenerator;
 
 public class GoldenRune extends Item implements Consumable{
 
+
+    RuneManager rm = RuneManager.getInstance();
     boolean consumed = false;
     final int MAX_AMOUNT = 100000;
     final int MIN_AMOUNT = 200;
@@ -41,7 +43,7 @@ public class GoldenRune extends Item implements Consumable{
 
         Player player = (Player) actor;
         Rune droppedRune = this.getRuneAmount();
-        player.increaseRune(droppedRune);
+        rm.increaseRune(droppedRune);
         this.updateStatus();
 
         // remove golden rune from the inventory

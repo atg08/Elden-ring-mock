@@ -44,6 +44,8 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 */
 	protected Rune runes = new Rune();
 
+	protected RuneManager runeManager = RuneManager.getInstance();
+
 	/**
 	 * The previous location of the player.
 	 */
@@ -67,8 +69,9 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		this.addCapability(StatusActor.CAN_REST);
 		this.addItemToInventory(new FlaskOfCrimsonTears());
 		rm.registerResettable(this);
-		this.addItemToInventory(new Rune());  // player always starts with 0 rune
+//		this.addItemToInventory(new Rune(100));  // player always starts with 0 rune
 		maxHP = hitPoints;
+		runeManager.increaseRune(new Rune());
 
 	}
 
@@ -84,7 +87,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-		display.println(this.name + " (" + this.hitPoints +"/" + this.getMaxHp() + ")" + ", runes: " + getExistingRune().getAmount());
+		display.println(this.name + " (" + this.hitPoints +"/" + this.getMaxHp() + ")" + ", runes: " + runeManager.getPlayerRune().getAmount());
 
 		// record player's current location
 		this.previousLocation = map.locationOf(this);
@@ -161,30 +164,32 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	 @return The existing Rune object, or null if there is none.
 	 */
-	public Rune getExistingRune(){
-		Rune existingRune = (Rune) this.getItemInventory().
-				stream()
-				.filter(item -> "rune".equals(item.toString()))
-				.findFirst()
-				.orElse(null);
-
-		return existingRune;
-	}
+//	public Rune getExistingRune(){
+//
+//
+//		Rune existingRune = (Rune) this.getItemInventory().
+//				stream()
+//				.filter(item -> "rune".equals(item.toString()))
+//				.findFirst()
+//				.orElse(null);
+//
+//		return existingRune;
+//	}
 	/**
 
 	 Increases the quantity of the given Rune object in the player's inventory.
 
 	 @param rune The Rune object to increase.
 	 */
-	public void increaseRune(Rune rune){
-
-		Rune existingRune = this.getExistingRune();
-		// Note: it shouldn't be null because we instantiate new Rune everytime we instantiate a player
-		if (existingRune != null){
-			existingRune.increaseRune(rune);
-		}
-
-	}
+//	public void increaseRune(Rune rune){
+//
+//		Rune existingRune = this.getExistingRune();
+//		// Note: it shouldn't be null because we instantiate new Rune everytime we instantiate a player
+//		if (existingRune != null){
+//			existingRune.increaseRune(rune);
+//		}
+//
+//	}
 
 
 	/**
@@ -193,10 +198,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 	 @param rune The Rune object to decrease.
 	 @return True if the Rune was successfully decreased, false otherwise.
 	 */
-	public boolean decreaseRune(Rune rune){
-		Rune existingRune = getExistingRune();
-		return existingRune.decreaseRune(rune);
-	}
+//	public boolean decreaseRune(Rune rune){
+//		Rune existingRune = getExistingRune();
+//		return existingRune.decreaseRune(rune);
+//	}
 
 
 	/**
@@ -214,7 +219,8 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 				exception.printStackTrace();
 			}
 		}
-		this.addItemToInventory(new Rune());
+//		this.removeItemFromInventory(getExistingRune());
+//		this.addItemToInventory(new Rune());
 		rm.run(map,false);
 
 		map.moveActor(this, this.getRespawnLocation());
@@ -254,16 +260,19 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	@Override
 	public Rune getDeathRune(){
-		Rune droppedRune = this.getExistingRune();
+
+		runeManager.setDroppedRune(runeManager.getPlayerRune());
+		runeManager.resetPlayerRune();
+//		Rune droppedRune = this.getExistingRune();
 
 		// ensure that rune can be dropped; note we don't need to toggle back this because when this rune is picked
 		// up, its amount will be added to another new instance of Rune which is not portable
-		droppedRune.togglePortability();
+		runeManager.getDroppedRune().togglePortability();
 
 		// register this rune as resettable
-		droppedRune.registerAsResettable();
+		runeManager.getDroppedRune().registerAsResettable();
 
-		return droppedRune;
+		return runeManager.getDroppedRune();
 	}
 
 	public RemembranceOfTheGrafted getExistingRemembranceOfTheGrafted(){

@@ -14,6 +14,7 @@ import game.gameactors.enemies.Enemy;
 import game.gameactors.enemies.graveyard.PileOfBones;
 import game.gameactors.players.Player;
 import game.items.Rune;
+import game.items.RuneManager;
 
 import static game.gameactors.EnemyType.EARTH_TYPE;
 
@@ -26,6 +27,7 @@ import static game.gameactors.EnemyType.EARTH_TYPE;
  */
 public class DeathAction extends Action {
     private final Actor attacker;
+    private RuneManager  rm = RuneManager.getInstance();
 
 //    private ResetManager rm = ResetManager.getInstance();
 
@@ -56,6 +58,7 @@ public class DeathAction extends Action {
             // Player is dying
             Player player = (Player) target;
             String dropRuneMessage = new DropRuneAction().execute(player, map);
+
             player.respawn(map);
 
             result += System.lineSeparator() + dropRuneMessage;
@@ -93,7 +96,7 @@ public class DeathAction extends Action {
                result +=  System.lineSeparator() + this.attacker + " has been healed to their maxHP";
             }
             Rune droppedRune = enemy.getDeathRune();
-            player.increaseRune(droppedRune);
+            rm.increaseRune(droppedRune);
             droppedRuneAmount = droppedRune.getAmount();
             result += System.lineSeparator() + this.attacker + " collects " + droppedRuneAmount + " runes";
         }

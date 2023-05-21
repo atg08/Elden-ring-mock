@@ -1,8 +1,13 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.RecoverRuneAction;
+import game.gameactors.StatusActor;
+import game.gameactors.players.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -44,6 +49,10 @@ public class Rune extends Item implements Resettable{
         super("rune", '$', false);
         this.amount = amount;
 
+    }
+
+    public void setAmount(int amount) {
+        this.amount += amount;
     }
 
     /**
@@ -103,7 +112,7 @@ public class Rune extends Item implements Resettable{
      */
     @Override
     public String reset(GameMap map, boolean rest) {
-        if (this.checkForRemoval()){
+        if (!rest && this.checkForRemoval()){
             runeLocation.removeItem(this);
             return "rune removed from the map";
         }
@@ -130,4 +139,9 @@ public class Rune extends Item implements Resettable{
         return false;
     }
 
+
+    @Override
+    public PickUpAction getPickUpAction(Actor actor) {
+        return new RecoverRuneAction(this);
+    }
 }
