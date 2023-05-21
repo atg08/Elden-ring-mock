@@ -44,7 +44,6 @@ public class FollowBehaviour implements Behaviour {
 
 		// check actor is supposed to follow
 		if (!actor.hasCapability(StatusActor.FOLLOWING)){
-			System.out.println("===================================");
 			return null;
 		}
 

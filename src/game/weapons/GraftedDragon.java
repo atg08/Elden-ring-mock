@@ -23,6 +23,7 @@ public class GraftedDragon extends WeaponItem implements Sellable{
     public GraftedDragon() {
         super("Grafted Dragon", 'N', 89, "bite", 90 );
         this.addCapability(WeaponSkill.TARGETED_ATTACK);
+        this.addCapability(WeaponTradingAvailabilityStatus.SELLABLE);
     }
 
     @Override

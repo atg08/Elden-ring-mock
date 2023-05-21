@@ -160,7 +160,7 @@ public abstract class Enemy extends NPC implements DeathRuneDroppper{
 //            return true;
 //        }
 
-        if (otherActor.hasCapability(StatusActor.IS_ENEMY)){
+        if (otherActor.hasCapability(StatusActor.IS_ENEMY) && !otherActor.hasCapability(StatusActor.IS_POB)){
             // if otherActor is an enemy of not same type, Enemy can attack it
             List<EnemyType> actorTypeList = this.findCapabilitiesByType(EnemyType.class);
             List<EnemyType> otherActorTypeList = otherActor.findCapabilitiesByType(EnemyType.class);
