@@ -166,7 +166,7 @@ public class Application {
 		GameMap gameMap4 = new GameMap(groundFactory4, bossRoom);
 
 		world.addGameMap(gameMap);
-		world.addGameMap(gameMap2);
+//		world.addGameMap(gameMap2);
 //		world.addGameMap(gameMap3);
 //		world.addGameMap(gameMap4);
 
@@ -218,11 +218,11 @@ public class Application {
 		MerchantKale kale = new MerchantKale();
 		FingerReaderEnia fre = new FingerReaderEnia();
 
-//		world.addPlayer(player, gameMap.at(13, 4));
+		world.addPlayer(player, gameMap.at(13, 4));
 		world.addPlayer(kale, gameMap.at(40, 12));
 		world.addPlayer(fre, gameMap.at(16, 5));
 		NPC.addPlayer(player);
-		world.addPlayer(player, gameMap.at(29, 0));
+//		world.addPlayer(player, gameMap.at(29, 0));
 
 		// since access to maps only in application better to get the values here
 		// door in Roundtable to door to limgrave

@@ -25,7 +25,10 @@ public class PlayerFollowingManager {
     private boolean wasPlayerAround(List<Exit> exits){
         for (Exit exit: exits){
             Location destination = exit.getDestination();
-            return destination == this.player.getPlayerPreviousLocation();
+            if (destination.getActor() == this.player){
+                return true;
+            };
+//            return destination == this.player.getPlayerPreviousLocation();
         }
 
         return false;
