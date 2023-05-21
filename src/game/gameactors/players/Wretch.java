@@ -16,5 +16,6 @@ public class Wretch extends Player{
     public Wretch() {
         super( 414);
         addWeaponToInventory(new Club());
+        this.originalWeapon = new Club();
     }
 }

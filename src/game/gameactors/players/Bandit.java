@@ -1,6 +1,7 @@
 package game.gameactors.players;
 
 import game.weapons.GreatKnife;
+import game.weapons.Uchigatana;
 
 
 /**
@@ -22,6 +23,7 @@ public class Bandit extends Player{
     public Bandit() {
         super( 414);
         this.addWeaponToInventory(new GreatKnife());
+        this.originalWeapon = new GreatKnife();
     }
 
 

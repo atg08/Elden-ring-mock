@@ -36,6 +36,11 @@ public class FollowBehaviour implements Behaviour {
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
 
+		// check actor is supposed to follow
+		if (!actor.hasCapability(StatusActor.FOLLOWING)){
+			return null;
+		}
+
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 

@@ -17,6 +17,7 @@ public class Samurai extends Player{
     public Samurai() {
         super( 455);
         addWeaponToInventory(new Uchigatana());
+        this.originalWeapon = new Uchigatana();
     }
 
 }

@@ -9,5 +9,6 @@ public class Astrologer extends Player{
     public Astrologer() {
         super(396);
         addWeaponToInventory(new Uchigatana());
+        this.originalWeapon = new Uchigatana();
     }
 }

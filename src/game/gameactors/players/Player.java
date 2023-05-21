@@ -55,6 +55,8 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 
 	private static ArrayList<GameMap> mapsAccessible = new ArrayList<>();
 
+	protected WeaponItem originalWeapon;
+
 
 	/**
 	 * Constructs a Player object with the specified number of hitpoints.
@@ -221,6 +223,10 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		}
 //		this.removeItemFromInventory(getExistingRune());
 //		this.addItemToInventory(new Rune());
+		if (this.getWeaponInventory().size() == 0){
+			this.addWeaponToInventory(this.originalWeapon);
+		}
+
 		rm.run(map,false);
 
 		map.moveActor(this, this.getRespawnLocation());
