@@ -5,10 +5,11 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.weapons.AxeOfGodrick;
 import game.weapons.GraftedDragon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RemembranceOfTheGrafted extends Item implements Exchangeable{
-    List<WeaponItem> availableWeaponsForExchange;
+    List<WeaponItem> availableWeaponsForExchange = new ArrayList<>();
 
     /***
      * Constructor.

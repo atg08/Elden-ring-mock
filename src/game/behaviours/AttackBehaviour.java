@@ -49,12 +49,6 @@ public class AttackBehaviour implements Behaviour {
     // assume enemy does not own any weapons with a special skill (like Uchigatana)
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        System.out.println("x and y");
-        System.out.println(map.locationOf(this.player).x() + " "  +  map.locationOf(this.player).y());
-        System.out.println(this.player.getPlayerPreviousLocation().x() + " " +  this.player.getPlayerPreviousLocation().y());
-        System.out.println(map.locationOf(this.player) != this.player.getPlayerPreviousLocation());
-        System.out.println(map.locationOf(this.player).hashCode());
-        System.out.println(this.player.getPlayerPreviousLocation().hashCode());
         if (actor.hasCapability(StatusActor.FOLLOWING) && map.locationOf(this.player) != this.player.getPlayerPreviousLocation()){
             return null;
         }

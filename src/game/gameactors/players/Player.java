@@ -69,6 +69,7 @@ public abstract class Player extends Actor implements Resettable, Respawnable, D
 		this.addItemToInventory(new Rune());  // player always starts with 0 rune
 		maxHP = hitPoints;
 
+		this.addItemToInventory(new RemembranceOfTheGrafted());  // start with a sample RemembranceOfTheGrafted
 	}
 
 	/**

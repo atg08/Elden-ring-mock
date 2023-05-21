@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ExchangeItemToWeaponAction extends Action{
-    Random rand;
+    Random rand = new Random();
     Item item;
     Actor trader;
 

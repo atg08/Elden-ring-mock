@@ -33,7 +33,6 @@ public class FollowBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		System.out.println("============================");
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
 
@@ -47,7 +46,6 @@ public class FollowBehaviour implements Behaviour {
 				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
 					actor.addCapability(StatusActor.FOLLOWING);
-					System.out.println("follows");
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}

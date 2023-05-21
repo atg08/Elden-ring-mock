@@ -14,6 +14,7 @@ import game.environments.*;
 import game.environments.siteoflostgrace.StormveilMainGate;
 import game.environments.siteoflostgrace.TableOfLostGrace;
 import game.environments.siteoflostgrace.TheFirstStep;
+import game.gameactors.FingerReaderEnia;
 import game.gameactors.MerchantKale;
 import game.gameactors.enemies.NPC;
 import game.gameactors.players.*;
@@ -215,9 +216,11 @@ public class Application {
 
 
 		MerchantKale kale = new MerchantKale();
+		FingerReaderEnia fre = new FingerReaderEnia();
 
 //		world.addPlayer(player, gameMap.at(29, 0));
 //		world.addPlayer(kale, gameMap.at(40, 12));
+		world.addPlayer(fre, gameMap.at(16, 5));
 		NPC.addPlayer(player);
 		world.addPlayer(player, gameMap.at(16, 3));
 
