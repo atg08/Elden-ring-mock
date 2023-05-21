@@ -13,6 +13,7 @@ import game.actions.DespawnAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.gameactors.PlayerFollowingManager;
 import game.gameactors.StatusActor;
 import game.gameactors.enemies.DeathRuneDroppper;
 import game.gameactors.enemies.NPC;
