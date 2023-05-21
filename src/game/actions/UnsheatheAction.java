@@ -3,8 +3,11 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.gameactors.EnemyType;
+import game.gameactors.enemies.graveyard.PileOfBones;
+import game.gameactors.enemies.graveyard.Skeleton;
 
 import java.util.Random;
 
@@ -73,7 +76,10 @@ public class UnsheatheAction extends Action {
         if (!target.isConscious() && !target.hasCapability(EnemyType.SKELETON_TYPE)) {
             result += new DeathAction(actor).execute(target, map);
         }else if (!target.isConscious() && target.hasCapability(EnemyType.SKELETON_TYPE)) {
-            result += new TurnIntoPileOfBonesAction().execute(target, map);
+            Location location = map.locationOf(target);
+            map.removeActor(target);
+            map.addActor(new PileOfBones((Skeleton) target), location);
+            result += target + " turns into a Pile Of Bones";
         }
 
         return result;
