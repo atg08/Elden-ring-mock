@@ -1,10 +1,21 @@
-# FIT2099 Assignment (Semester 1, 2023)
-# Elden Ring
 
-## XX_LabYYTeamZZ
-Team members: Satoshi Kashima, Tanul Gupta, Aditti Gupta
+# Elden Ring mock game
+Elden Ring-Inspired Java Game
 
-## Design Rationale
+# Overview
+This repository hosts a collaborative project to develop a game inspired by Elden Ring, implemented in Java. The game draws inspiration from the rich lore, immersive world, and challenging gameplay that Elden Ring is known for. Our goal is to create a captivating gaming experience while showcasing our Java programming skills.
 
-## Contribution log
-https://docs.google.com/spreadsheets/d/1XwBDR87s39Gtv3NWy94DF-U9vQUq9DwdsreGggonu3s/edit#gid=846598609
+# Features
+Engage in epic battles with formidable foes in a dark fantasy world
+Multiple maps interconnected by doors
+Encounter a deep and immersive storyline influenced by Elden Ring's narrative style with multiple weapons, enemies and avatars
+No GUI included, just a plain map displayed on the terminal
+
+# UML Diagrams
+We've included UML diagrams in the uml-diagrams directory to help understand the game's architecture and design. These diagrams provide insights into the class structure, relationships, and flow of the game.
+
+# Authors
+Satoshi Kashima
+Tanul Gupta
+Aditti Gupta
+
